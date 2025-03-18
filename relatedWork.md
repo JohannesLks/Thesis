@@ -8,3 +8,4 @@
 [**AutoLog: Anomaly detection by deep autoencoding of system logs**](https://doi.org/10.1016/j.eswa.2021.116263) |  |  | Expert Systems with Applications | Elsevier |  |
 [**An anomaly detection method to detect web attacks using Stacked Auto-Encoder**](http://dx.doi.org/10.1109/CFIS.2018.8336654) |  |  | 2018 6th Iranian Joint Congress on Fuzzy and Intelligent Systems (CFIS) | IEEE |  |
 [**Anomaly Detection for HTTP Using Convolutional Autoencoders**](http://dx.doi.org/10.1109/ACCESS.2018.2881003) |  |  | IEEE Access | IEEE |  |
+[**A Deep Learning Approach to Network Intrusion Detection**](http://dx.doi.org/10.1109/TETCI.2017.2772792) |  |  | IEEE Transactions on Emerging Topics in Computational Intelligence | IEEE |  |
