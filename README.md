@@ -49,7 +49,7 @@ It contains regular updates, interim results, literature overviews, and preparat
 ## 🌐 Useful Links  
 
 - [Journal Research Overview](https://github.com/JohannesLks/Thesis/blob/main/journals.md)  
-- [Related Work](https://github.com/JohannesLks/Thesis/blob/main/journals.md)
+- [Related Work](https://github.com/JohannesLks/Thesis/blob/main/relatedWork.md)
 
 ---
 
