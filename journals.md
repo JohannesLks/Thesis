@@ -1,4 +1,4 @@
-| **Name** | **Publisher** | **SJR Rank** | **Fit** | **Anspruch** |
+| **Name** | **Publisher** | **SJR Quartil** | **Fit** | **Anspruch** |
 | --- | --- | --- | --- | --- |
 | [**Cybersecurity**](https://cybersecurity.springeropen.com/) | Springer Open | [Q1/Q2](https://www.scimagojr.com/journalsearch.php?q=21101019779&tip=sid&clean=0) | Sehr gut, Fokus auf Sicherheitsforschung, auch angewandt und politisch-strategisch (gut passend bei BSI-Beteiligung). | Hoch ,aber springer open journals sind etwas zugänglicher als ACM/IEEE. Gut möglich bei solider Methodik und innovativem Thema. |
 | [**IEEE Access**](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6287639) | IEEE | [Q1](https://www.scimagojr.com/journalsearch.php?q=21100374601&tip=sid&clean=0) | Generisch, aber sehr breit akzeptierend, auch Security/AI-Kombination möglich. | Hoch, aber auch Massenjournal mit relativ hohen Annahmeraten bei methodischer Sauberkeit und guter Struktur. Eher zahlen- und ergebnisgetrieben. |
