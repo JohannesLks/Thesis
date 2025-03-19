@@ -18,6 +18,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 
 ## General Observations
 > *Date: 19.3.2025*  
+-  Metrics (Precision, Recall, ...) should be explained as formula.
+> *Date: 19.3.2025*  
 -  The paper should cover basic math concepts, backpropagation might be to basic but in the explanation of teh Autoencoder or lstm it would fit really well.
 > *Date: 18.3.2025*  
 -  The paper should mention the differences and parallels between IDS and Honeypot. The proposed solution could find application in both domains.
