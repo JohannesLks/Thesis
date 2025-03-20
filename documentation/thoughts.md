@@ -9,8 +9,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
   - [Table of Contents](#table-of-contents)
   - [General Observations](#general-observations)
   - [possible research gaps](#possible-research-gaps)
-  - [Potential Improvements](#potential-improvements)
   - [Questions to Clarify](#questions-to-clarify)
+  - [Potential Improvements](#potential-improvements)
   - [Literature Insights](#literature-insights)
   - [Future Research Ideas](#future-research-ideas)
   - [To Investigate](#to-investigate)
@@ -47,6 +47,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## Questions to Clarify
+> *Date: 20.3.2025*  
+-  Can i make the BSI Dataset public? Could it be transfered to a cloud provider?
 > *Date: 19.3.2025*  
 -  How can i evaluate the performance of my modell, if i do not have labeled test data? That restriction might influence the whole approach.
 > *Date: 19.3.2025*  
