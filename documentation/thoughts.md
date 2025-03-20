@@ -8,6 +8,7 @@ This document serves as a structured place to record spontaneous thoughts, obser
 - [Thoughts \& Ideas](#thoughts--ideas)
   - [Table of Contents](#table-of-contents)
   - [General Observations](#general-observations)
+  - [possible research gaps](#possible-research-gaps)
   - [Potential Improvements](#potential-improvements)
   - [Questions to Clarify](#questions-to-clarify)
   - [Literature Insights](#literature-insights)
@@ -27,9 +28,22 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## possible research gaps
-- practical implementation of an Autoencoder with the specific BSI data. (Not enough theoratically work)
-- integrating current aproaches but developing a solution to use the classified information to make the honeypot adaptive to the attacker to gather more information of its behaviour
-- combining current approaches to one new solution (just first bytes, without preprocessing and feature extraction on raw data, system logs als language sequences, non-symmetric data dimensionality reduction, stacked NDAEs and the RF classification algorithm)
+1. practical implementation of an Autoencoder with the specific BSI data. (Not enough theoratically work)
+2. integrating current aproaches but developing a solution to use the classified information to make the honeypot adaptive to the attacker to gather more information of its behaviour
+3. combining current approaches to one new solution (just first bytes, without preprocessing and feature extraction on raw data, system logs als language sequences, non-symmetric data dimensionality reduction, stacked NDAEs and the RF classification algorithm)
+4. **Analyze logs on line, sessio and cross session level**  
+    - Attacker behavior spans multiple sessions and sequences.  
+    - Logs are unstructured and not always tied to a single user or continuous flow.  
+    - Single-sequence modeling (like DeepLog) misses cross-session patterns.
+    - **Proposed Solution:**  
+      - **Line-level anomaly detection**: Autoencoder or text reconstruction for individual log entries.  
+      - **Intra-session modeling**: LSTM to detect sequential anomalies within sessions.  
+      - **Cross-session modeling**:  
+        - LSTM or Graph-based structure over session embeddings.  
+        - Capture patterns across multiple sessions over time.  
+      - **Global attention layer**: Focus on key sessions or time periods.  
+      - **Fusion layer**: Combine all scores into one anomaly indicator.
+
 ---
 
 ## Questions to Clarify
