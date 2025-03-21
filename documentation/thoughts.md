@@ -18,6 +18,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+> *Date: 21.3.2025*  
+-  Nearly no paper is about anomaly detection in honeypots. That makes sense, because NIDS are the main usecase and there is no big difference between the both in my research context, but it should be possible to use this fact for my research gap
 > *Date: 19.3.2025*  
 -  Metrics (Precision, Recall, ...) should be explained as formula.
 > *Date: 19.3.2025*  
