@@ -45,10 +45,13 @@ This document serves as a structured place to record spontaneous thoughts, obser
         - Capture patterns across multiple sessions over time.  
       - **Global attention layer**: Focus on key sessions or time periods.  
       - **Fusion layer**: Combine all scores into one anomaly indicator.
+5. be able to extract maybe with the lstm the attack chain or at least parts of the attacker to have a output of the honeypot which is usefull. Adaptiveness could build up on that data.
 
 ---
 
 ## Questions to Clarify
+> *Date: 21.3.2025*  
+-  What is the BSI doing at the momant with the Honeypot Data? What analysis is happening?
 > *Date: 20.3.2025*  
 -  Can i make the BSI Dataset public? Could it be transfered to a cloud provider?
 > *Date: 19.3.2025*  
