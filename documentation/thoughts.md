@@ -18,6 +18,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+> *Date: 21.3.2025*  
+-  Nearly no paper is about anomaly detection in honeypots. That makes sense, because NIDS are the main usecase and there is no big difference between the both in my research context, but it should be possible to use this fact for my research gap
 > *Date: 19.3.2025*  
 -  Metrics (Precision, Recall, ...) should be explained as formula.
 > *Date: 19.3.2025*  
@@ -43,16 +45,19 @@ This document serves as a structured place to record spontaneous thoughts, obser
         - Capture patterns across multiple sessions over time.  
       - **Global attention layer**: Focus on key sessions or time periods.  
       - **Fusion layer**: Combine all scores into one anomaly indicator.
+5. be able to extract maybe with the lstm the attack chain or at least parts of the attacker to have a output of the honeypot which is usefull. Adaptiveness could build up on that data.
 
 ---
 
 ## Questions to Clarify
+> *Date: 21.3.2025*  
+-  What is the BSI doing at the momant with the Honeypot Data? What analysis is happening?
 > *Date: 20.3.2025*  
 -  Can i make the BSI Dataset public? Could it be transfered to a cloud provider?
 > *Date: 19.3.2025*  
--  How can i evaluate the performance of my modell, if i do not have labeled test data? That restriction might influence the whole approach.
+-  How can i evaluate the performance of my model, if i do not have labeled test data? That restriction might influence the whole approach.
 > *Date: 19.3.2025*  
--  A typical journal paper ranges from 5 to 15 pages, while a regular bachelor's thesis is around 40 pages. Would a highly focused and concentrated 15-page paper, demonstrating significant research quality and depth, be sufficient as a bachelor's thesis?
+-  A typical journal paper ranges from 5 to 20 pages, while a regular bachelor's thesis is around 40-50 pages. Would a highly focused and concentrated 15-page paper, demonstrating significant research quality and depth, be sufficient as a bachelor's thesis?
 ---
 
 ## Potential Improvements
