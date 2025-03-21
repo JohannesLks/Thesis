@@ -50,7 +50,7 @@ This document serves as a structured place to record spontaneous thoughts, obser
 > *Date: 20.3.2025*  
 -  Can i make the BSI Dataset public? Could it be transfered to a cloud provider?
 > *Date: 19.3.2025*  
--  How can i evaluate the performance of my modell, if i do not have labeled test data? That restriction might influence the whole approach.
+-  How can i evaluate the performance of my model, if i do not have labeled test data? That restriction might influence the whole approach.
 > *Date: 19.3.2025*  
 -  A typical journal paper ranges from 5 to 15 pages, while a regular bachelor's thesis is around 40 pages. Would a highly focused and concentrated 15-page paper, demonstrating significant research quality and depth, be sufficient as a bachelor's thesis?
 ---
