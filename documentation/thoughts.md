@@ -46,6 +46,7 @@ This document serves as a structured place to record spontaneous thoughts, obser
       - **Global attention layer**: Focus on key sessions or time periods.  
       - **Fusion layer**: Combine all scores into one anomaly indicator.
 5. be able to extract maybe with the lstm the attack chain or at least parts of the attacker to have a output of the honeypot which is usefull. Adaptiveness could build up on that data.
+6. the focus could also be on the prblem, that i have not a labeled dataset and thus, no clean training data
 
 ---
 
