@@ -45,11 +45,6 @@ Dieses Dokument enthält den aktuellen Fortschritt meiner Bachelorarbeit sowie a
 
 ---
 
-## 🌐 Nützliche Links  
-
-- [Journal Research Overview](https://github.com/JohannesLks/Thesis/blob/main/journals.md)  
-- [Related Work](https://github.com/JohannesLks/Thesis/blob/main/relatedWork.md)
-
 ---
 
 ## 📬 Kontakt  
