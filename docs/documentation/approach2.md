@@ -1,6 +1,7 @@
 # Unsupervised Multi-Layer Anomaly Detection and Attack Chain Extraction in Unstructured Honeypot Logs  
 *A Hybrid Deep Learning Framework for Modeling Complex Attacker Behavior on Unlabeled Production Data*  
 
+
 ## Introduction
 
 The detection of anomalies and attack chain reconstruction in unstructured honeypot logs represents a complex challenge. Existing literature provides valuable inspiration but also exposes clear gaps. This document proposes a critically designed architecture and theoretical framework, leveraging the strengths and overcoming the weaknesses identified across recent state-of-the-art research.
@@ -24,7 +25,17 @@ The detection of anomalies and attack chain reconstruction in unstructured honey
 - **Fusion Layer:** Combine line-level entropy scores, session-level anomaly signals, and GNN-based cluster embeddings into a unified anomaly score.
 - **Graph-Based Attack Chain Extraction:** Leverage community detection or optimization-based clustering guided by the Cross-Session Anomaly Cohesion Score (CSACS).
 
-### Proposed Architecture Diagram (Markdown)
+### Is the Architecture Truly Linear?
+In practice, the architecture is **not strictly linear**. While the conceptual flow diagram is presented sequentially for clarity, in reality:
+- **Parallel processing** occurs between line-level embedding generation and session segmentation.
+- **Iterative refinement** loops may feed anomaly signals back into the graph to adjust edge weights dynamically.
+- The **GNN layer** and clustering steps may operate on dynamically updated graphs in near real-time.
+- The **fusion layer** aggregates signals from different components asynchronously, allowing for late binding of information.
+- Feedback loops and adaptive updates (possibly even federated training elements) will make the system cyclical rather than purely top-down.
+
+Thus, the real system is better conceptualized as a dynamic ecosystem of modules with feedback and parallelization rather than a linear pipeline.
+
+### Proposed Architecture Diagram (Conceptual Overview)
 ```mermaid
 graph TD
   Input["Unlabeled Honeypot Logs"] --> LineTransformer["Line-level Transformer (DistilByT5)"]
@@ -36,6 +47,8 @@ graph TD
   GNN --> Fusion["Fusion Layer"]
   Fusion --> AttackChains["Graph-Based Attack Chain Extraction"]
   AttackChains --> Output["Attack Chain Reports & Visualizations"]
+  Fusion -->|Feedback Loop| TemporalGraph
+  AttackChains -->|Continuous Update| SessionModel
 ```
 
 ## Mathematical Background
@@ -67,8 +80,7 @@ Where:
 $$
 \max_{C} \text{CSACS}(C) - \gamma \cdot |C|
 $$
-
-- This balances cluster quality with regularization to avoid trivial large clusters.
+- Balancing cluster quality with regularization.
 
 ### Hypothetical Stability Theorem (Conceptual Proposal)
 **Theorem:** Under Gaussian noise and uniform temporal distribution, the probability of a random cluster exceeding threshold $\theta$ decreases exponentially with edge count:
@@ -76,14 +88,14 @@ $$
 P(\text{CSACS}(C) \geq \theta) \leq \exp(-\alpha \cdot |E_C| \cdot \theta)
 $$
 - $\alpha > 0$ relates to noise variance.
-- Future empirical testing needed.
+- Requires future empirical proof.
 
 ## Limitations and Critical Reflection
-- The ByT5 transformer approach, while powerful, may struggle with scalability in high-throughput honeypots.
-- Parameter tuning ($\lambda_1, \lambda_2, \gamma$) remains an open research question.
-- Graph-based clustering methods require evaluation for noise sensitivity and scalability.
-- The proposed theorem remains unproven and serves as a conceptual building block.
+- Transformer-based methods may suffer from scalability constraints.
+- Parameter selection ($\lambda_1, \lambda_2, \gamma$) and training stability remain open challenges.
+- Graph construction and continuous updates can introduce computational overhead.
+- The linear diagram is a conceptual simplification; real-world deployment is inherently cyclical and asynchronous.
 
 ## Conclusion
-This architecture and mathematical framework synthesize the strongest ideas from recent literature while addressing existing gaps. It creates a robust, theoretically grounded approach for unsupervised anomaly detection and attack chain reconstruction across sessions and time. Future research will need to validate parameter choices, prove theoretical stability, and optimize runtime performance.
+This framework merges the most powerful ideas from the literature into a dynamic, non-linear system for anomaly detection and attack chain reconstruction. It provides a robust theoretical and practical foundation, with the flexibility for future adaptations, real-time updates, and federated learning extensions.
 
