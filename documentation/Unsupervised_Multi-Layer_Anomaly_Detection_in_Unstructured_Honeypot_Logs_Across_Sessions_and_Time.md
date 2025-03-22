@@ -1,54 +1,58 @@
-# Unsupervised Multi-Layer Anomaly Detection in Unstructured Honeypot Logs Across Sessions and Time
-*A Hybrid Deep Learning Framework for Modeling Complex Attacker Behavior*
+# Unsupervised Multi-Layer Anomaly Detection and Attack Chain Extraction in Unstructured Honeypot Logs  
+*A Hybrid Deep Learning Framework for Modeling Complex Attacker Behavior on Unlabeled Production Data*  
 
-## 1. Introduction
+## 1. Introduction  
 
-Honeypot systems are critical tools in cybersecurity research and network defense, designed to attract and record attacker behavior. These environments produce vast amounts of unstructured, noisy, and heterogeneous log data. Detecting anomalies within these logs is essential to uncover stealthy attacks, zero-day exploits, and previously unknown attack patterns.
+Honeypot systems are widely deployed in cybersecurity research and defense operations to attract and record attacker behavior in controlled environments. These systems generate large volumes of highly unstructured, noisy, and heterogeneous log data. Detecting anomalies within these logs is crucial for identifying stealthy or previously unknown attacks. However, this task becomes significantly more complex when working with unlabeled production datasets, such as the one provided by the German Federal Office for Information Security (BSI), where no predefined ground truth or attack annotations are available.  
 
-However, existing anomaly detection methods for logs typically rely on structured log templates, assume continuous linear sequences, or operate on isolated session data. Real-world attacker behavior does not adhere to such assumptions: attackers frequently distribute their actions across multiple sessions, switch IP addresses, and exhibit complex temporal patterns that go undetected by single-level models.
-
-This paper proposes a novel, unsupervised multi-layer anomaly detection framework that captures attacker behavior across individual log entries, sequences within sessions, and patterns that span multiple sessions over time.
+This paper presents a novel unsupervised framework designed to not only detect anomalous behavior in unstructured honeypot logs but also to autonomously reconstruct potential attack chains by grouping related sessions and log entries. Our approach addresses both detection and interpretability challenges in environments where labeling is impractical or impossible.  
 
 ---
 
-## 2. Related Work and Research Gap
+## 2. Related Work and Research Gap  
 
-- **DeepLog (2017)** introduced LSTM-based sequence modeling for structured log templates but does not generalize to unstructured honeypot logs or multi-session activity.
-- **AutoLog (2021)** uses autoencoders for entropy-based scoring of log chunks but lacks temporal modeling and cross-session awareness.
-- **LogBERT (2021)** applies transformers for log sequences but requires predefined templates and does not address heterogeneous or session-spanning attacker behavior.
-- Clustering approaches (e.g., UNADA) detect honeypot traffic anomalies but rely on NetFlow features and do not utilize deep learning on raw log content.
+- **DeepLog (2017)** models log sequences with LSTMs but relies on structured templates and does not scale to unstructured or cross-session patterns.  
+- **AutoLog (2021)** uses autoencoders for anomaly detection but ignores temporal and cross-session relationships.  
+- **LogBERT (2021)** applies transformer-based sequence modeling but depends on predefined templates and does not handle multi-session attacker behavior.  
+- **Clustering-based methods (UNADA, DBScan on NetFlow)** detect attack patterns but focus on flow-level metrics and do not leverage deep embeddings from log content.  
 
-> **Research Gap**:  
-To date, no unsupervised anomaly detection framework exists that:
-- Operates on unstructured honeypot logs,
-- Models line-level anomalies, intra-session sequences, and cross-session attacker strategies in combination,
-- Provides interpretable, real-time anomaly detection.
-
----
-
-## 3. Research Objectives
-
-- Develop a hybrid deep learning model combining:
-  - Autoencoders for log-line content anomaly detection,
-  - LSTM-based sequential models for intra-session anomaly detection,
-  - A cross-session attention mechanism to capture distributed attacker patterns.
-- Design an unsupervised detection pipeline without reliance on structured templates or manual feature engineering.
-- Evaluate on real honeypot datasets, enriched with synthetic attacker behaviors, demonstrating detection accuracy, false-positive rate, and scalability.
-- Provide interpretability through attention heatmaps and temporal anomaly visualization.
+> **Identified Research Gap:**  
+No current framework:  
+- Operates fully unsupervised on unstructured, unlabeled honeypot log data,  
+- Models attacker behavior across line-level, session-level, and cross-session layers,  
+- And extracts coherent attack chains from anomaly signals without ground-truth annotations.
 
 ---
 
-## 4. Proposed Framework Architecture
+## 3. Research Objectives  
+
+- **Develop** a hybrid deep learning framework that integrates:  
+  - Line-level autoencoder for anomaly detection in individual log entries,  
+  - Session-level sequential modeling using LSTM to detect abnormal behavior patterns within sessions,  
+  - A cross-session attention layer to detect distributed attacker strategies over multiple sessions.  
+
+- **Address the absence of labeled data** by:  
+  - Operating fully unsupervised,  
+  - Using anomaly scores and embeddings to autonomously cluster sessions and reconstruct attack chains.  
+
+- **Enable explainability and analyst support** by:  
+  - Providing log line-level anomaly scores,  
+  - Visualizing attention weights across sessions,  
+  - Outputting clustered groups of logs and sessions that constitute suspected attack chains.  
+
+---
+
+## 4. Proposed Framework Architecture  
 
 ```mermaid
 graph TD
-    AE["Line-level Autoencoder (per line)"] --> AE_Out["AE anomaly scores & embeddings"]
+    Input["Unlabeled Honeypot Log Data"] --> AE["Line-level Autoencoder (per line)"]
+    AE --> AE_Out["AE anomaly scores & embeddings"]
     AE_Out --> LSTM["Session-level LSTM (per session)"]
     LSTM --> SessEmb["Session embeddings"]
     SessEmb --> Attention["Cross-session Attention Layer"]
     AE_Out --> Fusion["Fusion Layer"]
     LSTM --> Fusion
     Attention --> Fusion
-    Fusion --> Output["Unified Anomaly Score"]
-
-
+    Fusion --> Chains["Attack Chain Extraction & Clustering"]
+    Chains --> Output["Unified Anomaly Score & Attack Chain Reports"]
