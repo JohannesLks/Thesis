@@ -25,15 +25,6 @@ The detection of anomalies and attack chain reconstruction in unstructured honey
 - **Fusion Layer:** Combine line-level entropy scores, session-level anomaly signals, and GNN-based cluster embeddings into a unified anomaly score.
 - **Graph-Based Attack Chain Extraction:** Leverage community detection or optimization-based clustering guided by the Cross-Session Anomaly Cohesion Score (CSACS).
 
-### Is the Architecture Truly Linear?
-In practice, the architecture is **not strictly linear**. While the conceptual flow diagram is presented sequentially for clarity, in reality:
-- **Parallel processing** occurs between line-level embedding generation and session segmentation.
-- **Iterative refinement** loops may feed anomaly signals back into the graph to adjust edge weights dynamically.
-- The **GNN layer** and clustering steps may operate on dynamically updated graphs in near real-time.
-- The **fusion layer** aggregates signals from different components asynchronously, allowing for late binding of information.
-- Feedback loops and adaptive updates (possibly even federated training elements) will make the system cyclical rather than purely top-down.
-
-Thus, the real system is better conceptualized as a dynamic ecosystem of modules with feedback and parallelization rather than a linear pipeline.
 
 ### Proposed Architecture Diagram (Conceptual Overview)
 ```mermaid
