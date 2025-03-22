@@ -1,11 +1,10 @@
-# Thoughts & Ideas
-
+# Thoughts and Ideas
 This document serves as a structured place to record spontaneous thoughts, observations, and ideas related to the thesis.
 
 ---
 
 ## Table of Contents
-- [Thoughts \& Ideas](#thoughts--ideas)
+- [Thoughts and Ideas](#thoughts-and-ideas)
   - [Table of Contents](#table-of-contents)
   - [General Observations](#general-observations)
   - [possible research gaps](#possible-research-gaps)
