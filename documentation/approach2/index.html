@@ -1,0 +1,1053 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://johanneslks.github.io/Thesis/documentation/approach2/">
+      
+      
+        <link rel="prev" href="../Unsupervised_Multi-Layer_Anomaly_Detection_in_Unstructured_Honeypot_Logs_Across_Sessions_and_Time/">
+      
+      
+        <link rel="next" href="../math/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>Concept II - Honeypot Anomaly Detection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unsupervised-multi-layer-anomaly-detection-and-attack-chain-extraction-in-unstructured-honeypot-logs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-header__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Honeypot Anomaly Detection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Concept II
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-nav__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Honeypot Anomaly Detection
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatedWork/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Related Work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Journals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thoughts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Unsupervised_Multi-Layer_Anomaly_Detection_in_Unstructured_Honeypot_Logs_Across_Sessions_and_Time/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Concept II
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Concept II
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#related-work-and-positioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related Work and Positioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-architecture-enhanced-conceptual-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proposed Architecture: Enhanced Conceptual Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposed Architecture: Enhanced Conceptual Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-innovations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Innovations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-architecture-diagram-conceptual-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Architecture Diagram (Conceptual Overview)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Background
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-session-anomaly-cohesion-score-csacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Session Anomaly Cohesion Score (CSACS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimization-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimization Objective
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hypothetical-stability-theorem-conceptual-proposal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hypothetical Stability Theorem (Conceptual Proposal)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-strategy-implementation-and-evaluation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Strategy, Implementation, and Evaluation Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Strategy, Implementation, and Evaluation Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablation-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ablation Studies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-constraints-and-overhead-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Constraints and Overhead Mitigation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explainability-demonstration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explainability Demonstration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refined-limitations-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refined Limitations and Future Work
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mathematical Formulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#related-work-and-positioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related Work and Positioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-architecture-enhanced-conceptual-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proposed Architecture: Enhanced Conceptual Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposed Architecture: Enhanced Conceptual Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-innovations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Innovations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-architecture-diagram-conceptual-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Architecture Diagram (Conceptual Overview)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Background
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-session-anomaly-cohesion-score-csacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Session Anomaly Cohesion Score (CSACS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimization-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimization Objective
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hypothetical-stability-theorem-conceptual-proposal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hypothetical Stability Theorem (Conceptual Proposal)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-strategy-implementation-and-evaluation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Strategy, Implementation, and Evaluation Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Strategy, Implementation, and Evaluation Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablation-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ablation Studies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-constraints-and-overhead-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Constraints and Overhead Mitigation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explainability-demonstration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explainability Demonstration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refined-limitations-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refined Limitations and Future Work
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="unsupervised-multi-layer-anomaly-detection-and-attack-chain-extraction-in-unstructured-honeypot-logs">Unsupervised Multi-Layer Anomaly Detection and Attack Chain Extraction in Unstructured Honeypot Logs</h1>
+<p><em>A Hybrid Deep Learning Framework for Modeling Complex Attacker Behavior on Unlabeled Production Data</em></p>
+<h2 id="related-work-and-positioning">Related Work and Positioning</h2>
+<p>This framework builds upon and addresses gaps identified in state-of-the-art research, including:</p>
+<ul>
+<li><strong>An Unsupervised Deep Learning Model for Early Network Traffic Anomaly Detection (2020)</strong>: CNN combined with autoencoders for early anomaly detection on IoT traffic, using only the first bytes of flows for fast detection.</li>
+<li><strong>Anomaly Detection from Log Files Using Unsupervised Deep Learning (2020)</strong>: LSTM autoencoder applied to raw, unstructured log data without preprocessing; relevant for modeling temporal rarity signals.</li>
+<li><strong>DeepLog (2017)</strong>: LSTM-based modeling of structured system log sequences, with incremental updates but limited to single-session and structured data.</li>
+<li><strong>AutoLog (2021)</strong>: Template-free deep autoencoder using entropy scoring, effective on heterogeneous system logs, but lacking relational modeling across sessions.</li>
+<li><strong>Raw Packet Data Ingestion with Transformers (2023)</strong>: Byte-level transformer ingestion of raw packet data; demonstrates feasibility but faces large infrastructure demands.</li>
+<li><strong>Unsupervised Machine Learning Techniques for Network Intrusion Detection (2020)</strong>: Comparison of PCA, Isolation Forest, One-Class SVM, and autoencoders; highlights autoencoders' superiority for zero-day detection and real-time efficiency.</li>
+<li><strong>A Deep Learning Approach to Network Intrusion Detection (2017)</strong>: Stacked non-symmetric autoencoders with random forest classifiers; foundational for hybrid feature extraction and classification.</li>
+<li><strong>An LSTM-Based Deep Learning Approach for Packet-Level Detection (2020)</strong>: Embedding of packet header fields for sequence-based anomaly detection, pointing out limitations in generalizing to payloads.</li>
+<li><strong>UNADA (2015)</strong>: Clustering-based unsupervised anomaly detection in honeypot traffic with automated signature generation; limited to NetFlow data.</li>
+<li><strong>FedNIDS (2025)</strong>: Federated supervised learning on packet data; excellent scalability, but lacks unsupervised adaptability for unknown attacks.</li>
+<li><strong>DeepFed (2023)</strong>: Federated, unsupervised deep anomaly detection across unlabeled data streams, relevant for future decentralized security models.</li>
+<li><strong>Graph Neural Networks for Anomaly Detection in Dynamic Graphs (2022)</strong>: Reviews scalability strategies and temporal GNN frameworks applicable to dynamic honeypot graph construction.</li>
+<li><strong>Online and Adaptive Graph Construction for Anomaly Detection (2022)</strong>: Introduces dynamic graph edge adaptation mechanisms based on anomaly scores and time decay.</li>
+<li><strong>Explainable AI for Anomaly Detection in Cybersecurity (2023)</strong>: Provides guidance on integrating GNN explainability techniques like GNNExplainer and interpretability for security analysts.</li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>The detection of anomalies and attack chain reconstruction in unstructured honeypot logs represents a complex challenge. Existing literature provides valuable inspiration but also exposes clear gaps. This document proposes a critically designed architecture and theoretical framework, leveraging the strengths and overcoming the weaknesses identified across recent state-of-the-art research.</p>
+<p>Given the large-scale nature of production honeypot data, this paper primarily focuses on an unlabeled 500 GB dataset provided by the BSI (German Federal Office for Information Security). Its size and lack of labels motivate a fully unsupervised approach. For further validation and partial ground-truth checks, classical intrusion datasets such as <strong>KDD Cup 99</strong> and <strong>NSL-KDD</strong> can be leveraged. This combination enables comprehensive benchmarking: the BSI dataset tests scalability and real-world complexity, while the labeled sets confirm detection accuracy on known attack types.</p>
+<h2 id="proposed-architecture-enhanced-conceptual-design">Proposed Architecture: Enhanced Conceptual Design</h2>
+<h3 id="key-innovations">Key Innovations</h3>
+<ul>
+<li><strong>Line-Level Modeling:</strong> Use a lightweight distilled transformer (e.g., DistilByT5) for byte-level embeddings of log lines. To ensure scalability, introduce a fallback denoising sequence autoencoder that can replicate transformer-based embeddings in high-throughput production environments.</li>
+<li><strong>Session-Level Modeling:</strong> Deploy a hybrid Transformer-LSTM module with temporal attention to capture both local (sequence-based) and global (contextual) session behavior.</li>
+<li><strong>Temporal Relationship Modeling:</strong> Build dynamic session graphs with clear construction logic: edge weights are defined by a combination of semantic distance and temporal proximity with exponential decay. Only edges above a defined percentile threshold are retained.</li>
+<li><strong>Graph Neural Network Layer:</strong> Integrate a scalable GNN using subgraph sampling techniques (such as GraphSAGE or Cluster-GCN) to learn over the session graph without overwhelming memory.</li>
+<li><strong>Fusion Layer:</strong> Design the fusion layer as a multi-input attention mechanism, weighting line-level entropy scores, session-level anomaly signals, and GNN-based cluster embeddings. Include ablation studies to optimize this fusion mechanism.</li>
+<li><strong>Improved Attack Chain Extraction:</strong> Implement a two-stage process — temporal clustering (via DBSCAN on timestamp embeddings) followed by community detection (Leiden algorithm) within each cluster to improve stability and accuracy.</li>
+<li><strong>Explainability:</strong> Incorporate an explainability module using GNNExplainer and heatmaps to highlight the most influential lines and sessions. Additionally, visualize attack chains and cluster structures for analyst consumption.</li>
+</ul>
+<h3 id="updated-architecture-diagram-conceptual-overview">Updated Architecture Diagram (Conceptual Overview)</h3>
+<pre class="mermaid"><code>graph TD
+  Input["Unlabeled Honeypot Logs (500 GB BSI)"] --&gt; LineTransformer["Line-level Transformer (DistilByT5) or Fallback Autoencoder"]
+  LineTransformer --&gt; LineEmbeddings["Line Embeddings &amp; Entropy Scores"]
+  LineEmbeddings --&gt; SessionModel["Session-Level Hybrid Transformer-LSTM"]
+  SessionModel --&gt; SessionEmbeddings["Session Embeddings"]
+  SessionEmbeddings --&gt; TemporalGraph["Dynamic Temporal Session Graph"]
+  TemporalGraph --&gt; GNN["Scalable GNN with Subgraph Sampling"]
+  GNN --&gt; Fusion["Attention-Based Fusion Layer"]
+  Fusion --&gt; AttackChains["Improved Two-Stage Attack Chain Extraction"]
+  AttackChains --&gt; Output["Attack Chain Reports, Visualizations &amp; Explanations"]
+  Fusion --&gt;|Feedback Loop| TemporalGraph
+  AttackChains --&gt;|Continuous Update| SessionModel</code></pre>
+<h2 id="mathematical-background">Mathematical Background</h2>
+<h3 id="problem-setup">Problem Setup</h3>
+<ul>
+<li>Honeypot log lines:
+$$ L = {l_1, l_2, \dots, l_n} $$</li>
+<li>Grouped into sessions:
+$$ S = {s_1, s_2, \dots, s_m} $$</li>
+<li>Each log line maps to an embedding:
+$$ e_{l_i} \in \mathbb{R}^d $$</li>
+<li>Session embeddings are derived from the final state of the Transformer-LSTM stack:
+$$ e_{s_i} = \text{TransformerLSTM}(s_i) $$</li>
+</ul>
+<h3 id="cross-session-anomaly-cohesion-score-csacs">Cross-Session Anomaly Cohesion Score (CSACS)</h3>
+<div class="arithmatex">\[
+CSACS(C) = \frac{ \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{D(s_i, s_j) + \epsilon} + \lambda_2 \cdot \frac{1}{T(s_i, s_j) + \delta} \right) \cdot \min(A(s_i), A(s_j)) }{ |E_C| }
+\]</div>
+<p><strong>Where:</strong></p>
+<ul>
+<li><span class="arithmatex">\(E_C\)</span>: set of edges in cluster <span class="arithmatex">\(C\)</span></li>
+<li><span class="arithmatex">\(D(s_i, s_j)\)</span>: embedding distance</li>
+<li><span class="arithmatex">\(T(s_i, s_j)\)</span>: temporal gap</li>
+<li><span class="arithmatex">\(A(s_i)\)</span>: anomaly score of session <span class="arithmatex">\(s_i\)</span></li>
+<li><span class="arithmatex">\(\lambda_1, \lambda_2\)</span>: tunable weighting parameters</li>
+<li><span class="arithmatex">\(\epsilon, \delta\)</span>: smoothing constants</li>
+</ul>
+<h3 id="optimization-objective">Optimization Objective</h3>
+<p>$$
+\max_{C} CSACS(C) - \gamma \cdot |C|
+$$
+- With <span class="arithmatex">\(\gamma\)</span> as a regularization term balancing cluster compactness and size.</p>
+<h3 id="hypothetical-stability-theorem-conceptual-proposal">Hypothetical Stability Theorem (Conceptual Proposal)</h3>
+<p><strong>Theorem:</strong> 
+Under Gaussian noise and uniform temporal distribution assumptions, the probability that a random cluster exceeds threshold <span class="arithmatex">\(\theta\)</span> decays exponentially with the number of edges:
+$$
+P(CSACS(C) \geq \theta) \leq \exp\left(-\alpha \cdot |E_C| \cdot \theta\right)
+$$
+- <span class="arithmatex">\(\alpha &gt; 0\)</span> depends on the noise variance.
+- Future mathematical proof and empirical validation are required.</p>
+<h2 id="data-strategy-implementation-and-evaluation-plan">Data Strategy, Implementation, and Evaluation Plan</h2>
+<p>To demonstrate feasibility, the approach will be evaluated on:</p>
+<ol>
+<li><strong>Unlabeled 500 GB BSI Honeypot Dataset</strong>: Large, real-world, and unstructured. Ideal for testing scalability and unsupervised capabilities. Detection coverage, throughput (logs/sec), and resource usage (CPU/GPU memory) will be measured in near real-time ingestion pipelines.</li>
+<li><strong>KDD Cup 99 / NSL-KDD</strong>: Classic labeled intrusion datasets. Although dated, these sets establish performance baselines and partially validate detection metrics (precision, recall, F1) on known attack classes.</li>
+</ol>
+<h3 id="ablation-studies">Ablation Studies</h3>
+<p>A systematic comparison is planned:</p>
+<ul>
+<li><strong>Transformer vs. Autoencoder</strong> for line-level embedding.</li>
+<li><strong>Full Session Model vs. No Session Model</strong> to confirm the necessity of capturing cross-line context.</li>
+<li><strong>Static vs. Dynamic Graph</strong> construction thresholds.</li>
+<li><strong>GNN vs. simpler aggregator</strong> (e.g., MLP) to measure the GNN’s benefit in multi-session correlation.</li>
+<li><strong>Fusion vs. single anomaly score</strong> to highlight synergy among line-level, session-level, and GNN-based signals.</li>
+</ul>
+<h3 id="real-time-constraints-and-overhead-mitigation">Real-Time Constraints and Overhead Mitigation</h3>
+<ul>
+<li>Subgraph sampling (GraphSAGE/Cluster-GCN) and mini-batch training keep memory usage stable.</li>
+<li>The fallback autoencoder can replace the transformer for continuous ingestion on commodity servers when resource constraints are high.</li>
+<li>Asynchronous pipelines and approximate nearest neighbor queries accelerate graph construction for large data volumes.</li>
+</ul>
+<h3 id="explainability-demonstration">Explainability Demonstration</h3>
+<ul>
+<li>Selected case studies from the BSI dataset will be used to illustrate how suspicious clusters are found. Analysts can see GNNExplainer visuals, line-level anomaly heatmaps, and a timeline-based chain reconstruction.</li>
+<li>Comparisons to simpler feature-based methods (e.g., Isolation Forest) will highlight how deeply learned embeddings capture complex attacker behavior beyond rule-based approaches.</li>
+</ul>
+<h2 id="refined-limitations-and-future-work">Refined Limitations and Future Work</h2>
+<ul>
+<li><strong>Hyperparameter Tuning</strong>: Finding suitable thresholds, weights (<span class="arithmatex">\(\lambda_1, \lambda_2, \gamma\)</span>), and subgraph sampling rates requires iterative experimentation.</li>
+<li><strong>Irregular Temporal Patterns</strong>: Some attacks may exhibit dormant phases. An adaptive decay function or rolling time windows may be needed.</li>
+<li><strong>Large-Scale Real-Time</strong>: Even with fallback methods, extremely high ingestion rates demand distributed architectures. Parallel graph-building and cluster algorithms are potential next steps.</li>
+<li><strong>Partial Labeling &amp; Ground Truth</strong>: Although the BSI dataset is unlabeled, known labeled segments or curated subsets could be integrated. Such data would support semi-supervised extensions and more thorough evaluation.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This enhanced framework integrates fallback autoencoders, scalable graph learning techniques, well-defined temporal graph construction, advanced fusion mechanisms, improved attack chain extraction methods, and robust explainability components. The availability of a massive 500 GB unlabeled honeypot dataset from the BSI, alongside smaller labeled benchmarks such as KDD Cup 99 and NSL-KDD, enables thorough demonstration of both scalability and accuracy. These improvements solidify the architecture’s potential for publication and practical deployment, while paving the way for further exploration of real-time, federated, and adaptive threat intelligence systems.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "search.highlight"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
