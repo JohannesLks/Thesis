@@ -51,6 +51,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## Questions to Clarify
+> *Date: 22.3.2025*  
+-  How can i use generative AI? If i write a text based on my thoughts and with referenced literature, can i input this text, for instance, to ChatGpt and let it rewrite it so its wriiten in a academic and typical journal article manner?
 > *Date: 21.3.2025*  
 -  What is the BSI doing at the momant with the Honeypot Data? What analysis is happening?
 > *Date: 20.3.2025*  
