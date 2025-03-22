@@ -51,51 +51,51 @@ graph TD
   AttackChains -->|Continuous Update| SessionModel
 ```
 
-## Mathematical Background
+## Mathematical Background (Clean LaTeX Presentation)
 
 ### Problem Setup
 - Honeypot log lines:
-$$L = \{l_1, l_2, ..., l_n\}$$
+$$ L = \{l_1, l_2, \dots, l_n\} $$
 - Grouped into sessions:
-$$S = \{s_1, s_2, ..., s_m\}$$
+$$ S = \{s_1, s_2, \dots, s_m\} $$
 - Each log line maps to an embedding:
-$$\mathbf{e}_{l_i} \in \mathbb{R}^d$$
+$$ e_{l_i} \in \mathbb{R}^d $$
 - Session embeddings are derived from the final state of the Transformer-LSTM stack:
-$$\mathbf{e}_{s_i} = \text{TransformerLSTM}(s_i)$$
+$$ e_{s_i} = \text{TransformerLSTM}(s_i) $$
 
 ### Cross-Session Anomaly Cohesion Score (CSACS)
 $$
-\text{CSACS}(C) = \frac{ \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{D(s_i, s_j) + \epsilon} + \lambda_2 \cdot \frac{1}{T(s_i, s_j) + \delta} \right) \cdot \min(A(s_i), A(s_j)) }{ |E_C| }
+CSACS(C) = \frac{ \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{D(s_i, s_j) + \epsilon} + \lambda_2 \cdot \frac{1}{T(s_i, s_j) + \delta} \right) \cdot \min(A(s_i), A(s_j)) }{ |E_C| }
 $$
 
-Where:
-- $E_C$ = set of edges in cluster $C$
-- $D(s_i, s_j)$ = embedding distance
-- $T(s_i, s_j)$ = temporal gap
-- $A(s_i)$ = session anomaly score
-- $\lambda_1, \lambda_2$ = tunable parameters
-- $\epsilon, \delta$ = smoothing constants
+**Where:**
+- $E_C$: set of edges in cluster $C$
+- $D(s_i, s_j)$: embedding distance
+- $T(s_i, s_j)$: temporal gap
+- $A(s_i)$: anomaly score of session $s_i$
+- $\lambda_1, \lambda_2$: tunable weighting parameters
+- $\epsilon, \delta$: smoothing constants
 
 ### Optimization Objective
 $$
-\max_{C} \text{CSACS}(C) - \gamma \cdot |C|
+\max_{C} CSACS(C) - \gamma \cdot |C|
 $$
-- Balancing cluster quality with regularization.
+- With $\gamma$ as a regularization term balancing cluster compactness and size.
 
 ### Hypothetical Stability Theorem (Conceptual Proposal)
-**Theorem:** Under Gaussian noise and uniform temporal distribution, the probability of a random cluster exceeding threshold $\theta$ decreases exponentially with edge count:
+**Theorem:** Under Gaussian noise and uniform temporal distribution assumptions, the probability that a random cluster exceeds threshold $\theta$ decays exponentially with the number of edges:
 $$
-P(\text{CSACS}(C) \geq \theta) \leq \exp(-\alpha \cdot |E_C| \cdot \theta)
+P(CSACS(C) \geq \theta) \leq \exp\left(-\alpha \cdot |E_C| \cdot \theta\right)
 $$
-- $\alpha > 0$ relates to noise variance.
-- Requires future empirical proof.
+- $\alpha > 0$ depends on the noise variance.
+- Future mathematical proof and empirical validation are required.
 
 ## Limitations and Critical Reflection
-- Transformer-based methods may suffer from scalability constraints.
-- Parameter selection ($\lambda_1, \lambda_2, \gamma$) and training stability remain open challenges.
-- Graph construction and continuous updates can introduce computational overhead.
-- The linear diagram is a conceptual simplification; real-world deployment is inherently cyclical and asynchronous.
+- Potential scalability challenges with large transformer models.
+- Parameter tuning (for $\lambda_1, \lambda_2, \gamma$) remains an open research question.
+- Real-world temporal graphs and GNN processing may introduce computational bottlenecks.
+- The diagram and flow are conceptual simplifications; implementation will require asynchronous pipelines.
 
 ## Conclusion
-This framework merges the most powerful ideas from the literature into a dynamic, non-linear system for anomaly detection and attack chain reconstruction. It provides a robust theoretical and practical foundation, with the flexibility for future adaptations, real-time updates, and federated learning extensions.
+This framework synthesizes the most promising insights from cutting-edge research into a dynamic, explainable, and theoretically grounded architecture. It is well-suited for future extensions such as federated learning, adaptive honeypot responses, and real-time interactive visualization for analysts.
 
