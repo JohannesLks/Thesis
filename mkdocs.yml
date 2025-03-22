@@ -18,7 +18,7 @@ markdown_extensions:
   - pymdownx.tabbed 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/mermaid@10/dist/mermaid.min.j
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
 nav:
   - Home: index.md
   - Documentation:
@@ -26,6 +26,7 @@ nav:
       - Related Work: documentation/relatedWork.md
       - Journals: documentation/journals.md
       - Thoughts: documentation/thoughts.md
+      - Concept I: documentation/Unsupervised_Multi-Layer_Anomaly_Detection_in_Unstructured_Honeypot_Logs_Across_Sessions_and_Time.md
       - Mathematical Formulation: documentation/math.md
 extra:
   mermaid2: true
