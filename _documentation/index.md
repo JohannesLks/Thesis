@@ -1,11 +1,11 @@
 ---
-title: Documentation Home
-permalink: /Thesis/documentation/
+layout: single
+title: "Documentation Overview"
+permalink: /documentation/
 ---
 
-# Documentation Overview
-
-Welcome to the official documentation.
-
-## Sections:
-- [Related Work](./relatedWork.md)
+## Documentation Sections:
+- [Theoretical Framework]({{ site.baseurl }}/documentation/theoretical-framework/)
+- [Related Work]({{ site.baseurl }}/documentation/related-work/)
+- [Journals]({{ site.baseurl }}/documentation/journals/)
+- [Thoughts]({{ site.baseurl }}/documentation/thoughts/)

@@ -1,14 +1,13 @@
-title: Honeypot Anomaly Detection
-theme: just-the-docs
-
-url: "https://johanneslks.github.io"
+title: "Honeypot Anomaly Detection"
+description: "Unsupervised Multi-Layer Anomaly Detection and Attack Chain Extraction"
 baseurl: "/Thesis"
+url: "https://johanneslks.github.io"
+theme: minimal-mistakes-jekyll
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
 
-# Enable callouts and math support
-just_the_docs:
-  collections:
-    documentation:
-      name: Documentation
-      nav_exclude: false
-  search_enabled: true
-  math: true
+# Enable top navigation bar:
+header_pages:
+  - index.md
+  - documentation/index.md
