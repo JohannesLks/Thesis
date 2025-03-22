@@ -10,6 +10,7 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.arithmatex:
+      generic: true
       inline_syntax: ['dollar', 'round']
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
