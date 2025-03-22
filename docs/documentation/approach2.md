@@ -3,6 +3,7 @@
 
 ## Related Work and Positioning
 This framework builds upon and addresses gaps identified in state-of-the-art research, including:
+
 - **An Unsupervised Deep Learning Model for Early Network Traffic Anomaly Detection (2020)**: CNN combined with autoencoders for early anomaly detection on IoT traffic, using only the first bytes of flows for fast detection.
 - **Anomaly Detection from Log Files Using Unsupervised Deep Learning (2020)**: LSTM autoencoder applied to raw, unstructured log data without preprocessing; relevant for modeling temporal rarity signals.
 - **DeepLog (2017)**: LSTM-based modeling of structured system log sequences, with incremental updates but limited to single-session and structured data.
@@ -68,6 +69,7 @@ CSACS(C) = \frac{ \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{D(s_
 $$
 
 **Where:**
+
 - $E_C$: set of edges in cluster $C$
 - $D(s_i, s_j)$: embedding distance
 - $T(s_i, s_j)$: temporal gap
@@ -82,7 +84,8 @@ $$
 - With $\gamma$ as a regularization term balancing cluster compactness and size.
 
 ### Hypothetical Stability Theorem (Conceptual Proposal)
-**Theorem:** Under Gaussian noise and uniform temporal distribution assumptions, the probability that a random cluster exceeds threshold $\theta$ decays exponentially with the number of edges:
+**Theorem:** 
+Under Gaussian noise and uniform temporal distribution assumptions, the probability that a random cluster exceeds threshold $\theta$ decays exponentially with the number of edges:
 $$
 P(CSACS(C) \geq \theta) \leq \exp\left(-\alpha \cdot |E_C| \cdot \theta\right)
 $$
@@ -92,11 +95,13 @@ $$
 ## Data Strategy, Implementation, and Evaluation Plan
 
 To demonstrate feasibility, the approach will be evaluated on:
+
 1. **Unlabeled 500 GB BSI Honeypot Dataset**: Large, real-world, and unstructured. Ideal for testing scalability and unsupervised capabilities. Detection coverage, throughput (logs/sec), and resource usage (CPU/GPU memory) will be measured in near real-time ingestion pipelines.
 2. **KDD Cup 99 / NSL-KDD**: Classic labeled intrusion datasets. Although dated, these sets establish performance baselines and partially validate detection metrics (precision, recall, F1) on known attack classes.
 
 ### Ablation Studies
 A systematic comparison is planned:
+
 - **Transformer vs. Autoencoder** for line-level embedding.
 - **Full Session Model vs. No Session Model** to confirm the necessity of capturing cross-line context.
 - **Static vs. Dynamic Graph** construction thresholds.
