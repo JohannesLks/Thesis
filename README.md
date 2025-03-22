@@ -7,16 +7,10 @@
 ## 🗂 Projektübersicht  
 
 Dies ist das Repository zu meiner Bachelorarbeit.  
-Alle Fortschritte, Aufgaben, Literaturübersichten und Arbeitsmaterialien werden in der [index.md](./index.md) gepflegt.  
+Alle Fortschritte, Aufgaben, Literaturübersichten und Arbeitsmaterialien werden in der [Dokumentation](https://johanneslks.github.io/Thesis/) gepflegt.  
 
 ---
 
-## 🌐 Weiterführende Links  
-
-- [Journal Research Overview](https://github.com/JohannesLks/Thesis/blob/main/journals.md)  
-- [Related Work](https://github.com/JohannesLks/Thesis/blob/main/relatedWork.md)
-
----
 
 ## 📬 Kontakt  
 
