@@ -7,18 +7,21 @@ theme:
   features:
     - navigation.tabs
     - search.highlight
+
 markdown_extensions:
   - admonition
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
       inline_syntax: ['dollar', 'round']
-  - pymdownx.highlight  
-  - pymdownx.details  
-  - pymdownx.tabbed 
-extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - pymdownx.highlight
+  - pymdownx.details
+  - pymdownx.tabbed
+
+plugins:
+  - search
+  - mermaid2
+
 nav:
   - Home: index.md
   - Documentation:
