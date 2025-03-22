@@ -1,9 +1,14 @@
-markdown: kramdown
-kramdown:
-  math_engine: mathjax
-theme: jekyll-theme-slate
+title: Honeypot Anomaly Detection
+theme: just-the-docs
 
-collections:
-  documentation:
-    output: true
-    permalink: /documentation/:path/
+url: "https://johanneslks.github.io"
+baseurl: "/Thesis"
+
+# Enable callouts and math support
+just_the_docs:
+  collections:
+    documentation:
+      name: Documentation
+      nav_exclude: false
+  search_enabled: true
+  math: true
