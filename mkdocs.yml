@@ -17,7 +17,7 @@ nav:
   - Home: index.md
   - Documentation:
       - Overview: documentation/index.md
-      - Theoretical Framework: documentation/theoretical-framework.md
-      - Related Work: documentation/related-work.md
+      - Related Work: documentation/relatedWork.md
       - Journals: documentation/journals.md
       - Thoughts: documentation/thoughts.md
+      - Mathematical Formulation: documentation/math.md
