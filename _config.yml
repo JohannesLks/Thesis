@@ -2,3 +2,8 @@ markdown: kramdown
 kramdown:
   math_engine: mathjax
 theme: jekyll-theme-slate
+
+collections:
+  documentation:
+    output: true
+    permalink: /documentation/:path/
