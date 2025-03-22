@@ -1,11 +1,10 @@
----
-layout: single
-title: "Documentation Overview"
-permalink: /documentation/
----
+# Documentation Overview
 
-## Documentation Sections:
-- [Theoretical Framework]({{ site.baseurl }}/documentation/theoretical-framework/)
-- [Related Work]({{ site.baseurl }}/documentation/related-work/)
-- [Journals]({{ site.baseurl }}/documentation/journals/)
-- [Thoughts]({{ site.baseurl }}/documentation/thoughts/)
+Welcome to the detailed documentation.
+
+## 📖 Sections
+- [Theoretical Framework](theoretical-framework.md)
+- [Methodology](methodology.md)
+- [Related Work](related-work.md)
+- [Journals](journals.md)
+- [Thoughts](thoughts.md)
