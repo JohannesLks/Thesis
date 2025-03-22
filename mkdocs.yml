@@ -20,6 +20,8 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.details
   - pymdownx.tabbed
+  - pymdownx.tasklist
+  - pymdownx.betterem
 
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
