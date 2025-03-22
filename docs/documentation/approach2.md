@@ -91,33 +91,32 @@ $$
 
 ## Data Strategy, Implementation, and Evaluation Plan
 
-To demonstrate feasibility, we plan to evaluate this approach on:
-1. **Unlabeled 500 GB BSI Honeypot Dataset**: Large, real-world, and unstructured. Ideal for testing scalability and unsupervised capabilities. We will measure anomaly detection coverage, throughput (logs/sec), and resource usage (CPU/GPU memory) in near real-time ingestion pipelines.
-2. **KDD Cup 99 / NSL-KDD**: Classic labeled intrusion datasets. Although dated, they help us establish performance baselines and partially validate detection metrics (precision, recall, F1) on known attack classes.
+To demonstrate feasibility, the approach will be evaluated on:
+1. **Unlabeled 500 GB BSI Honeypot Dataset**: Large, real-world, and unstructured. Ideal for testing scalability and unsupervised capabilities. Detection coverage, throughput (logs/sec), and resource usage (CPU/GPU memory) will be measured in near real-time ingestion pipelines.
+2. **KDD Cup 99 / NSL-KDD**: Classic labeled intrusion datasets. Although dated, these sets establish performance baselines and partially validate detection metrics (precision, recall, F1) on known attack classes.
 
 ### Ablation Studies
-We will systematically compare:
+A systematic comparison is planned:
 - **Transformer vs. Autoencoder** for line-level embedding.
-- **Full Session Model vs. No Session Model** to confirm the need for capturing cross-line context.
+- **Full Session Model vs. No Session Model** to confirm the necessity of capturing cross-line context.
 - **Static vs. Dynamic Graph** construction thresholds.
-- **GNN vs. simpler aggregator** (e.g., MLP) to measure the GNN’s benefit on multi-session correlation.
+- **GNN vs. simpler aggregator** (e.g., MLP) to measure the GNN’s benefit in multi-session correlation.
 - **Fusion vs. single anomaly score** to highlight synergy among line-level, session-level, and GNN-based signals.
 
 ### Real-Time Constraints and Overhead Mitigation
-- We employ **subgraph sampling** (GraphSAGE/Cluster-GCN) and **mini-batch training** to keep memory usage stable.
+- Subgraph sampling (GraphSAGE/Cluster-GCN) and mini-batch training keep memory usage stable.
 - The fallback autoencoder can replace the transformer for continuous ingestion on commodity servers when resource constraints are high.
 - Asynchronous pipelines and approximate nearest neighbor queries accelerate graph construction for large data volumes.
 
 ### Explainability Demonstration
-- We plan to highlight case studies from the BSI dataset, where suspicious clusters are found. Analysts can see GNNExplainer visuals, line-level anomaly heatmaps, and a timeline-based chain reconstruction.
-- Comparisons to simpler feature-based methods (e.g., Isolation Forest) will help show how deeply learned embeddings reveal complex attacker behavior that rule-based systems miss.
+- Selected case studies from the BSI dataset will be used to illustrate how suspicious clusters are found. Analysts can see GNNExplainer visuals, line-level anomaly heatmaps, and a timeline-based chain reconstruction.
+- Comparisons to simpler feature-based methods (e.g., Isolation Forest) will highlight how deeply learned embeddings capture complex attacker behavior beyond rule-based approaches.
 
 ## Refined Limitations and Future Work
 - **Hyperparameter Tuning**: Finding suitable thresholds, weights ($\lambda_1, \lambda_2, \gamma$), and subgraph sampling rates requires iterative experimentation.
-- **Irregular Temporal Patterns**: Some attacks may exhibit long dormant phases. We plan to incorporate an adaptive decay function or rolling time windows.
-- **Large-Scale Real-Time**: Even with fallback and sampling, extremely large ingestion rates demand distributed architectures. We will explore parallel graph-building and cluster algorithms.
-- **Partial Labeling & Ground Truth**: While our BSI dataset is unlabeled, we plan to integrate known labeled segments or curated subsets. This also supports semi-supervised expansions and evaluation.
+- **Irregular Temporal Patterns**: Some attacks may exhibit dormant phases. An adaptive decay function or rolling time windows may be needed.
+- **Large-Scale Real-Time**: Even with fallback methods, extremely high ingestion rates demand distributed architectures. Parallel graph-building and cluster algorithms are potential next steps.
+- **Partial Labeling & Ground Truth**: Although the BSI dataset is unlabeled, known labeled segments or curated subsets could be integrated. Such data would support semi-supervised extensions and more thorough evaluation.
 
 ## Conclusion
-This enhanced framework integrates fallback autoencoders, scalable graph learning techniques, well-defined temporal graph construction, advanced fusion mechanisms, improved attack chain extraction methods, and robust explainability components. With the availability of a massive 500 GB unlabeled honeypot dataset from the BSI, plus smaller labeled benchmarks like KDD Cup 99 and NSL-KDD, we can thoroughly demonstrate both scalability and accuracy. These improvements solidify the architecture’s potential for publication and practical deployment while paving the way for future work in real-time, federated, and adaptive threat intelligence systems.
-
+This enhanced framework integrates fallback autoencoders, scalable graph learning techniques, well-defined temporal graph construction, advanced fusion mechanisms, improved attack chain extraction methods, and robust explainability components. The availability of a massive 500 GB unlabeled honeypot dataset from the BSI, alongside smaller labeled benchmarks such as KDD Cup 99 and NSL-KDD, enables thorough demonstration of both scalability and accuracy. These improvements solidify the architecture’s potential for publication and practical deployment, while paving the way for further exploration of real-time, federated, and adaptive threat intelligence systems.
