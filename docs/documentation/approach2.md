@@ -1,4 +1,5 @@
-# Theoretical Framework and Best Architecture Proposal
+# Unsupervised Multi-Layer Anomaly Detection and Attack Chain Extraction in Unstructured Honeypot Logs  
+*A Hybrid Deep Learning Framework for Modeling Complex Attacker Behavior on Unlabeled Production Data*  
 
 ## Introduction
 
