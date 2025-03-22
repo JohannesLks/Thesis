@@ -1,1 +1,24 @@
+site_name: Honeypot Anomaly Detection
+site_url: https://johanneslks.github.io/Thesis
+theme:
+  name: material
+  palette:
+    primary: indigo
+  features:
+    - navigation.tabs
+    - search.highlight
+markdown_extensions:
+  - admonition
+  - pymdownx.arithmatex:
+      inline_syntax: true
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+nav:
+  - Home: index.md
+  - Documentation:
+      - Overview: documentation/index.md
+      - Theoretical Framework: documentation/theoretical-framework.md
+      - Related Work: documentation/related-work.md
+      - Journals: documentation/journals.md
+      - Thoughts: documentation/thoughts.md
 
