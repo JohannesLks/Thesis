@@ -5,11 +5,10 @@ Welcome to the documentation for my thesis project:
 
 ## 📚 Contents
 
-- [Theoretical Framework](documentation/theoretical-framework.md)
-- [Methodology](documentation/methodology.md)
-- [Related Work](documentation/related-work.md)
-- [Journals](documentation/journals.md)
-- [Thoughts](documentation/thoughts.md)
+- [Related Work](related-work.md)
+- [Journals](journals.md)
+- [Thoughts](thoughts.md)
+- [Concept 1](Unsupervised_Multi-Layer_Anomaly_Detection_in_Unstructured_Honeypot_Logs_Across_Sessions_and_Time.md)
 
 ## 🎯 Project Overview
 This research project focuses on:
