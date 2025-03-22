@@ -5,12 +5,12 @@
 
 We consider a set of honeypot log lines:  
 $$
-L = \{l_1, l_2, \,dots, l_n\}
+L = \{l_1, l_2, \dots, l_n\}
 $$
 
 Grouped into sessions:  
 $$
-S = \{s_1, s_2, \,dots, s_m\}
+S = \{s_1, s_2, \dots, s_m\}
 $$
 
 Each session $s_i$ is a time-ordered sequence of log lines.  
