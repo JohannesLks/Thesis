@@ -4,7 +4,7 @@ Welcome to the documentation site for the project: **Unsupervised Multi-Layer An
 
 ## Documentation Access
 
-You can view the full theoretical framework and methodology [here in the documentation section](/documentation).
+You can view the full theoretical framework and methodology [here in the documentation section]({{ site.baseurl }}/documentation/).
 
 ## Project Overview
 
@@ -17,4 +17,4 @@ This project focuses on developing an unsupervised anomaly detection framework f
 - ✅ Clustering-based attack chain extraction
 - ✅ Mathematical guarantees and proof sketches
 
-> For full formulas and theoretical background, visit the [Documentation](/documentation) page.
+> For full formulas and theoretical background, visit the [Documentation]({{ site.baseurl }}/documentation/) page.
