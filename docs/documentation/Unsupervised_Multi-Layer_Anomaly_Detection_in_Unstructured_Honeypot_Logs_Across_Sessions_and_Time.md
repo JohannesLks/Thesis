@@ -25,19 +25,20 @@ This paper presents a novel unsupervised framework designed to not only detect a
 ## 3. Research Objectives  
 
 - **Develop** a hybrid deep learning framework that integrates:  
-  - Line-level autoencoder for anomaly detection in individual log entries,  
-  - Session-level sequential modeling using LSTM to detect abnormal behavior patterns within sessions,  
-  - Time-based LSTM for modeling sequential patterns across multiple sessions over time,  
-  - A cross-session attention layer to highlight suspicious aggregated patterns.  
+    - Line-level autoencoder for anomaly detection in individual log entries,  
+    - Session-level sequential modeling using LSTM to detect abnormal behavior patterns within sessions,  
+    - Time-based LSTM for modeling sequential patterns across multiple sessions over time,  
+    - A cross-session attention layer to highlight suspicious aggregated patterns.  
 
 - **Address the absence of labeled data** by:  
-  - Operating fully unsupervised,  
-  - Using anomaly scores and embeddings to autonomously cluster sessions and reconstruct attack chains.  
+    - Operating fully unsupervised,  
+    - Using anomaly scores and embeddings to autonomously cluster sessions and reconstruct attack chains.  
 
 - **Enable explainability and analyst support** by:  
-  - Providing log line-level anomaly scores,  
-  - Visualizing attention weights across sessions and time,  
-  - Outputting clustered groups of logs and sessions that constitute suspected attack chains.  
+    - Providing log line-level anomaly scores,  
+    - Visualizing attention weights across sessions and time,  
+    - Outputting clustered groups of logs and sessions that constitute suspected attack chains.
+ 
 
 ## 4. Proposed Framework Architecture  
 
