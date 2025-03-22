@@ -3,7 +3,7 @@ name: Deploy MkDocs to GitHub Pages
 on:
   push:
     branches:
-      - main  # or 'master' if your branch is master
+      - main
 
 jobs:
   deploy:
@@ -16,12 +16,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: '3.13'
 
       - name: Install dependencies
         run: |
           pip install mkdocs-material
-          pip install mkdocs-material[plugins]
           pip install mkdocs-git-revision-date-localized-plugin
 
       - name: Build and deploy
