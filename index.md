@@ -1,9 +1,3 @@
-
----
-layout: default
-title: Honeypot Anomaly Detection Project
----
-
 # Honeypot Anomaly Detection Documentation
 
 Welcome to the documentation site for the project: **Unsupervised Multi-Layer Anomaly Detection and Attack Chain Extraction in Unstructured Honeypot Logs**.
