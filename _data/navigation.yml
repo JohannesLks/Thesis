@@ -1,0 +1,15 @@
+- title: "Home"
+  url: "/Thesis/"
+
+- title: "Documentation"
+  children:
+    - title: "Overview"
+      url: "/Thesis/documentation/"
+    - title: "Theoretical Framework"
+      url: "/Thesis/documentation/theoretical-framework/"
+    - title: "Related Work"
+      url: "/Thesis/documentation/related-work/"
+    - title: "Journals"
+      url: "/Thesis/documentation/journals/"
+    - title: "Thoughts"
+      url: "/Thesis/documentation/thoughts/"
