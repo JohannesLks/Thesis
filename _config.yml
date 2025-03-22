@@ -1,6 +1,0 @@
-theme: jekyll-theme-cayman
-markdown: kramdown
-kramdown:
-  math_engine: mathjax
-title: Honeypot Anomaly Detection
-description: "Thesis documentation site"
