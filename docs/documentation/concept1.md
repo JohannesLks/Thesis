@@ -82,30 +82,30 @@ graph TD
 
 ### 4.1 Problem Setup
 - **Honeypot Log Lines**  
-  \[
+  $$
     L = \{l_1, l_2, \dots, l_n\}
-  \]  
+  $$  
 - **Grouped into Sessions**  
-  \[
+  $$
     S = \{s_1, s_2, \dots, s_m\}
-  \]  
+  $$  
 - **Per-Line Embeddings**  
-  \[
+  $$
     e_{l_i} \in \mathbb{R}^d
-  \]  
+  $$  
   Each log line is mapped to a continuous vector representation.  
 - **Session Embeddings**  
   Derived from the final state of the Transformer-LSTM stack:  
-  \[
+  $$
     e_{s_i} = \text{TransformerLSTM}(s_i)
-  \]
+  $$
 
 ### 4.2 Cross-Session Anomaly Cohesion Score (CSACS)
 To quantify how anomalous and tightly coupled a community \( C \) of sessions is, we propose:
 
-\[
+$$
   CSACS(C) = \frac{ \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{D(s_i, s_j) + \epsilon} + \lambda_2 \cdot \frac{1}{T(s_i, s_j) + \delta} \right) \cdot \min(A(s_i), A(s_j)) }{ |E_C| }
-\]
+$$
 
 **Where**:
 - \( E_C \): set of edges among sessions in community \( C \)  
@@ -116,16 +116,16 @@ To quantify how anomalous and tightly coupled a community \( C \) of sessions is
 - \( \epsilon, \delta \): small constants for numerical stability  
 
 ### 4.3 Optimization Objective
-\[
+$$
   \max_{C} \; CSACS(C) \;-\; \gamma \cdot |C|
-\]
+$$
 Balancing cluster compactness and size through a regularization term \(\gamma\).
 
 ### 4.4 Hypothetical Stability Theorem (Conceptual Proposal)
 > **Theorem:** Under Gaussian noise and uniform temporal distribution assumptions, the probability that a random cluster exceeds threshold \(\theta\) decays exponentially with the number of edges:  
-> \[
+> $$
 >   P(CSACS(C) \geq \theta) \;\leq\; \exp\Bigl(-\alpha \cdot |E_C| \cdot \theta\Bigr),
-> \]  
+> $$  
 > where \(\alpha > 0\) depends on the noise variance.  
 > **Note:** A full proof is out of scope for this paper, but future work will involve both theoretical and empirical analysis to validate or refine this statement.
 
