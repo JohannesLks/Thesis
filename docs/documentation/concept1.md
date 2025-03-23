@@ -48,10 +48,12 @@ Given the large-scale nature of production honeypot data, this paper primarily f
    Integrate a scalable GNN using subgraph sampling techniques (e.g., GraphSAGE or Cluster-GCN) to handle large, evolving graphs without overwhelming memory. This layer consolidates session embeddings and uncovers global patterns indicative of distributed or advanced persistent threats (APTs).
 
 5. **Fusion Layer**  
-   Design an attention-based fusion mechanism that combines:  
+   Design an attention-based fusion mechanism that combines: 
+
    - **Line-level anomaly scores** (e.g., reconstruction/entropy error),  
    - **Session-level anomaly indicators**,  
    - **GNN-based cluster embeddings**.  
+  
    By weighting these factors, the fusion layer seeks a comprehensive anomaly indicator reflective of local outliers and global relational structure.
 
 6. **Improved Attack Chain Extraction**  
@@ -108,6 +110,7 @@ $$
 $$
 
 **Where**:
+
 - \( E_C \): set of edges among sessions in community \( C \)  
 - \( D(s_i, s_j) \): distance between session embeddings \( e_{s_i} \) and \( e_{s_j} \)  
 - \( T(s_i, s_j) \): temporal gap between sessions  
@@ -136,11 +139,13 @@ Balancing cluster compactness and size through a regularization term \(\gamma\).
 ### 5.1 Datasets
 
 1. **Unlabeled 500 GB BSI Honeypot Dataset**  
+
    - Large-scale, real-world, unstructured data.  
    - Ideal for testing scalability and unsupervised capabilities on production-level volumes.  
    - We will measure detection coverage, throughput (logs/sec), and resource usage (CPU/GPU memory) in near real-time pipelines.
 
 2. **KDD Cup 99 / NSL-KDD**  
+
    - Classic labeled intrusion datasets, albeit somewhat dated.  
    - Useful for establishing performance baselines (Precision, Recall, F1).  
    - Provides partial ground truth and confirms whether the system can detect well-known attacks.
@@ -149,23 +154,28 @@ Balancing cluster compactness and size through a regularization term \(\gamma\).
 We propose **five** key ablations to rigorously test each major architectural component:
 
 1. **Transformer vs. Autoencoder (Line-Level Embedding)**  
+
    - **Hypothesis:** Byte-level transformer embeddings yield more nuanced semantic features but require more computation.  
    - **Metrics:** Reconstruction error, classification metrics (where labels exist), ingestion throughput.
 
 2. **Full Session Model vs. No Session Model**  
+
    - **Setup:** Compare a pipeline that (a) aggregates log lines into sessions vs. (b) treats every line independently before the GNN.  
    - **Aim:** Check if ignoring session context severely diminishes anomaly detection for multi-step attacks.
 
 3. **Static vs. Dynamic Graph Construction**  
+
    - **Variant A:** Build a static graph for a fixed time window.  
    - **Variant B:** Continuously update edges with an exponential time decay.  
    - **Goal:** Evaluate whether dynamic adjacency provides better chain detection for persistent or slow-moving attacks.
 
 4. **GNN vs. Simpler Aggregator**  
+
    - **Comparison:** Replace the GNN with a basic aggregator (e.g., an MLP on session embeddings or a clustering method like k-Means).  
    - **Question:** Is the complexity of a GNN justified by significantly better correlation of anomalies across sessions?
 
 5. **Fusion vs. Single Anomaly Score**  
+
    - **Approach:** Compare using a single anomaly score (e.g., from the session model only) vs. combining line-level, session-level, and GNN-based signals in the fusion layer.  
    - **Objective:** Demonstrate whether multi-level fusion substantially improves detection robustness and reduces false positives.
 
@@ -187,14 +197,17 @@ We propose **five** key ablations to rigorously test each major architectural co
 The BSI dataset poses a classic challenge: massive volume with no explicit labels. To address the validation gap:
 
 1. **Spot Checks by Analysts**  
+
    - Manually inspect a small subset of flagged sessions for confirmatory evidence of malicious or benign behavior.  
    - This yields some real “ground truth” points to estimate false positive vs. true positive rates.
 
 2. **Threat Intelligence Feeds**  
+
    - Cross-reference sessions against known malicious IPs, domains, or other IOCs.  
    - Although this only detects attacks already known, it at least provides partial labeling or confidence checks.
 
-3. **Synthetic Injection Tests**  
+3. **Synthetic Injection Tests** 
+ 
    - Inject known artificial anomalies or replay small slices of labeled attacks into the BSI data stream.  
    - Assess how well the pipeline detects these injects within large volumes of normal honeypot logs.
 
@@ -202,46 +215,57 @@ The BSI dataset poses a classic challenge: massive volume with no explicit label
 To provide preliminary evidence for the theorem’s relevance:
 
 1. **Synthetic Clustering Experiments**  
+
    - Generate data with controlled noise and inject “attack-like” clusters.  
    - Measure how frequently random subsets exceed CSACS thresholds, correlating results with the proposed exponential bound.
 
 2. **Real-Data Subset Analysis**  
+
    - Partition BSI logs into smaller subsets and track how anomaly clusters form.  
    - Estimate whether random groupings seldom achieve high CSACS values, especially as the number of edges grows.
 
 3. **Varying Noise Levels**  
+
    - Experiment with different noise intensities or background traffic patterns to see if the exponential decay in cluster false alarms holds across multiple scenarios.
 
 ### 6.3 Practical and Resource Considerations
 - **Computational Footprint**  
+
   - The pipeline’s complexity (Transformer + LSTM + GNN) requires robust hardware.  
   - Fallback autoencoders can mitigate overhead, but real-time streaming at 500 GB scale demands either distributed systems or batching strategies.
 
 - **Ablation vs. Real-World Constraints**  
+
   - Thorough ablation is valuable for academic demonstration. However, real deployments might choose simpler configurations (e.g., direct autoencoder + GNN) if hardware budgets are tight.
 
 ---
 
 ## 7. Refined Limitations and Future Work
 1. **Hyperparameter Tuning**  
+
    - Selecting thresholds (\(\lambda_1, \lambda_2, \gamma\)), graph pruning levels, and fusion weights requires iterative experimentation with domain feedback.
 
 2. **Irregular Temporal Patterns**  
+
    - Attacks may have dormant phases or irregular intervals. More adaptive time windows or advanced temporal modeling (e.g., gating mechanisms) could help.
 
-3. **Large-Scale Real-Time**  
+3. **Large-Scale Real-Time** 
+
    - True real-time processing at sustained ingestion rates remains challenging. Distributed graph-building and streaming-based GNN updates could be the next milestone.
 
 4. **Partial Labeling & Ground Truth**  
+
    - While the BSI dataset is unlabeled, curated subsets (possibly with known malicious IPs or events) could anchor a semi-supervised approach, boosting reliability.
 
-5. **Federated and Adaptive Extensions**  
+5. **Federated and Adaptive Extensions**
+  
    - Inspired by *FedNIDS (2025)* and *DeepFed (2023)*, the proposed methods could be adapted for federated learning, allowing multiple honeypot locations to collaborate without sharing raw logs.
 
 ---
 
 ## 8. Conclusion
 This work presents a **multi-layer unsupervised anomaly detection and attack chain reconstruction framework**, integrating:
+
 - **Fallback autoencoders** for resource efficiency,  
 - **Scalable graph learning** with dynamic edge construction,  
 - **Advanced fusion** of line-level, session-level, and GNN-based anomaly signals,  
