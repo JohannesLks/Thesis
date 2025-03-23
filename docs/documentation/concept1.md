@@ -35,31 +35,31 @@ Given the large-scale nature of production honeypot data, this paper primarily f
 ## 3. Proposed Architecture: Enhanced Conceptual Design
 
 ### 3.1 Key Innovations
-1. **Line-Level Modeling**  
+(1) **Line-Level Modeling**  
    Use a lightweight distilled transformer (e.g., DistilByT5) for byte-level embeddings of log lines. To ensure scalability under high-throughput conditions, introduce a fallback denoising sequence autoencoder. This autoencoder can replicate or approximate the transformer-based embeddings in resource-constrained production environments.
 
-2. **Session-Level Modeling**  
+(2) **Session-Level Modeling**  
    Deploy a hybrid Transformer-LSTM module with temporal attention to capture both local (sequence-based) and global (contextual) session behavior. This layer aggregates line embeddings into a coherent session representation, accounting for potential long-range dependencies and ordering.
 
-3. **Temporal Relationship Modeling**  
+(3) **Temporal Relationship Modeling**  
    Construct dynamic session graphs in which edges reflect semantic distance and temporal adjacency, decaying exponentially over time. This approach helps identify how different sessions are interlinked, uncovering multi-session attack sequences or correlated anomalies.
 
-4. **Graph Neural Network Layer**  
+(4) **Graph Neural Network Layer**  
    Integrate a scalable GNN using subgraph sampling techniques (e.g., GraphSAGE or Cluster-GCN) to handle large, evolving graphs without overwhelming memory. This layer consolidates session embeddings and uncovers global patterns indicative of distributed or advanced persistent threats (APTs).
 
-5. **Fusion Layer**  
+(5) **Fusion Layer**  
    Design an attention-based fusion mechanism that combines: 
 
-    - **Line-level anomaly scores** (e.g., reconstruction/entropy error),  
-    - **Session-level anomaly indicators**,  
-    - **GNN-based cluster embeddings**.  
+  - **Line-level anomaly scores** (e.g., reconstruction/entropy error),  
+  - **Session-level anomaly indicators**,  
+  - **GNN-based cluster embeddings**.  
   
    By weighting these factors, the fusion layer seeks a comprehensive anomaly indicator reflective of local outliers and global relational structure.
 
-6. **Improved Attack Chain Extraction**  
+(6) **Improved Attack Chain Extraction**  
    Implement a two-stage process—first, coarse temporal clustering (via DBSCAN on timestamp embeddings) to group sessions that lie close in time, followed by fine-grained community detection (e.g., Leiden algorithm) to identify subgroups with high anomaly cohesion. This helps reconstruct potentially large, multi-step attack chains spanning many sessions.
 
-7. **Explainability**  
+(7) **Explainability**  
    Incorporate GNNExplainer for subgraph-level interpretability and heatmaps showing the most significant lines or sessions in an anomalous cluster. By mapping the contributing features back to raw log lines, security analysts can trace suspicious activity with minimal manual overhead.
 
 ### 3.2 Updated Architecture Diagram (Conceptual Overview)
