@@ -65,21 +65,29 @@ Given the large-scale nature of production honeypot data, this paper primarily f
 ### 3.2 Updated Architecture Diagram (Conceptual Overview)
 ```mermaid
 graph TD
-  Input["Unlabeled Honeypot Logs (500 GB BSI)"] --> EmbeddingPath["Line Embedding Generation"]
-  EmbeddingPath -->|Transformer (ByT5)| LineEmbeddings["Line Embeddings"]
-  EmbeddingPath -->|Fallback Autoencoder| LineEmbeddingsAE["Line Embeddings (Autoencoder)"] 
-  EmbeddingPath -->|Autoencoder Reconstruction Error| LineAnomalyScores["Line-Level Anomaly Scores"]
+  Input["Unlabeled Honeypot Logs (500 GB BSI)"] 
+  Input --> ByT5["Line-Level Transformer (ByT5)"]
+  Input --> FallbackAE["Fallback Autoencoder"]
+  
+  ByT5 --> LineEmbeddings["Line Embeddings"]
+  FallbackAE --> AEEmbeddings["AE Embeddings"]
+  FallbackAE --> LineAnomaly["Line-Level Anomaly Scores"]
+  
   LineEmbeddings --> SessionModel["Session-Level Hybrid Transformer-LSTM"]
-  LineEmbeddingsAE --> SessionModel
+  AEEmbeddings --> SessionModel
+  
   SessionModel --> SessionEmbeddings["Session Embeddings"]
   SessionEmbeddings --> TemporalGraph["Dynamic Temporal Session Graph"]
   TemporalGraph --> GNN["Scalable GNN with Subgraph Sampling"]
+  
   GNN --> Fusion["Attention-Based Fusion Layer"]
-  LineAnomalyScores --> Fusion
+  LineAnomaly --> Fusion
+  
   Fusion --> AttackChains["Two-Stage Attack Chain Extraction"]
-  AttackChains --> Output["Attack Chain Reports & Explanations"]
+  AttackChains --> Output["Attack Chain Reports & Visualizations"]
   Fusion -->|Feedback Loop| TemporalGraph
   AttackChains -->|Continuous Update| SessionModel
+
 ```
 
 ---
