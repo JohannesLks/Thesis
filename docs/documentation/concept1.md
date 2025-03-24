@@ -65,7 +65,7 @@ Given the large-scale nature of production honeypot data, this paper primarily f
 ### 3.2 Updated Architecture Diagram (Conceptual Overview)
 ```mermaid
 graph TD
-  Input["Unlabeled Honeypot Logs (500 GB BSI)"] --> LineTransformer["Line-Level Transformer (DistilByT5) or Fallback Autoencoder"]
+  Input["Unlabeled Honeypot Logs (500 GB BSI)"] --> LineTransformer["Line-Level Transformer (Distil ByT5) or Fallback Autoencoder"]
   LineTransformer --> LineEmbeddings["Line Embeddings & Entropy Scores"]
   LineEmbeddings --> SessionModel["Session-Level Hybrid Transformer-LSTM"]
   SessionModel --> SessionEmbeddings["Session Embeddings"]
