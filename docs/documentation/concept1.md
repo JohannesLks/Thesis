@@ -69,22 +69,17 @@ graph TD
   EmbeddingPath -->|Transformer (ByT5)| LineEmbeddings["Line Embeddings"]
   EmbeddingPath -->|Fallback Autoencoder| LineEmbeddingsAE["Line Embeddings (Autoencoder)"] 
   EmbeddingPath -->|Autoencoder Reconstruction Error| LineAnomalyScores["Line-Level Anomaly Scores"]
-  
   LineEmbeddings --> SessionModel["Session-Level Hybrid Transformer-LSTM"]
   LineEmbeddingsAE --> SessionModel
-  
   SessionModel --> SessionEmbeddings["Session Embeddings"]
   SessionEmbeddings --> TemporalGraph["Dynamic Temporal Session Graph"]
   TemporalGraph --> GNN["Scalable GNN with Subgraph Sampling"]
-  
   GNN --> Fusion["Attention-Based Fusion Layer"]
   LineAnomalyScores --> Fusion
-  
   Fusion --> AttackChains["Two-Stage Attack Chain Extraction"]
   AttackChains --> Output["Attack Chain Reports & Explanations"]
   Fusion -->|Feedback Loop| TemporalGraph
   AttackChains -->|Continuous Update| SessionModel
-
 ```
 
 ---
