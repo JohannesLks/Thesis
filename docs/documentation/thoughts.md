@@ -52,6 +52,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## Questions to Clarify
+> *Date: 24.3.2025*  
+-  Should i use byt5 es transformer at first step to big?
 > *Date: 22.3.2025*  
 -  How can i use generative AI? If i write a text based on my thoughts and with referenced literature, can i input this text, for instance, to ChatGpt and let it rewrite it so its wriiten in a academic and typical journal article manner?
 > *Date: 21.3.2025*  
