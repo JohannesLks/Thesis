@@ -262,16 +262,3 @@ To provide preliminary evidence for the theorem’s relevance:
     - Inspired by *FedNIDS (2025)* and *DeepFed (2023)*, the proposed methods could be adapted for federated learning, allowing multiple honeypot locations to collaborate without sharing raw logs.
 
 ---
-
-## 8. Conclusion
-This work presents a **multi-layer unsupervised anomaly detection and attack chain reconstruction framework**, integrating:
-
-- **Fallback autoencoders** for resource efficiency,  
-- **Scalable graph learning** with dynamic edge construction,  
-- **Advanced fusion** of line-level, session-level, and GNN-based anomaly signals,  
-- **Improved attack chain extraction** through a two-stage clustering scheme, and  
-- **Explainability** (GNNExplainer, line-level heatmaps) for operational insight.
-
-By testing on a **massive 500 GB unlabeled honeypot dataset** from the BSI, alongside classical labeled benchmarks such as KDD Cup 99 and NSL-KDD, this approach aims to demonstrate both **scalability** and **accuracy**. The proposed **Hypothetical Stability Theorem** adds a conceptual underpinning for why cohesive anomaly clusters remain statistically rare, although further simulation and proof are required.
-
-Overall, this architecture holds promise for practical deployment in high-volume security operations and offers a solid foundation for ongoing research into **real-time, federated, and adaptive threat intelligence** systems.
