@@ -3,6 +3,7 @@
 
 ---
 This concept is created with help from Generative AI (ChatGpt o1 + 4o)
+
 ---
 
 ## 1. Related Work and Positioning
@@ -36,45 +37,42 @@ Given the large-scale nature of production honeypot data, this paper primarily f
 
 ### 3.1 Key Innovations
 (1) **Line-Level Modeling**  
-   Use a lightweight distilled transformer (e.g., DistilByT5) for byte-level embeddings of log lines. To ensure scalability under high-throughput conditions, introduce a fallback denoising sequence autoencoder. This autoencoder can replicate or approximate the transformer-based embeddings in resource-constrained production environments.
+Use a lightweight denoising sequence autoencoder for byte-level embeddings of log lines. This autoencoder simultaneously provides a line embedding vector (from the bottleneck layer) and a reconstruction error as an anomaly score.
 
 (2) **Session-Level Modeling**  
-   Deploy a hybrid Transformer-LSTM module with temporal attention to capture both local (sequence-based) and global (contextual) session behavior. This layer aggregates line embeddings into a coherent session representation, accounting for potential long-range dependencies and ordering.
+Deploy a hybrid Transformer-LSTM module with temporal attention to capture both local (sequence-based) and global (contextual) session behavior. This layer aggregates line embeddings into a coherent session representation, accounting for potential long-range dependencies and ordering.
 
 (3) **Temporal Relationship Modeling**  
-   Construct dynamic session graphs in which edges reflect semantic distance and temporal adjacency, decaying exponentially over time. This approach helps identify how different sessions are interlinked, uncovering multi-session attack sequences or correlated anomalies.
+Construct dynamic session graphs in which edges reflect semantic distance and temporal adjacency, decaying exponentially over time. This approach helps identify how different sessions are interlinked, uncovering multi-session attack sequences or correlated anomalies.
 
 (4) **Graph Neural Network Layer**  
-   Integrate a scalable GNN using subgraph sampling techniques (e.g., GraphSAGE or Cluster-GCN) to handle large, evolving graphs without overwhelming memory. This layer consolidates session embeddings and uncovers global patterns indicative of distributed or advanced persistent threats (APTs).
+Integrate a scalable GNN using subgraph sampling techniques (e.g., GraphSAGE or Cluster-GCN) to handle large, evolving graphs without overwhelming memory. This layer consolidates session embeddings and uncovers global patterns indicative of distributed or advanced persistent threats (APTs).
 
 (5) **Fusion Layer**  
-   Design an attention-based fusion mechanism that combines: 
+Design an attention-based fusion mechanism that combines:  
 
-  - **Line-level anomaly scores** (e.g., reconstruction/entropy error),  
+  - **Line-level anomaly scores** (reconstruction error from the autoencoder),  
   - **Session-level anomaly indicators**,  
   - **GNN-based cluster embeddings**.  
   
    By weighting these factors, the fusion layer seeks a comprehensive anomaly indicator reflective of local outliers and global relational structure.
 
 (6) **Improved Attack Chain Extraction**  
-   Implement a two-stage process—first, coarse temporal clustering (via DBSCAN on timestamp embeddings) to group sessions that lie close in time, followed by fine-grained community detection (e.g., Leiden algorithm) to identify subgroups with high anomaly cohesion. This helps reconstruct potentially large, multi-step attack chains spanning many sessions.
+Implement a two-stage process—first, coarse temporal clustering (via DBSCAN on timestamp embeddings) to group sessions that lie close in time, followed by fine-grained community detection (e.g., Leiden algorithm) to identify subgroups with high anomaly cohesion. This helps reconstruct potentially large, multi-step attack chains spanning many sessions.
 
 (7) **Explainability**  
-   Incorporate GNNExplainer for subgraph-level interpretability and heatmaps showing the most significant lines or sessions in an anomalous cluster. By mapping the contributing features back to raw log lines, security analysts can trace suspicious activity with minimal manual overhead.
+Incorporate GNNExplainer for subgraph-level interpretability and heatmaps showing the most significant lines or sessions in an anomalous cluster. By mapping the contributing features back to raw log lines, security analysts can trace suspicious activity with minimal manual overhead.
 
 ### 3.2 Updated Architecture Diagram (Conceptual Overview)
 ```mermaid
 graph TD
-  Input["Unlabeled Honeypot Logs (500 GB BSI)"] 
-  Input --> ByT5["Line-Level Transformer (ByT5)"]
-  Input --> FallbackAE["Fallback Autoencoder"]
+  Input["Unlabeled Honeypot Logs (500 GB BSI)"]
+  Input --> Autoencoder["Lightweight Sequence Autoencoder"]
   
-  ByT5 --> LineEmbeddings["Line Embeddings"]
-  FallbackAE --> AEEmbeddings["AE Embeddings"]
-  FallbackAE --> LineAnomaly["Line-Level Anomaly Scores"]
+  Autoencoder --> LineEmbeddings["Line Embeddings (Bottleneck Layer)"]
+  Autoencoder --> LineAnomaly["Line-Level Anomaly Scores (Reconstruction Error)"]
   
   LineEmbeddings --> SessionModel["Session-Level Hybrid Transformer-LSTM"]
-  AEEmbeddings --> SessionModel
   
   SessionModel --> SessionEmbeddings["Session Embeddings"]
   SessionEmbeddings --> TemporalGraph["Dynamic Temporal Session Graph"]
@@ -87,7 +85,6 @@ graph TD
   AttackChains --> Output["Attack Chain Reports & Visualizations"]
   Fusion -->|Feedback Loop| TemporalGraph
   AttackChains -->|Continuous Update| SessionModel
-
 ```
 
 ---
@@ -165,9 +162,9 @@ Balancing cluster compactness and size through a regularization term \(\gamma\).
 ### 5.2 Ablation Studies and Comparative Experiments
 We propose **five** key ablations to rigorously test each major architectural component:
 
-1. **Transformer vs. Autoencoder (Line-Level Embedding)**  
+1. **Autoencoder vs. Transformer (historical reference)**  
 
-    - **Hypothesis:** Byte-level transformer embeddings yield more nuanced semantic features but require more computation.  
+    - **Hypothesis:** Although Transformer embeddings could be more expressive, a well-trained autoencoder provides a robust and scalable alternative with anomaly scoring capability.  
     - **Metrics:** Reconstruction error, classification metrics (where labels exist), ingestion throughput.
 
 2. **Full Session Model vs. No Session Model**  
@@ -193,7 +190,7 @@ We propose **five** key ablations to rigorously test each major architectural co
 
 ### 5.3 Real-Time Constraints and Overhead Mitigation
 - **Subgraph Sampling & Mini-batch Training**: Techniques like GraphSAGE or Cluster-GCN prevent memory overflow by processing only portions of the graph at each step.  
-- **Fallback Autoencoder**: In high-throughput or hardware-limited scenarios, switch from transformer embeddings to a lighter sequence autoencoder.  
+- **Fallback Autoencoder**: Serves as both feature generator and anomaly scorer with minimal overhead.  
 - **Asynchronous Pipelines & Approximate Queries**: Use approximate nearest neighbor (ANN) for faster edge construction among sessions and decouple embedding computation from graph updates for better parallelization.
 
 ### 5.4 Explainability Demonstration
@@ -203,74 +200,3 @@ We propose **five** key ablations to rigorously test each major architectural co
 
 ---
 
-## 6. Extended Critical Analysis and Validation Outlook
-
-### 6.1 Validation on Unlabeled Data
-The BSI dataset poses a classic challenge: massive volume with no explicit labels. To address the validation gap:
-
-1. **Spot Checks by Analysts**  
-
-    - Manually inspect a small subset of flagged sessions for confirmatory evidence of malicious or benign behavior.  
-    - This yields some real “ground truth” points to estimate false positive vs. true positive rates.
-
-2. **Threat Intelligence Feeds**  
-
-    - Cross-reference sessions against known malicious IPs, domains, or other IOCs.  
-    - Although this only detects attacks already known, it at least provides partial labeling or confidence checks.
-
-3. **Synthetic Injection Tests** 
- 
-    - Inject known artificial anomalies or replay small slices of labeled attacks into the BSI data stream.  
-    - Assess how well the pipeline detects these injects within large volumes of normal honeypot logs.
-
-### 6.2 Theoretical Simulation for the Hypothetical Stability Theorem
-To provide preliminary evidence for the theorem’s relevance:
-
-1. **Synthetic Clustering Experiments**  
-
-    - Generate data with controlled noise and inject “attack-like” clusters.  
-    - Measure how frequently random subsets exceed CSACS thresholds, correlating results with the proposed exponential bound.
-
-2. **Real-Data Subset Analysis**  
-
-    - Partition BSI logs into smaller subsets and track how anomaly clusters form.  
-    - Estimate whether random groupings seldom achieve high CSACS values, especially as the number of edges grows.
-
-3. **Varying Noise Levels**  
-
-    - Experiment with different noise intensities or background traffic patterns to see if the exponential decay in cluster false alarms holds across multiple scenarios.
-
-### 6.3 Practical and Resource Considerations
-- **Computational Footprint**  
-
-  - The pipeline’s complexity (Transformer + LSTM + GNN) requires robust hardware.  
-  - Fallback autoencoders can mitigate overhead, but real-time streaming at 500 GB scale demands either distributed systems or batching strategies.
-
-- **Ablation vs. Real-World Constraints**  
-
-  - Thorough ablation is valuable for academic demonstration. However, real deployments might choose simpler configurations (e.g., direct autoencoder + GNN) if hardware budgets are tight.
-
----
-
-## 7. Refined Limitations and Future Work
-1. **Hyperparameter Tuning**  
-
-    - Selecting thresholds (\(\lambda_1, \lambda_2, \gamma\)), graph pruning levels, and fusion weights requires iterative experimentation with domain feedback.
-
-2. **Irregular Temporal Patterns**  
-
-    - Attacks may have dormant phases or irregular intervals. More adaptive time windows or advanced temporal modeling (e.g., gating mechanisms) could help.
-
-3. **Large-Scale Real-Time** 
-
-    - True real-time processing at sustained ingestion rates remains challenging. Distributed graph-building and streaming-based GNN updates could be the next milestone.
-
-4. **Partial Labeling & Ground Truth**  
-
-    - While the BSI dataset is unlabeled, curated subsets (possibly with known malicious IPs or events) could anchor a semi-supervised approach, boosting reliability.
-
-5. **Federated and Adaptive Extensions**
-  
-    - Inspired by *FedNIDS (2025)* and *DeepFed (2023)*, the proposed methods could be adapted for federated learning, allowing multiple honeypot locations to collaborate without sharing raw logs.
-
----
