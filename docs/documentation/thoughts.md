@@ -17,6 +17,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+> *Date: 24.3.2025*  
+-  Question BSI, can i expect that the dataset has less then 5% Attack logs? Have there been analysis of the logs and is there a clean log subset
 > *Date: 21.3.2025*  
 -  Nearly no paper is about anomaly detection in honeypots. That makes sense, because NIDS are the main usecase and there is no big difference between the both in my research context, but it should be possible to use this fact for my research gap
 > *Date: 19.3.2025*  
