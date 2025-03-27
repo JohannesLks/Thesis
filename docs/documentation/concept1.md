@@ -115,7 +115,7 @@ graph TD
 To quantify how anomalous and tightly coupled a community \( C \) of sessions is, we propose:
 
 $$
-CSACS(C) = \frac{1}{|E_C|} \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{1 + D(s_i, s_j)} + \lambda_2 \cdot \frac{1}{1 + T(s_i, s_j)} \right) \cdot \text{mean}(A(s_i), A(s_j))
+  CSACS(C) = \frac{ \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{D(s_i, s_j) + \epsilon} + \lambda_2 \cdot \frac{1}{T(s_i, s_j) + \delta} \right) \cdot \min(A(s_i), A(s_j)) }{ |E_C| }
 $$
 
 **Where**:
@@ -199,4 +199,3 @@ We propose **five** key ablations to rigorously test each major architectural co
 - **Comparison to Baselines**: Methods like Isolation Forest or simpler autoencoders will be used to illustrate how deeper embedding and graph-based context capture more complex attack patterns.
 
 ---
-
