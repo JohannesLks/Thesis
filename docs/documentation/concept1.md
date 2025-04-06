@@ -66,25 +66,35 @@ Incorporate GNNExplainer for subgraph-level interpretability and heatmaps showin
 ### 3.2 Updated Architecture Diagram (Conceptual Overview)
 ```mermaid
 graph TD
-  Input["Unlabeled Honeypot Logs (500 GB BSI)"]
-  Input --> Autoencoder["Lightweight Sequence Autoencoder"]
-  
-  Autoencoder --> LineEmbeddings["Line Embeddings (Bottleneck Layer)"]
-  Autoencoder --> LineAnomaly["Line-Level Anomaly Scores (Reconstruction Error)"]
-  
-  LineEmbeddings --> SessionModel["Session-Level Hybrid Transformer-LSTM"]
-  
-  SessionModel --> SessionEmbeddings["Session Embeddings"]
-  SessionEmbeddings --> TemporalGraph["Dynamic Temporal Session Graph"]
-  TemporalGraph --> GNN["Scalable GNN with Subgraph Sampling"]
-  
-  GNN --> Fusion["Attention-Based Fusion Layer"]
-  LineAnomaly --> Fusion
-  
-  Fusion --> AttackChains["Two-Stage Attack Chain Extraction"]
-  AttackChains --> Output["Attack Chain Reports & Visualizations"]
-  Fusion -->|Feedback Loop| TemporalGraph
-  AttackChains -->|Continuous Update| SessionModel
+    A["Unlabeled Honeypot Logs (500 GB BSI)"]
+    B["Preprocessing & Feature Extraction"]
+    C["Lightweight Sequence Autoencoder\n(Denoising)"]
+    D["Line Embeddings\n(Bottleneck Layer)"]
+    E["Line-Level Anomaly Scores\n(Reconstruction Error)"]
+    F["Session Aggregation\n(Hybrid Transformer-LSTM)"]
+    G["Session Embeddings"]
+    H["Dynamic Temporal Graph Construction\n(Edge weights: Semantic & Temporal)"]
+    I["Scalable Graph Neural Network\n(Subgraph Sampling, e.g., GraphSAGE)"]
+    J["Attention-Based Fusion Module\n(Multi-Level Signal Integration)"]
+    K["Two-Stage Attack Chain Extraction\n(Temporal Clustering + Community Detection)"]
+    L["Attack Chain Reports & Visualizations\n(GNNExplainer, Heatmaps)"]
+    
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    D --> F
+    F --> G
+    G --> H
+    H --> I
+    I --> J
+    E --> J
+    J --> K
+    K --> L
+    
+    %% Feedback loops for continuous adaptation:
+    J -- "Update Graph Weights" --> H
+    K -- "Refine Session Grouping" --> F
 ```
 
 ---

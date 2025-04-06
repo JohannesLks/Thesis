@@ -98,19 +98,19 @@ Given the large-scale nature of production honeypot data, our focus is on an unl
 ### 3.2 Updated Architecture Diagram (Conceptual Overview)
 ```mermaid
 flowchart TD
-  A[Unlabeled Honeypot Logs<br/>(500 GB BSI)]
-  B[Preprocessing & Feature Extraction]
-  C[Sequence Autoencoder<br/>(Denoising)]
-  D[Line Embeddings<br/>(Bottleneck Layer)]
-  E[Line-Level Anomaly Scores<br/>(Reconstruction Error)]
-  F[Session Aggregation<br/>(Hybrid Transformer-LSTM)]
-  G[Session Embeddings]
-  H[Dynamic Temporal Graph Construction<br/>(Edge weights: Semantic & Temporal)]
-  I[Graph Neural Network<br/>(Subgraph Sampling, e.g., GraphSAGE)]
-  J[Attention-Based Fusion Module<br/>(Combine multi-level scores)]
-  K[Attack Chain Extraction<br/>(Temporal Clustering + Community Detection)]
-  L[Visualization & Reports<br/>(GNNExplainer, Heatmaps)]
-  
+  A["Unlabeled Honeypot Logs\n(500 GB BSI)"]
+  B["Preprocessing & Feature Extraction"]
+  C["Sequence Autoencoder\n(Denoising)"]
+  D["Line Embeddings\n(Bottleneck Layer)"]
+  E["Line-Level Anomaly Scores\n(Reconstruction Error)"]
+  F["Session Aggregation\n(Hybrid Transformer-LSTM)"]
+  G["Session Embeddings"]
+  H["Dynamic Temporal Graph Construction\n(Edge weights: Semantic & Temporal)"]
+  I["Graph Neural Network\n(Subgraph Sampling, e.g., GraphSAGE)"]
+  J["Attention-Based Fusion Module\n(Combine multi-level scores)"]
+  K["Attack Chain Extraction\n(Temporal Clustering + Community Detection)"]
+  L["Visualization & Reports\n(GNNExplainer, Heatmaps)"]
+
   A --> B
   B --> C
   C --> D
@@ -123,10 +123,11 @@ flowchart TD
   E --> J
   J --> K
   K --> L
-  
+
   %% Feedback loops for continuous adaptation:
   J -- "Feedback: Update Graph Weights" --> H
   K -- "Update Session Grouping" --> F
+
 
 ```
 
