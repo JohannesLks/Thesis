@@ -39,11 +39,11 @@ Conventional honeypot systems predominantly capture “first-flight” data, pro
 ```mermaid
 graph TD
   A[Unstructured JSON Logs] --> B[Feature Extraction]
-  B --> C[Deep Learning Classification<br/>(LSTM/Transformer)]
+  B --> C[Deep Learning Classification\n(LSTM/Transformer)]
   C --> D[Dynamic Dispatcher]
   D --> E[Container-based Service Emulation]
   
-  A --> F[Autoencoder-based<br/>Anomaly Detection]
+  A --> F[Autoencoder-based\nAnomaly Detection]
   F --> G[Line-level Anomaly Scores]
   
   E --> H[Interactive Attacker Environment]
@@ -52,8 +52,9 @@ graph TD
   H --> J[Feedback to DRL Agent]
   I --> J
   
-  J --> K[Adaptive Control via<br/>Reinforcement Learning]
+  J --> K[Adaptive Control via\nReinforcement Learning]
   K --> B
+
 ```
 
 ---
