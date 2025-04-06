@@ -17,6 +17,7 @@ Dieses Dokument enthält den aktuellen Fortschritt meiner Bachelorarbeit sowie a
 
 | Datum       | Fortschritt                                                        |
 |-------------|--------------------------------------------------------------------|
+| 24.03.2025 | Grobe Gliederung und erste Konzeptskizze erstellen|
 | 22.03.2025 | Mögliche Forschungslücken sind skizziert.|
 | 22.03.2025 | Identifizierte Literatur bewertet und Kernergebnisse zusammengefasst|
 | 22.03.2025 | Erweiterte Literaturrecherche durchgeführt |
@@ -24,11 +25,11 @@ Dieses Dokument enthält den aktuellen Fortschritt meiner Bachelorarbeit sowie a
 
 ---
 
-## 📅 Nächste Prioritäten  
+## 📅 Woran ich gerade arbeite
 
-- [ ] Forschungsfrage auf Basis der Literaturlücken festlegen  
-- [ ] Grobe Gliederung und erste Konzeptskizze erstellen  
-- [ ] Abstimmung des Konzepts mit Prof. Dr. Krauss und Prof. Dr. Schneider  
+- [ ] Erste Code Umsetzung des Konzept
+- [ ] Abstimmung des Konzepts mit Prof. Dr. Krauss und Prof. Dr. Schneider 
+- [ ] Erste Code Umsetzung des Konzept
 
 ---
 
