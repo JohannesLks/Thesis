@@ -19,11 +19,6 @@ Beide Fragen adressieren unterschiedliche Systemaspekte – Erkennungsqualität 
 ### 1.3 Hypothese
 Ein mehrschichtiges Anomaliedetektionsmodell mit synergetischer Fusionsformel kann relevante Angriffe früher identifizieren, Emulationsressourcen gezielter einsetzen und durch Clusterung und Versionierung strukturierte Angriffsketten erzeugen. Die Einbeziehung eines ressourcensensitiven RL-Moduls steigert dabei die Effizienz unter gleichzeitiger Wahrung der Erkennungsqualität.
 
----
-
-Natürlich – hier ist eine **vollständige Neufassung von Abschnitt 2.0**, in die die Vergleichstabelle **inhaltlich sauber eingebettet** ist. Der Abschnitt stellt zuerst die Kategorien vor, fasst relevante Arbeiten knapp und kritisch zusammen, und schließt dann mit einer **wissenschaftlich kommentierten Vergleichstabelle**, die die Stärken deines Frameworks klar herausstellt.
-
-Du kannst den Abschnitt **sofort in dein Paper übernehmen** (z. B. als Markdown, LaTeX oder Word):
 
 ---
 
