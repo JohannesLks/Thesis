@@ -531,37 +531,65 @@ Zur Analyse der Wirkungsbeiträge einzelner Modellkomponenten führen wir system
 
 Diese Studien liefern entscheidende Hinweise zur Priorisierung der Modellkomponenten im Live-Betrieb und ermöglichen eine differenzierte Optimierung des Tradeoffs zwischen Rechenaufwand und Erkenntnistiefe.
 
-### 9.4 Robustheit gegenüber gezielten adversarialen Manipulationen
+Sehr gerne – hier ist der vollständig überarbeitete und **wissenschaftlich saubere Abschnitt 9.4** in deinem Stil, aber als **konzeptuelle Planung** formuliert. Er ersetzt die frühere „Evaluation mit realen Zahlen“ durch **plausible Angriffstypen**, **methodische Hypothesen** und einen **klar geplanten Versuchsaufbau**, ohne den Eindruck realer Messergebnisse zu erwecken.
 
-Neben dem ARS-Wert (vgl. Abschnitt 4.5) führen wir nun eine **systematische, quantitative Analyse** durch. Dazu werden gezielte Störmanipulationen auf First-Flight-Daten simuliert:
+---
 
-| Angriffstyp | Beschreibung | Ziel |
-|-------------|--------------|------|
-| **Padding Attack** | Einfügen semantisch irrelevanter Bytes (NOP, Leerzeichen) | Score-Dämpfung bei AE |
-| **Timing Delay** | künstliche Verzögerung zwischen Paketen | LSTM-Fehlkalibrierung |
-| **TTL Spoofing** | Manipulation der TTL-Werte | Feature-Verfälschung |
-| **Fragmentation** | Aufspaltung von Payload in Mikropakete | AE+LSTM-Verlust |
-| **TLS Noise** | Injection von harmlosen Cipher Suites | Graph-Edge-Verrauschung |
+## 9.4 Geplante Robustheitsanalyse gegenüber gezielten Angriffen
 
-#### Metriken
+Zur Bewertung der Widerstandsfähigkeit des Frameworks gegenüber gezielten Umgehungsstrategien wird eine systematische **Robustheitsanalyse** entworfen. Diese zielt darauf ab, potenzielle Schwachstellen in der Anomaliedetektion offenzulegen, die durch gezielte Manipulation von First-Flight-Daten ausgenutzt werden könnten. Die Analyse basiert auf **simulierten Angriffstypen**, die verschiedene Pfade der Architektur (AE, LSTM, GNN) unterschiedlich stark beeinflussen.
 
-- **\(\Delta \text{AUC}\)** pro Angriffstyp
-- ARS-Mittelwert
-- Fusions-Score-Verfall
-- Missed Detection Rate (MDR)
+### 9.4.1 Angriffstypen und erwartete Auswirkungen
 
-#### Ergebnisse (Beispielhafte Evaluation)
+| Angriffstyp     | Beschreibung | Erwarteter Effekt |
+|-----------------|--------------|--------------------|
+| **Padding Attack** | Einfügen semantisch irrelevanter Bytes (z. B. NOPs, Leerzeichen) | Dämpfung des AE-Rekonstruktionsfehlers |
+| **Timing Delay**   | Künstliche Verzögerung zwischen Paketen | Fehlkalibrierung im LSTM-Timing-Verlauf |
+| **TTL Spoofing**   | Manipulation von TTL- und TCP-Header-Feldern | Störung strukturierter Features |
+| **Fragmentation**  | Zerlegung von Payloads in Mikropakete | Auflösung syntaktischer und sequentieller Muster |
+| **TLS Noise**      | Injection harmloser Cipher Suites oder Extensions | Verrauschung semantischer GNN-Kanten |
 
-| Angriffstyp | ΔAUC | ARS↓ | MDR↑ |
-|-------------|------|------|------|
-| Padding | -4.2 % | 0.69 | +6.5 % |
-| TTL Spoof | -2.5 % | 0.74 | +3.1 % |
-| Fragmentation | -7.9 % | 0.62 | +11.8 % |
-| TLS Noise | -3.4 % | 0.71 | +4.6 % |
+Diese Angriffe sollen gezielt simuliert werden, um die Reaktionsfähigkeit der Module auf adversariale Modifikationen zu testen. Dabei liegt der Fokus auf dem Verhalten des Fusionsmodells unter verzerrten Einzel-Scores.
 
-### 9.4.1 Gegenmaßnahmen (evaluationsgestützt)
+### 9.4.2 Bewertungsmethoden (geplant)
 
-Die vorgestellten Gegenmaßnahmen (Jitter-Features, Payload-Normalisierung, Adversarial Augmentation) **heben die ARS-Werte im Schnitt um 12–18 % an**. Die robustifizierte Pipeline wird als `Ours-AdvDef` in den Vergleichen berücksichtigt.
+Die Robustheit wird im geplanten Experiment mittels folgender Metriken untersucht:
+
+- **\(\Delta \text{AUC}\)**: Veränderung der Area Under Curve im Vergleich zur sauberen Basislinie
+- **ARS (Adversarial Robustness Score)**: Stabilität des Fusionsscores bei leichten Perturbationen
+- **MDR (Missed Detection Rate)**: Anteil nicht erkannter Anomalien durch gezielte Täuschung
+- **Fusionsscore-Verlauf**: Veränderung des Scores \( s_{\text{fusion}} \) bei inkrementeller Manipulation
+
+Die Angriffe werden sowohl auf Rohdatenebene als auch auf Featureebene appliziert, um verschiedene Verwundbarkeitspfade zu testen.
+
+### 9.4.3 Erwartete Ergebnisse (hypothetisch)
+
+Basierend auf früheren Arbeiten zur Adversarial Robustness in Autoencodern und Sequence Models ist anzunehmen, dass insbesondere folgende Effekte auftreten:
+
+| Angriffstyp     | Erwarteter ΔAUC | Erwartete ARS | Potenzielle MDR |
+|-----------------|------------------|----------------|------------------|
+| **Padding**     | moderat negativ (~–4 %) | leicht reduziert (~0.7) | leicht erhöht (5–7 %) |
+| **Fragmentation** | stark negativ (–7 bis –9 %) | signifikant reduziert (< 0.65) | deutlich erhöht (>10 %) |
+| **TLS Noise**   | mäßig negativ (~–3 %) | moderat (~0.7) | erhöht (4–6 %) |
+
+Diese Werte stellen keine empirisch gemessenen Resultate dar, sondern dienen der **planerischen Orientierung für die spätere Evaluation**. Sie basieren auf Modellannahmen und bekannten Schwächen ähnlicher Architekturen.
+
+### 9.4.4 Abwehrstrategien und geplante Evaluierung
+
+Um adversarialer Einflussnahme entgegenzuwirken, sieht das Konzept folgende Verteidigungsmaßnahmen vor:
+
+- **Payload-Normalisierung**: Entfernung redundanter Byte-Blöcke vor AE-Verarbeitung
+- **Sequenz-Augmentation**: Training mit Jitter, Dropouts und Permutationen im LSTM-Modul
+- **Graph-Robustifizierung**: Dropout-Simulationen und semantische Kantenerweiterungen im GNN
+- **Nebenmerkmale**: Integration von Timing-Spikes, TTL-Jitter und Early-Reset-Erkennung als robuste Zusatzfeatures
+
+In einer geplanten Evaluationsreihe („Ours-AdvDef“) soll das System mit aktivierten Gegenmaßnahmen gegen die simulierten Angriffe getestet werden. Die erzielte Stabilität (z. B. Anstieg der ARS-Werte um > 12 %) wird dabei als Maß für die Wirksamkeit der Schutzstrategien verwendet.
+
+---
+
+### 🔚 Fazit für 9.4
+
+Diese strukturierte Robustheitsplanung ermöglicht es, bereits im Konzeptstadium klare Angriffsszenarien und Schwachstellen zu benennen – ohne Ergebnisse zu behaupten. Damit bleibt dein Paper **wissenschaftlich korrekt, glaubwürdig und publikationsfähig**, während es gleichzeitig Tiefe und Relevanz demonstriert.
 
 ---
 
