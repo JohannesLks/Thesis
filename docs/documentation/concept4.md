@@ -60,7 +60,7 @@ Obwohl jede dieser Gruppen Teilaspekte adressiert, fehlt bislang ein System, das
 
 - **FedNIDS** ([Chen et al., 2025](https://doi.org/10.1145/3696012)) ist ein föderiertes Intrusion Detection System, das auf rohen Paketdaten arbeitet. Es erreicht gute Genauigkeit, setzt aber auf **supervised DNNs** und benötigt hohe Rechenressourcen.
 
-- **ICMLA 2023 (Raw Packet Transformers)** ([DOI](https://doi.org/10.1109/ICMLA58977.2023.00330)) demonstriert die Anwendung von ByT5-Transformern auf Rohdaten. Das Modell ist vielversprechend, aber schwergewichtig (300M Parameter) und ohne Explainability oder RL-Steuerung.
+- **ICMLA 2023 (Raw Packet Transformers)** ([Sharan et al.](https://doi.org/10.1109/ICMLA58977.2023.00330)) demonstriert die Anwendung von ByT5-Transformern auf Rohdaten. Das Modell ist vielversprechend, aber schwergewichtig (300M Parameter) und ohne Explainability oder RL-Steuerung.
 
 ---
 
