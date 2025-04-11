@@ -85,6 +85,7 @@ Im Folgenden wird der Funktionsumfang relevanter Systeme mit dem in dieser Arbei
 ### 2.5 Fazit der Analyse
 
 Die analysierten Systeme liefern jeweils wichtige Beiträge – sei es durch First-Flight-Datenverarbeitung, Deep-Learning-Integration oder Flow-basiertes Clustering. Allerdings vereint **keines dieser Systeme** alle folgenden Eigenschaften in einem integrierten Framework:
+
 - dynamische Emulationsentscheidungen basierend auf Datenqualität,
 - explainable Multi-Path-Anomalieerkennung,
 - und automatisierte Angriffsketten-Versionierung mit SIEM-Anbindung.
