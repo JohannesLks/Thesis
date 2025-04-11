@@ -110,9 +110,9 @@ Gerne! Hier sind deine überarbeiteten Abschnitte mit klaren Definitionen und te
 
 Der operative Datenfluss unseres Frameworks lässt sich wie folgt formalisieren:
 
-\[
+$$
 X := f_{\text{FF}}(\text{pkt}_{\text{init}}) \Rightarrow V := \phi(X) \Rightarrow (s_{\text{line}}, s_{\text{session}}, s_{\text{graph}}) \Rightarrow s_{\text{fusion}} \Rightarrow \delta(s_{\text{fusion}}, T) \Rightarrow \text{Spawn}(C_i) \,|\, \text{Drop}
-\]
+$$
 
 #### Begriffsdefinitionen:
 
@@ -165,9 +165,9 @@ Der Dispatcher entscheidet auf Basis des Fusionsscores und der RL-Policy über d
 - **CPU/RAM-Limits und TTLs**
 
 Das Mapping erfolgt über eine Hash-basierte Matching-Funktion:
-\[
+$$
 T_i := \psi(s_{fusion}, P, F) \Rightarrow C_i
-\]
+$$
 wobei \( P \) = Protokoll, \( F \) = Fingerprint-Features (z. B. User-Agent), und \( \psi \) eine regelbasierte Zuordnung auf verfügbaren Templates ist.
 
 ##### Skalierbarkeit bei hoher Sessionzahl
@@ -186,7 +186,7 @@ Darüber hinaus erlaubt das System *Prefetching* für populäre Protokolle (z.�
 ### 4.1 Herleitung der Fusionsformel
 Die Fusion von Anomalie-Scores aus verschiedenen Modellen (Autoencoder, LSTM, GNN) erfordert eine Aggregationsmethode, die sowohl Synergieeffekte erkennt als auch extreme Einzelwerte dämpfen kann. Die gewählte Formel basiert auf einer exponentiell gewichteten Multiplikation:
 
-\[ s_{fusion} = ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) - 1 \]
+$$ s_{fusion} = ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) - 1 $$
 
 #### Begründung:
 - Die additive Verschiebung um +1 verhindert Degeneration durch Nullwerte in einzelnen Scores.
@@ -207,22 +207,22 @@ Ein systematischer Vergleich dieser Varianten erfolgt in der Evaluation durch Ab
 
 Die ursprüngliche Fusionsformel nutzte fixe Gewichtungen \(\alpha, \beta, \gamma\) für die drei Anomaliepfade:
 
-\[
+$$
 s_{fusion} = ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) - 1
-\]
+$$
 
 Diese statische Gewichtung ignoriert jedoch den Einfluss des **Protokolltyps \(P\)** und charakteristischer Merkmale \(F\) auf die Modellrelevanz. Daher führen wir eine **adaptive Gewichtungsmatrix** ein:
 
-\[
+$$
 (\alpha, \beta, \gamma) = f(P, F)
-\]
+$$
 
 #### Funktion \( f(P, F) \): regelbasiert & lernfähig
 Die Gewichtungen werden über eine Kombination aus regelbasierten Zuordnungen (z. B. SSH bevorzugt AE/LSTM, SMTP bevorzugt GNN) und einem Meta-Modell erzeugt:
 
-\[
+$$
 f(P, F) := \text{MLP}_{\text{meta}}([\text{enc}(P); \text{stat}(F)])
-\]
+$$
 
 - \( \text{enc}(P) \): learned embedding für Protokolltyp
 - \( \text{stat}(F) \): statistische Feature-Vektoren der Session (Entropie, TCP-Flags, Paketanzahl, Payload-Länge)
@@ -237,14 +237,14 @@ f(P, F) := \text{MLP}_{\text{meta}}([\text{enc}(P); \text{stat}(F)])
 ---
 
 ### 4.2 Schwellenwertfunktion
-\[ \delta(s_{fusion}, T) = \begin{cases} 1 & s_{fusion} \geq T \\ 0 & \text{sonst} \end{cases} \]
+$$ \delta(s_{fusion}, T) = \begin{cases} 1 & s_{fusion} \geq T \\ 0 & \text{sonst} \end{cases} $$
 
 Nur wenn \( \delta = 1 \) wird ein Emulationscontainer gestartet. Dies reduziert unproduktive Emulationen.
 
 ### 4.3 Ressourcenkostenbewertung (Reinforcement Learning)
 
 #### Reward-Funktion:
-\[ R_t = \frac{I_t^{\text{neu}}}{I_t^{\text{total}}} - \lambda \cdot C_t \]
+$$ R_t = \frac{I_t^{\text{neu}}}{I_t^{\text{total}}} - \lambda \cdot C_t $$
 
 - \( I_t^{neu} \): Neue Information (Embedding-Distanz zu Cluster-Zentrum > \( \epsilon \))
 - \( C_t \): Laufzeitkosten (CPU, RAM, Zeit)
@@ -252,7 +252,7 @@ Nur wenn \( \delta = 1 \) wird ein Emulationscontainer gestartet. Dies reduziert
 
 #### Beispiel:
 Gegeben seien: \( I_t^{neu} = 0.2 \), \( I_t^{total} = 1.5 \), \( C_t = 0.1 \), \( \lambda = 0.5 \)
-\[ R_t = \frac{0.2}{1.5} - 0.5 \cdot 0.1 = 0.133 - 0.05 = 0.083 \]
+$$ R_t = \frac{0.2}{1.5} - 0.5 \cdot 0.1 = 0.133 - 0.05 = 0.083 $$
 
 #### RL-Komponenten:
 - **Zustand**: \( s_t = [s_{fusion}, t_{last}, r_{usage},\dots] \)
@@ -275,14 +275,14 @@ Der Output ist ein Session-Embedding \( \mathbf{e}_{graph} \in \mathbb{R}^d \), 
 #### Sensitivitätsanalyse der Fusionsformel
 
 Die gewählte Fusionsformel
-\[
+$$
 s_{fusion} = \left( (s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma \right) - 1
-\]
+$$
 verstärkt Synergieeffekte, kann jedoch bei niedrigem Score-Niveau einzelner Komponenten anfällig für Instabilitäten sein. Zur **Sensitivitätsanalyse** untersuchen wir die partielle Ableitung nach einem Score, z. B. \( \frac{\partial s_{fusion}}{\partial s_{line}} \), um Einflussbereiche zu quantifizieren:
 
-\[
+$$
 \frac{\partial s_{fusion}}{\partial s_{line}} = \alpha (s_{line}+1)^{\alpha-1} \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma
-\]
+$$
 
 Die Ableitung zeigt, dass geringe Werte in \( s_{line} \) exponentiell verstärkt werden, sobald die anderen Scores hoch sind. Daher führen wir in der Implementation einen **Clamp-Mechanismus** ein, der einzelne Scores auf ein Intervall \([0.01, 10]\) begrenzt und so numerische Dominanzen verhindert. Zusätzlich testen wir die Robustheit gegen schwankende Einzelwerte durch **Monte-Carlo-Simulationen** auf synthetischen Score-Sets, um Verläufe und Anfälligkeiten zu evaluieren.
 
@@ -303,9 +303,9 @@ Jede neue Session wird in diesen globalen Graph integriert, wodurch **Angriffscl
 
 Wir wenden ein weiteres **R-GAT-Modell** auf \( G^{\text{global}} \) an, das Topologie und semantische Ähnlichkeit nutzt, um verteilte Anomalien zu detektieren. Das Ergebnis ist ein zusätzlicher Anomalie-Score \( s_{cross} \), der in die Fusion einfließt:
 
-\[
+$$
 s_{fusion}^{\text{final}} = \left( ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) + s_{cross} \right) - 1
-\]
+$$
 
 \( s_{cross} \) wird nur berücksichtigt, wenn die Session im globalen Graph mit ≥ 2 Nachbarn verbunden ist (Verteilungsmerkmal erfüllt).
 
@@ -317,9 +317,9 @@ s_{fusion}^{\text{final}} = \left( ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\b
 
 Zielgerichtete Payload-Manipulationen, wie Fragmentierung, semantisch irrelevante Padding-Sequenzen oder zeitlich gestreckte Protokollinteraktionen, können die Anomalie-Scores absichtlich senken. Um dem zu begegnen, führen wir einen **Adversarial Robustness Score (ARS)** ein, der die Stabilität der Entscheidung unter leicht veränderten First-Flight-Eingaben misst:
 
-\[
+$$
 ARS = 1 - \frac{1}{k} \sum_{i=1}^k \left| s_{fusion}^{(0)} - s_{fusion}^{(i)} \right|
-\]
+$$
 
 Dabei bezeichnet \( s_{fusion}^{(0)} \) den Original-Score und \( s_{fusion}^{(i)} \) die Scores nach gezielten Mikroveränderungen in Payload, Timing oder TCP-Feldern. Ein niedriger ARS (< 0.7) weist auf ein hohes Risiko adversarialer Täuschung hin.
 
@@ -411,15 +411,15 @@ Gerne! Hier sind deine überarbeiteten Abschnitte mit klaren Definitionen und te
 
 Die Versionierung von Angriffsketten basiert auf einer kontinuierlichen Clusterbildung über den Raum der Session-Embeddings. Eine neue Angriffsversion wird erzeugt, wenn der semantische Abstand \( d(E_i, \mu_k) \) zu den existierenden Zentren \( \mu_k \) eine festgelegte Schwelle \( \epsilon \) übersteigt:
 
-\[
+$$
 d(E_i, \mu_k) > \epsilon \Rightarrow \text{neue Version}
-\]
+$$
 
 #### Begriffsdefinition:
 - **\( \mu_k \)**: Bezeichnet den **dynamischen Mittelpunkt des Clusters** \( C_k \) im Embedding-Raum. Dieser wird kontinuierlich durch gewichtetes Mittel der zugeordneten Session-Embeddings aktualisiert:
-  \[
+  $$
   \mu_k^{(t+1)} = \frac{1}{|C_k|} \sum_{E_j \in C_k} E_j
-  \]
+  $$
 
   Eine **Sliding-Window-Strategie** verhindert Konzeptdrift: Nur Sessions der letzten \( N \) Tage (z. B. \( N = 7 \)) fließen in die Berechnung ein. Ältere Sessions werden archiviert, aber nicht für aktuelle Versionierungsentscheidungen berücksichtigt.
 
