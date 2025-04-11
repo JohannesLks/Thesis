@@ -68,9 +68,9 @@ Das System zielt darauf ab, Honeypot-Infrastrukturen durch folgende Elemente sub
 - **GNN-Analyse:** z. B. mit GraphSAGE
 - **Nichtlineare Fusionsformel**:
 
-\[
+$$
 \mathrm{score}_{\mathrm{fusion}}(s) = \left[(\mathrm{score}_{\text{line}} + 1)^\alpha \cdot (\mathrm{score}_{\text{session}} + 1)^\beta \cdot (\mathrm{score}_{\text{graph}} + 1)^\gamma \right] - 1
-\]
+$$
 
 ---
 
@@ -87,9 +87,9 @@ Das System zielt darauf ab, Honeypot-Infrastrukturen durch folgende Elemente sub
 
 ### **3.4 Reward-Funktion des RL-Agents**
 
-\[
+$$
 R(s_j) = \lambda_1 \cdot \frac{D_{\text{neu}}}{D_{\text{gesamt}}} - \lambda_2 \cdot \frac{T_{\text{runtime}}}{T_{\text{max}}}
-\]
+$$
 
 - \( D_{\text{neu}} \): Anzahl neuer Command-/Payload-Typen
 - \( T_{\text{runtime}} \): Containerlaufzeit
