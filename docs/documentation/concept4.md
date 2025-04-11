@@ -24,7 +24,11 @@ Ein mehrschichtiges Anomaliedetektionsmodell mit synergetischer Fusionsformel ka
 
 ##  2.0 Verwandte Arbeiten und Abgrenzung
 
-Forschungsarbeiten zur Anomalieerkennung im Kontext von Honeypots, Netzwerkverkehr und Logs lassen sich grob in drei Kategorien einteilen: (1) **klassische Honeypot-Frameworks**, (2) **Deep-Learning-basierte Anomalieerkennungssysteme**, und (3) **unsupervised/multimodale Netzwerkmodelle**. Obwohl jede dieser Gruppen Teilaspekte adressiert, fehlt bislang ein System, das *dynamisch reagiert*, *ressourceneffizient emuliert* und dabei *multimodale Anomalien* mit *Erklärbarkeit und Versionierung* kombiniert.
+Forschungsarbeiten zur Anomalieerkennung im Kontext von Honeypots, Netzwerkverkehr und Logs lassen sich grob in drei Kategorien einteilen: 
+(1) **klassische Honeypot-Frameworks**
+(2) **Deep-Learning-basierte Anomalieerkennungssysteme**
+(3) **unsupervised/multimodale Netzwerkmodelle**. 
+Obwohl jede dieser Gruppen Teilaspekte adressiert, fehlt bislang ein System, das *dynamisch reagiert*, *ressourceneffizient emuliert* und dabei *multimodale Anomalien* mit *Erklärbarkeit und Versionierung* kombiniert.
 
 ---
 
