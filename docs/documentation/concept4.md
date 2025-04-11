@@ -109,8 +109,6 @@ Das in dieser Arbeit vorgestellte Framework adressiert diese Lücke und position
 - **Fusionsmodul**: Siehe Abschnitt 4 (nichtlineare Gewichtung)
 - **Dispatcher:** Steuerung von Containeremulationen via REST-API auf Kubernetes (Pod Templates, Ressourcenlimits, Isolation)
 - **Logger & Analyzer:** Persistenz der Sessions, Feature-Export, Embedding-Vergleich, Angriffskettenrekonstruktion per Clustering
-      -
-Gerne! Hier sind deine überarbeiteten Abschnitte mit klaren Definitionen und technischen Präzisierungen für die Begriffe `pkt_0^5`, `ϕ(X)` und `μ_k`, jeweils elegant eingebettet im wissenschaftlichen Stil deines bisherigen Konzepts:
 
 ---
 
