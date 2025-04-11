@@ -262,7 +262,7 @@ $$ R_t = \frac{0.2}{1.5} - 0.5 \cdot 0.1 = 0.133 - 0.05 = 0.083 $$
 
 #### RL-Komponenten:
 - **Zustand**: \( s_t = [s_{fusion}, t_{last}, r_{usage},\dots] \)
-- **Aktionen**: \( \{ \textbf{Spawn}, \textbf{Delay}, \textbf{Drop} \} \)
+- **Aktionen**: \( \{ \text{Spawn}, \text{Delay}, \text{Drop} \} \)
 - **Lernalgorithmus**: PPO (Proximal Policy Optimization) mit kontinuierlichem Update
 
 ---
