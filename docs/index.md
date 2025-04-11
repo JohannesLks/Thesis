@@ -17,6 +17,7 @@ Dieses Dokument enthält den aktuellen Fortschritt meiner Bachelorarbeit sowie a
 
 | Datum       | Fortschritt                                                        |
 |-------------|--------------------------------------------------------------------|
+| 3.04.2025 | T-Pot aufgesetzt|
 | 24.03.2025 | Grobe Gliederung und erste Konzeptskizze erstellen|
 | 22.03.2025 | Mögliche Forschungslücken sind skizziert.|
 | 22.03.2025 | Identifizierte Literatur bewertet und Kernergebnisse zusammengefasst|
@@ -27,9 +28,9 @@ Dieses Dokument enthält den aktuellen Fortschritt meiner Bachelorarbeit sowie a
 
 ## 📅 Woran ich gerade arbeite
 
+- [ ] Konzept umstellen, BSI bishe rnur first flight
 - [ ] Erste Code Umsetzung des Konzept
 - [ ] Abstimmung des Konzepts mit Prof. Dr. Krauss und Prof. Dr. Schneider 
-- [ ] Erste Code Umsetzung des Konzept
 
 ---
 
