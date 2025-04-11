@@ -40,6 +40,8 @@ Obwohl jede dieser Gruppen Teilaspekte adressiert, fehlt bislang ein System, das
 
 - **T-Pot** ist ein industriell erprobtes Honeynet-Framework, das zahlreiche Emulationsservices bündelt, jedoch auf **statisch laufenden Containern** basiert. Es gibt keine adaptive Entscheidung auf Basis des Traffics – alle Dienste laufen dauerhaft, unabhängig von Relevanz oder Angriffswahrscheinlichkeit.
 
+- **MADCAT** stellt einen Low-Interaction-Sensorverbund dar, der auf vollständige Portabdeckung und strukturierte Rohdatenextraktion ohne Emulation setzt. Im Gegensatz zu klassischen Honeynets mit tiefen Antwortlogiken (z. B. Cowrie, Dionaea) liegt der Fokus auf skalenoptimierter Erfassung und Weiterverarbeitung initialer Sitzungsmerkmale – ein ideales Umfeld für unser unsupervised ML-Framework.
+
 - **UNADA** ([Ulle et al., 2015](https://doi.org/10.1145/2714576.2714580)) schlägt ein unüberwachtes System zur Clustering-basierenden Anomalieerkennung vor, das auf Flow-Metadaten basiert. Der Fokus liegt auf Subspace-Clustering und Signaturgenerierung, allerdings ohne tiefere Modellarchitektur oder dynamische Emulationssteuerung.
 
 - **Hybrid IDS mit Honeypots** ([Almutairi et al., 2018](https://doi.org/10.1109/NCG.2018.8593030)) beschreibt ein Konzept, Honeypots als Feedbackquelle für ein IDS zu nutzen – jedoch ohne konkrete Implementierung oder Bewertung.
@@ -98,7 +100,7 @@ Das in dieser Arbeit vorgestellte Framework adressiert diese Lücke und position
 
 ### 3.1 Komponentenübersicht
 - **Sensoring Layer**: Netzwerkweiterleitung über T7-Proxy, TLS-Termination, Protokollklassifikation.
-- **First-Flight Modul**: Extrahiert innerhalb der ersten 5 Sekunden Fingerprints, TCP/IP-Verhalten, Payload-Muster.
+- **First-Flight Modul**: Analysiert die initialen Sitzungsmerkmale, die ohne aktive Emulation passiv erfassbar sind. Diese umfassen etwa SYN-Pakete, Protokollheader, Payload-Fragmente und Timing-Indikatoren. Grundlage ist der MADCAT-Ansatz, bei dem sämtliche Verbindungen über DNAT an zentrale Listener weitergeleitet werden. Die Extraktion erfolgt unabhängig von einer festen Zeitspanne, sondern basiert auf dem vollständigen Eingang der ersten Interaktionspakete (TCP, UDP, ICMP, RAW).
 - **Feature Extractor**: Vektorisiert Eingabedaten für alle drei Analysepfade (AE, LSTM, GNN).
 - **Anomalie-Detektion (3-Pfad):**
   - AE: Rekonstruktionsfehler auf Byte-Ebene
@@ -355,7 +357,7 @@ Zusätzlich evaluiert das System stichprobenartig 2 % aller „Drop“-Session
 ## 5. Trainingsstrategie
 
 ### 5.1 Datenbasis
-- **MADCAT (BSI)**: JSONL-Daten mit p0f, Suricata, FATT
+- **MADCAT (BSI)**: Die Datenbasis stammt aus dem MADCAT-System (Modular Analytical Data Collection for Adversarial Traffic), einem vom BSI entwickelten, breitbandigen Sensorframework. Durch die DNAT-Weiterleitung sämtlicher Ports an zentralisierte Listener zeichnet MADCAT alle eingehenden Pakete protokollübergreifend auf, ohne tiefe Emulation. Diese Architektur liefert die Grundlage für unser First-Flight-Modul, das aus den initialen, roh erfassten Paketen aussagekräftige Feature-Vektoren erzeugt.
 - **Replay-Daten**: CVEs (z. B. EternalBlue), Brute-Force-Sessions, Metasploit Payloads
 - **First-Flight-Merkmale:**
   - SSH-Passworteingaben, HTTP-Headers, Protokoll-Metadaten
