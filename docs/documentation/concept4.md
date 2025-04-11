@@ -616,24 +616,28 @@ Die durchschnittliche Entscheidungslatenz vom Eingang des ersten Pakets bis zur 
 
 ### 12.2 Fehlerhafte Kalibrierung der Fusionsformel
 Fehlkalibrierung der Parameter \(\alpha, \beta, \gamma\) kann zu überempfindlichen oder passiven Reaktionen führen. Zur Absicherung enthält das System:
+
 - **Fallback-Schwellwertfunktion**: hartes Timeout-Triggering bei verdächtigem Verhalten, unabhängig vom Score.
 - **Failsafe-Modus**: Wenn alle Scores < 0.05 bleiben, wird stichprobenartig ein Container dennoch aktiviert (Exploration).
 - **Monitoring-Metriken**: Laufende Analyse der Aktivierungsrate, False Positives/Negatives zur Re-Kalibrierung via Online-Learning.
 
 ### 12.3 Evasion-resistente Strategien
 Zur Erkennung von Angreifern, die bewusst Low-Fusion-Score Payloads senden (z. B. Fragmentierung, Padding, unnötige Delays), nutzt das System:
+
 - **Entropiebasierte Nebenmerkmale** im First-Flight-Modul
 - **Verhaltensanalyse über Zeit**: auch bei initialem Score < T erfolgt eine Probabilistische Nachbeobachtung (Score-Trailing).
 - **Active Triggering**: selektive Emulationsantworten, um aggressivere Probing-Aktionen zu provozieren.
 
 ### 12.4 Umgang mit Concept Drift
 Angesichts sich wandelnder Payloads und Angriffsstrategien:
+
 - **Rolling Retraining**: regelmäßige Re-Initialisierung der AE- und LSTM-Modelle mit aktuellen Session-Daten (z. B. alle 7 Tage)
 - **Drift Detection**: Einsatz von ADWIN/EDDM auf Score-Zeitreihen zur Erkennung signifikanter Verschiebungen
 - **Online-Learning-Pipeline**: Optional aktiviert für Fusion-Parameter und Schwellenwertanpassung
 
 ### 12.5 Robustheit der GNN-Analyse
 GNNs reagieren empfindlich auf unvollständige oder inkonsistente Graphstrukturen. Zur Absicherung:
+
 - **Session-Normalisierung**: unvollständige Knoten werden per Regeln synthetisch ergänzt (z. B. „Unknown Service“) zur Topologie-Stabilisierung
 - **Dropout-Simulation im Training**: Training auf fragmentierte Subgraphen fördert Generalisierung
 - **Graph-Margin-Erweiterung**: Kanten über heuristische Nähe verlängert (Payload-Zeitkorrelation), um Disruption durch TCP-Reassemblierung zu mindern
@@ -647,6 +651,7 @@ GNNs reagieren empfindlich auf unvollständige oder inkonsistente Graphstrukture
 ## 13. Angriffskettenbeispiel (Visualisierung)
 
 Ein exemplarischer Ablauf einer Angriffssession:
+
 - Zeit: 14:21:05
 - Protokoll: SSH → Reverse Shell → DNS Tunneling
 - Initiale Scores: \( s_{line} = 0.2 \), \( s_{session} = 0.3 \), \( s_{graph} = 0.9 \)
@@ -656,6 +661,7 @@ Ein Container wird daraufhin aktiviert. Die Session wird durch den Transformer k
 
 **Visualisierung:**
 Ein gerichteter Graph zeigt:
+
 - **Knoten** = Session-Cluster
 - **Kanten** = zeitliche Reihenfolge
 - **Farbintensität** = Fusion Score
