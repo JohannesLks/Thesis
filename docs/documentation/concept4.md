@@ -103,18 +103,18 @@ Das in dieser Arbeit vorgestellte Framework adressiert diese Lücke und position
 - **First-Flight Modul**: Analysiert die initialen Sitzungsmerkmale, die ohne aktive Emulation passiv erfassbar sind. Diese umfassen etwa SYN-Pakete, Protokollheader, Payload-Fragmente und Timing-Indikatoren. Grundlage ist der MADCAT-Ansatz, bei dem sämtliche Verbindungen über DNAT an zentrale Listener weitergeleitet werden. Die Extraktion erfolgt unabhängig von einer festen Zeitspanne, sondern basiert auf dem vollständigen Eingang der ersten Interaktionspakete (TCP, UDP, ICMP, RAW).
 - **Feature Extractor**: Vektorisiert Eingabedaten für alle drei Analysepfade (AE, LSTM, GNN).
 - **Anomalie-Detektion (3-Pfad):**
-  - AE: Rekonstruktionsfehler auf Byte-Ebene
-  - LSTM: Payload-Sequenzanomalien
-  - GNN: Topologie-basierte Session-Embedding-Anomalien
+    - AE: Rekonstruktionsfehler auf Byte-Ebene
+    - LSTM: Payload-Sequenzanomalien
+    - GNN: Topologie-basierte Session-Embedding-Anomalien
 - **Fusionsmodul**: Siehe Abschnitt 4 (nichtlineare Gewichtung)
 - **Dispatcher:** Steuerung von Containeremulationen via REST-API auf Kubernetes (Pod Templates, Ressourcenlimits, Isolation)
 - **Logger & Analyzer:** Persistenz der Sessions, Feature-Export, Embedding-Vergleich, Angriffskettenrekonstruktion per Clustering
-
+      -
 Gerne! Hier sind deine überarbeiteten Abschnitte mit klaren Definitionen und technischen Präzisierungen für die Begriffe `pkt_0^5`, `ϕ(X)` und `μ_k`, jeweils elegant eingebettet im wissenschaftlichen Stil deines bisherigen Konzepts:
 
 ---
 
-### **3.2 Formeller Datenfluss (ergänzt und präzisiert)**
+### **3.2 Formeller Datenfluss**
 
 Der operative Datenfluss unseres Frameworks lässt sich wie folgt formalisieren:
 
@@ -125,17 +125,17 @@ $$
 #### Begriffsdefinitionen:
 
 - **\(\text{pkt}_{\text{init}}\)**: Bezeichnet die **inhaltlich vollständige Repräsentation der ersten Interaktion**, bestehend aus:
-  - TCP/IP-Header (z. B. TTL, Flags, MSS, Window Size)
-  - Rohbytes initialer Payloads (z. B. SSH-Benutzername, HTTP-Request-Line)
-  - Timing-Daten zwischen ersten Paketen (Handshake-Verhalten)
-  - Fingerprintbare Protokollindikatoren (z. B. User-Agent, Cipher Suites)
+    - TCP/IP-Header (z. B. TTL, Flags, MSS, Window Size)
+    - Rohbytes initialer Payloads (z. B. SSH-Benutzername, HTTP-Request-Line)
+    - Timing-Daten zwischen ersten Paketen (Handshake-Verhalten)
+    - Fingerprintbare Protokollindikatoren (z. B. User-Agent, Cipher Suites)
 
 Diese Datenmenge ist unabhängig von einer festen Dauer und umfasst lediglich jene Informationen, die **ohne tiefergehende Emulation** beobachtbar sind. Das First-Flight-Modul \( f_{\text{FF}} \) extrahiert daraus eine semantisch dichte Signatur zur weiteren Analyse.
 
 - **\( \phi(X) \)** – *Feature Extractor*: Ein hybrides Extraktionsmodul, bestehend aus:
-  - *statistischen Extraktoren* (z. B. Byte-Entropie, N-Gram-Raten)
-  - *regelbasierten Parsern* (z. B. Regex-basierte Shellcode-Detektion)
-  - *vortrainierten Embedding-Modellen* (für ASCII/UTF8-Payloads, auf Token-Ebene via fastText oder Transformer-Encodern)
+    - *statistischen Extraktoren* (z. B. Byte-Entropie, N-Gram-Raten)
+    - *regelbasierten Parsern* (z. B. Regex-basierte Shellcode-Detektion)
+    - *vortrainierten Embedding-Modellen* (für ASCII/UTF8-Payloads, auf Token-Ebene via fastText oder Transformer-Encodern)
 
   Die resultierende Feature-Repräsentation \( V \in \mathbb{R}^n \) ist geeignet für alle drei Downstream-Modelle (AE, LSTM, GNN) und enthält sowohl strukturierte als auch semantische Merkmale der Session.
 
@@ -300,10 +300,10 @@ Zur Erkennung korrelierter, verteilter Angriffe (z. B. APT, DDoS, verteilte Re
 
 - **Knoten** \( V \): individuelle Sessions (nicht einzelne IPs!)
 - **Kanten** \( E \): korrelative Beziehungen, z. B.:
-  - gleiche Quell-IP
-  - ähnliche Payload-Hashes (Simhash > 0.8)
-  - identische Zielports in kurzer Zeit (≤ 30s)
-  - Session-Embedding-Distanz \( d < \epsilon \)
+    - gleiche Quell-IP
+    - ähnliche Payload-Hashes (Simhash > 0.8)
+    - identische Zielports in kurzer Zeit (≤ 30s)
+    - Session-Embedding-Distanz \( d < \epsilon \)
 
 Jede neue Session wird in diesen globalen Graph integriert, wodurch **Angriffscluster auf höherer Ebene** sichtbar werden.
 
@@ -360,19 +360,19 @@ Zusätzlich evaluiert das System stichprobenartig 2 % aller „Drop“-Session
 - **MADCAT (BSI)**: Die Datenbasis stammt aus dem MADCAT-System (Modular Analytical Data Collection for Adversarial Traffic), einem vom BSI entwickelten, breitbandigen Sensorframework. Durch die DNAT-Weiterleitung sämtlicher Ports an zentralisierte Listener zeichnet MADCAT alle eingehenden Pakete protokollübergreifend auf, ohne tiefe Emulation. Diese Architektur liefert die Grundlage für unser First-Flight-Modul, das aus den initialen, roh erfassten Paketen aussagekräftige Feature-Vektoren erzeugt.
 - **Replay-Daten**: CVEs (z. B. EternalBlue), Brute-Force-Sessions, Metasploit Payloads
 - **First-Flight-Merkmale:**
-  - SSH-Passworteingaben, HTTP-Headers, Protokoll-Metadaten
-  - TCP-Fingerprints, TLS-Client-Hellos
-  - Payload-N-Grams, Entropie und Jitter in der Initialphase
+    - SSH-Passworteingaben, HTTP-Headers, Protokoll-Metadaten
+    - TCP-Fingerprints, TLS-Client-Hellos
+    - Payload-N-Grams, Entropie und Jitter in der Initialphase
   Diese Merkmale stammen ausschließlich aus **nicht-emulierten Eröffnungsinteraktionen** und definieren damit den First-Flight-Bereich, wie ihn unser Modell verarbeit
 
 ### 5.2 Labels & Supervision
 - **Heuristikbasierte Pseudo-Labels:**
-  - Ports < 1024 und selten verwendet
-  - Abnorme TTL, Window Size
-  - DNS-Reputation
+    - Ports < 1024 und selten verwendet
+    - Abnorme TTL, Window Size
+    - DNS-Reputation
 - **Evaluierung:**
-  - AUC, Precision, Recall
-  - Vergleich mit Heuristikbaseline
+    - AUC, Precision, Recall
+    - Vergleich mit Heuristikbaseline
 Sehr gute Punkte für ein vollständiges, publikationsfähiges Konzept. Hier sind die überarbeiteten und ergänzten Abschnitte, die sich direkt in dein Paper einfügen lassen – mit klarer Beantwortung der drei offenen Fragen:
 
 ---
