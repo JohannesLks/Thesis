@@ -1,4 +1,6 @@
-#  Wissenschaftlicher Entwurf: Adaptives Honeynet-Framework mit mehrschichtiger Anomaliefusion, Angriffskettenversionierung und ressourcensensitiver Containersteuerung
+# Unsupervised Multi-Model Anomaly Detection and Attack Chain Versioning in Adaptive Honeynets  
+**Early Threat Recognition from First-Flight Data with Resource-Efficient Container Orchestration**
+
 
 ## 1. Einleitung und Problemstellung
 
