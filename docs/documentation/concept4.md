@@ -16,13 +16,16 @@ Die vorliegende Arbeit zielt darauf ab, ein **adaptives Honeynet-Framework** zu 
 ### 1.2 **Forschungsfragen**
 Die folgenden Forschungsfragen ergeben sich aus den praktischen Herausforderungen bei der Erkennung und Analyse von adaptiven Angreifern sowie der effizienten Ressourcennutzung in Honeypots:
 
-1. **Wie kann ein hybrides Deep-Learning-Modell, das Autoencoder (AE), Long Short-Term Memory (LSTM) Netzwerke und Graph Neural Networks (GNN) kombiniert, dazu beitragen, **adaptive Angreifer** zu erkennen und **Angriffsketten zu versionieren**, die sich über mehrere Sessions hinweg entwickeln?**
+1. Wie kann ein hybrides Deep-Learning-Modell, das Autoencoder (AE), Long Short-Term Memory (LSTM) Netzwerke und Graph Neural Networks (GNN) kombiniert, dazu beitragen, **adaptive Angreifer** zu erkennen und **Angriffsketten zu versionieren**, die sich über mehrere Sessions hinweg entwickeln?
+
    - **Forschungslücke:** Während bestehende Systeme teilweise Angreifer auf Basis von einzelnen Angriffsmustern oder Datenströmen erkennen, wird die Fähigkeit zur **langfristigen, dynamischen Erkennung** adaptiver Angreifer und **Versionierung von Angriffsketten** selten berücksichtigt. Das vorgestellte System adressiert diese Lücke, indem es **First-Flight-Daten** kombiniert mit mehreren **modellen zur Anomalieerkennung** und einer **Attack-Chain-Versionierung** nutzt, um **Verhaltenstrends** von Angreifern über längere Zeiträume hinweg zu verfolgen.
 
-2. **Wie kann ein Reinforcement-Learning-gestütztes System die **Container-Orchestrierung** in Honeypots effizient steuern, um die Ressourcennutzung zu optimieren und gleichzeitig die **Erkennungsqualität** und **Versionierung** von Angreifern nicht zu beeinträchtigen?**
+2. Wie kann ein Reinforcement-Learning-gestütztes System die **Container-Orchestrierung** in Honeypots effizient steuern, um die Ressourcennutzung zu optimieren und gleichzeitig die **Erkennungsqualität** und **Versionierung** von Angreifern nicht zu beeinträchtigen?
+
    - **Forschungslücke:** Viele bestehende Systeme emulieren Angriffe ohne Rücksicht auf die **Ressourcenkapazitäten**, was zu einer hohen Belastung des Systems führt, insbesondere bei hochfrequenten Angriffen. Das vorgestellte Framework nutzt **Reinforcement Learning (RL)** zur ressourcensensitiven Steuerung von **Container-Spawns**, um sicherzustellen, dass **nur relevante Angriffsszenarien emuliert werden** und gleichzeitig **Ressourcen** effizient genutzt werden. Dieses System könnte die **Echtzeitreaktionsfähigkeit** erheblich steigern und die **Fehlertoleranz** verbessern.
 
-3. **Wie können wir ein System zur **erklärbaren Anomalieerkennung (XAI)** entwickeln, das es ermöglicht, sowohl die **Erkennungsentscheidungen** als auch die **Entwicklung von Angriffsketten** für Sicherheitsanalysten nachvollziehbar zu machen?**
+3. Wie können wir ein System zur **erklärbaren Anomalieerkennung (XAI)** entwickeln, das es ermöglicht, sowohl die **Erkennungsentscheidungen** als auch die **Entwicklung von Angriffsketten** für Sicherheitsanalysten nachvollziehbar zu machen?
+
    - **Forschungslücke:** Erklärbarkeit ist ein kritischer Faktor bei der Implementierung von Sicherheitslösungen, um Vertrauen und Transparenz zu gewährleisten. In bisherigen Ansätzen wird die **Erklärung von Erkennungen** meist vernachlässigt. Diese Arbeit strebt an, eine **explainable AI (XAI)** zu integrieren, um sicherzustellen, dass die **Entscheidungsprozesse des Modells** für Sicherheitsexperten verständlich sind. Dies ist besonders wichtig, um bei komplexen, dynamischen Angriffen wie **APT-Angriffen** oder **langfristigen Botnet-Infiltrationen** die **Angriffsschritte** und deren **Zusammenhänge** transparent zu machen.
 
 ---
