@@ -375,8 +375,6 @@ In der Evaluation berücksichtigen wir diese Unsicherheit durch Unsicherheitsbal
 - Transformer-LSTM erzeugt Session-Embeddings (Protokoll- & Payloadstruktur)
 - HDBSCAN zur Clusterung (unsupervised, robust gegen Noise)
 
-Gerne! Hier sind deine überarbeiteten Abschnitte mit klaren Definitionen und technischen Präzisierungen für die Begriffe `pkt_0^5`, `ϕ(X)` und `μ_k`, jeweils elegant eingebettet im wissenschaftlichen Stil deines bisherigen Konzepts:
-
 ---
 
 ### 6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)
@@ -539,12 +537,6 @@ Um adversarialer Einflussnahme entgegenzuwirken, sieht das Konzept folgende Vert
 - **Nebenmerkmale**: Integration von Timing-Spikes, TTL-Jitter und Early-Reset-Erkennung als robuste Zusatzfeatures
 
 In einer geplanten Evaluationsreihe („Ours-AdvDef“) soll das System mit aktivierten Gegenmaßnahmen gegen die simulierten Angriffe getestet werden. Die erzielte Stabilität (z. B. Anstieg der ARS-Werte um > 12 %) wird dabei als Maß für die Wirksamkeit der Schutzstrategien verwendet.
-
----
-
-###  Fazit für 9.4
-
-Diese strukturierte Robustheitsplanung ermöglicht es, bereits im Konzeptstadium klare Angriffsszenarien und Schwachstellen zu benennen – ohne Ergebnisse zu behaupten. Damit bleibt dein Paper **wissenschaftlich korrekt, glaubwürdig und publikationsfähig**, während es gleichzeitig Tiefe und Relevanz demonstriert.
 
 ---
 
