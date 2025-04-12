@@ -1,82 +1,102 @@
 # Unsupervised Multi-Model Anomaly Detection and Attack Chain Versioning in Adaptive Honeynets  
 **Early Threat Recognition from First-Flight Data with Resource-Efficient Container Orchestration**
 
-
 ## 1. Einleitung und Problemstellung
 
-### 1.1 Motivation
-Moderne Honeypot-Systeme erzeugen umfangreiche Datenmengen, leiden jedoch häufig unter kontextlosen Interaktionen, redundanter Datenspeicherung und mangelhafter Korrelation. Die Erkennung relevanter Angriffsmuster erfolgt meist verspätet oder gar nicht. Zudem steigen Ressourcenkosten mit der Anzahl simultan laufender Emulationen linear an, was die Skalierung erschwert. Ziel dieses Beitrags ist die Entwicklung eines adaptiven Honeynet-Frameworks, das Erkenntnistiefe pro Containerlaufzeit maximiert, durch mehrschichtige Anomalieerkennung auf First-Flight-Daten frühzeitig relevante Angriffe identifiziert und Container orchestration intelligent steuert.
+Um die **Forschungsfragen** und **Hypothesen** klarer und tiefergehend zu formulieren, ist es wichtig, die **praktischen Herausforderungen** und **dynamischen Aspekte** der modernen Honeypot-Systeme zu berücksichtigen, insbesondere im Hinblick auf adaptive Angreifer und die Versionierung von Angriffsketten. Dabei müssen die **aktuelle Forschungslücke** und die **Zielsetzung** deines Systems präzise angesprochen werden.
 
-### 1.2 Forschungsfrage
+Hier eine überarbeitete Version:
 
-Diese Arbeit adressiert zwei komplementäre Forschungsfragen, die sich aus dem Entwurf eines adaptiven, ML-basierten Honeynet-Frameworks ergeben:
+---
 
-1. *Wie verbessert eine nichtlineare, multipfadige Anomaliefusion (AE, LSTM, GNN) auf First-Flight-Daten die Früherkennung relevanter Angriffssitzungen gegenüber klassischen Einzelsystemen?*
-2. *Wie steigert ein RL-gesteuerter, ressourcensensitiver Dispatcher die Effizienz und Erkenntnistiefe von Containeremulationen im adaptiven Honeynet-Betrieb?*
+### 1.1 **Motivation**
+Moderne Honeypot-Systeme sind in der Lage, umfangreiche Datenmengen zu erzeugen, die für die Analyse von Angriffsmustern genutzt werden können. Allerdings haben sie nach wie vor erhebliche Schwächen, insbesondere im Umgang mit **adaptiven Angreifern**. Diese Angreifer, oftmals als *Bots* bezeichnet, passen ihre Taktiken kontinuierlich an, um der Erkennung durch statische Systeme zu entgehen. Während klassische Honeypots auf die Erkennung isolierter Angriffe ausgerichtet sind, bleiben komplexe, dynamische Angreifer, die **Angriffsketten** über mehrere Sessions hinweg aufbauen, häufig unerkannt. 
 
-Beide Fragen adressieren unterschiedliche Systemaspekte – Erkennungsqualität und Ressourceneffizienz – und bilden die Grundlage der modularen Evaluation in Abschnitt 9.
+Ein weiteres zentrales Problem bei der Anwendung von Honeypots ist die **Skalierbarkeit** und **Ressourcennutzung**. In realen Angriffsszenarien, in denen mehrere Angriffe gleichzeitig und über längere Zeiträume hinweg stattfinden, ist es entscheidend, dass Honeypot-Systeme dynamisch reagieren und Ressourcen effizient verwalten. Die Notwendigkeit, auf **Echtzeit-Angriffe** zu reagieren, ohne in Ressourcenspitzen zu geraten, stellt eine weitere Herausforderung dar.
 
-### 1.3 Hypothese
-Ein mehrschichtiges Anomaliedetektionsmodell mit synergetischer Fusionsformel kann relevante Angriffe früher identifizieren, Emulationsressourcen gezielter einsetzen und durch Clusterung und Versionierung strukturierte Angriffsketten erzeugen. Die Einbeziehung eines ressourcensensitiven RL-Moduls steigert dabei die Effizienz unter gleichzeitiger Wahrung der Erkennungsqualität.
+Die vorliegende Arbeit zielt darauf ab, ein **adaptives Honeynet-Framework** zu entwickeln, das sowohl die **Erkennung adaptiver Angreifer** (insbesondere Bots) als auch die **Versionierung von Angriffsketten** ermöglicht. Gleichzeitig soll das System durch **intelligente Container-Orchestrierung** die Ressourcennutzung optimieren und die Effizienz bei der Emulation von Angriffen sicherstellen, insbesondere bei **hohem Traffic** oder **langfristigen Angriffsszenarien**.
+
+---
+
+### 1.2 **Forschungsfragen**
+Die folgenden Forschungsfragen ergeben sich aus den praktischen Herausforderungen bei der Erkennung und Analyse von adaptiven Angreifern sowie der effizienten Ressourcennutzung in Honeypots:
+
+1. **Wie kann ein hybrides Deep-Learning-Modell, das Autoencoder (AE), Long Short-Term Memory (LSTM) Netzwerke und Graph Neural Networks (GNN) kombiniert, dazu beitragen, **adaptive Angreifer** zu erkennen und **Angriffsketten zu versionieren**, die sich über mehrere Sessions hinweg entwickeln?**
+   - **Forschungslücke:** Während bestehende Systeme teilweise Angreifer auf Basis von einzelnen Angriffsmustern oder Datenströmen erkennen, wird die Fähigkeit zur **langfristigen, dynamischen Erkennung** adaptiver Angreifer und **Versionierung von Angriffsketten** selten berücksichtigt. Das vorgestellte System adressiert diese Lücke, indem es **First-Flight-Daten** kombiniert mit mehreren **modellen zur Anomalieerkennung** und einer **Attack-Chain-Versionierung** nutzt, um **Verhaltenstrends** von Angreifern über längere Zeiträume hinweg zu verfolgen.
+
+2. **Wie kann ein Reinforcement-Learning-gestütztes System die **Container-Orchestrierung** in Honeypots effizient steuern, um die Ressourcennutzung zu optimieren und gleichzeitig die **Erkennungsqualität** und **Versionierung** von Angreifern nicht zu beeinträchtigen?**
+   - **Forschungslücke:** Viele bestehende Systeme emulieren Angriffe ohne Rücksicht auf die **Ressourcenkapazitäten**, was zu einer hohen Belastung des Systems führt, insbesondere bei hochfrequenten Angriffen. Das vorgestellte Framework nutzt **Reinforcement Learning (RL)** zur ressourcensensitiven Steuerung von **Container-Spawns**, um sicherzustellen, dass **nur relevante Angriffsszenarien emuliert werden** und gleichzeitig **Ressourcen** effizient genutzt werden. Dieses System könnte die **Echtzeitreaktionsfähigkeit** erheblich steigern und die **Fehlertoleranz** verbessern.
+
+3. **Wie können wir ein System zur **erklärbaren Anomalieerkennung (XAI)** entwickeln, das es ermöglicht, sowohl die **Erkennungsentscheidungen** als auch die **Entwicklung von Angriffsketten** für Sicherheitsanalysten nachvollziehbar zu machen?**
+   - **Forschungslücke:** Erklärbarkeit ist ein kritischer Faktor bei der Implementierung von Sicherheitslösungen, um Vertrauen und Transparenz zu gewährleisten. In bisherigen Ansätzen wird die **Erklärung von Erkennungen** meist vernachlässigt. Diese Arbeit strebt an, eine **explainable AI (XAI)** zu integrieren, um sicherzustellen, dass die **Entscheidungsprozesse des Modells** für Sicherheitsexperten verständlich sind. Dies ist besonders wichtig, um bei komplexen, dynamischen Angriffen wie **APT-Angriffen** oder **langfristigen Botnet-Infiltrationen** die **Angriffsschritte** und deren **Zusammenhänge** transparent zu machen.
+
+---
+
+### 1.3 **Hypothese**
+Die Haupthypothese dieser Arbeit lautet:
+
+Ein mehrschichtiges Modell aus **Autoencodern (AE)**, **Long Short-Term Memory Netzwerken (LSTM)** und **Graph Neural Networks (GNN)** kann in Kombination mit **Reinforcement Learning** und **Explainable AI** in einem adaptiven Honeynet-Framework die **Früherkennung von adaptiven Angreifern**, **die Versionierung von Angriffsketten** sowie eine **effiziente Ressourcennutzung** ermöglichen. Dieses Modell wird es ermöglichen, nicht nur **einzelne Angriffe** frühzeitig zu erkennen, sondern auch die Entwicklung von Angreifern **über mehrere Sessions hinweg zu verfolgen**, was zu einer nachhaltigeren und leistungsfähigeren Sicherheitslösung führt. Dabei wird die **Ressourcenschonung** durch die **intelligente Container-Orchestrierung** des RL-Moduls optimiert, ohne die Qualität der **Angriffsbeobachtungen** zu beeinträchtigen.
 
 
 ---
 
-##  2.0 Verwandte Arbeiten und Abgrenzung
+## 2.0 Verwandte Arbeiten und Abgrenzung
 
-Forschungsarbeiten zur Anomalieerkennung im Kontext von Honeypots, Netzwerkverkehr und Logs lassen sich grob in drei Kategorien einteilen: 
+Forschungsarbeiten zur Anomalieerkennung im Kontext von Honeypots, Netzwerkverkehr und Logs lassen sich grob in drei Kategorien einteilen:
 
-(1) **klassische Honeypot-Frameworks**
-
-(2) **Deep-Learning-basierte Anomalieerkennungssysteme**
-
+(1) **klassische Honeypot-Frameworks**  
+(2) **Deep-Learning-basierte Anomalieerkennungssysteme**  
 (3) **unsupervised/multimodale Netzwerkmodelle**
 
-Obwohl jede dieser Gruppen Teilaspekte adressiert, fehlt bislang ein System, das *dynamisch reagiert*, *ressourceneffizient emuliert* und dabei *multimodale Anomalien* mit *Erklärbarkeit und Versionierung* kombiniert.
+Obwohl jede dieser Gruppen Teilaspekte adressiert, fehlt bislang ein System, das *dynamisch auf die Entwicklung von Angreifern reagiert*, *die Versionierung von Angriffsstrukturen* (wie Attack Chains) ermöglicht und gleichzeitig Ressourcen effizient nutzt.
 
 ---
 
 ### 2.1 Klassische Honeypot-Systeme
 
-- **T-Pot** ist ein industriell erprobtes Honeynet-Framework, das zahlreiche Emulationsservices bündelt, jedoch auf **statisch laufenden Containern** basiert. Es gibt keine adaptive Entscheidung auf Basis des Traffics – alle Dienste laufen dauerhaft, unabhängig von Relevanz oder Angriffswahrscheinlichkeit.
+- **T-Pot** bietet eine Vielzahl von Emulationsdiensten, basiert jedoch auf *statisch laufenden Containern*. Die fehlende dynamische Anpassung an den Traffic und die Relevanz der einzelnen Emulationen führt zu einer ineffizienten Ressourcennutzung. Eine Versionierung von Angriffsketten oder die Verfolgung von sich entwickelnden Angreifern wird nicht berücksichtigt.
 
-- **MADCAT** stellt einen Low-Interaction-Sensorverbund dar, der auf vollständige Portabdeckung und strukturierte Rohdatenextraktion ohne Emulation setzt. Im Gegensatz zu klassischen Honeynets mit tiefen Antwortlogiken (z. B. Cowrie, Dionaea) liegt der Fokus auf skalenoptimierter Erfassung und Weiterverarbeitung initialer Sitzungsmerkmale – ein ideales Umfeld für unser unsupervised ML-Framework.
+- **MADCAT** ist ein Low-Interaction-System, das auf die Extraktion von Rohdaten aus der Netzwerkinfrastruktur fokussiert. Im Gegensatz zu traditionellen Honeypots mit komplexen Antwortlogiken bietet MADCAT eine skalierbare Erfassungsmethode. Doch auch hier fehlt die Möglichkeit zur tiefgehenden *Erkennung und Versionierung* von Angriffsketten, die in adaptiven Bedrohungsszenarien notwendig ist.
 
-- **UNADA** ([Ulle et al., 2015](https://doi.org/10.1145/2714576.2714580)) schlägt ein unüberwachtes System zur Clustering-basierenden Anomalieerkennung vor, das auf Flow-Metadaten basiert. Der Fokus liegt auf Subspace-Clustering und Signaturgenerierung, allerdings ohne tiefere Modellarchitektur oder dynamische Emulationssteuerung.
+- **UNADA** schlägt eine *Clustering-basierte Anomalieerkennung* vor, jedoch ohne tiefere Modellarchitektur oder die Fähigkeit zur dynamischen Emulationssteuerung. Es werden keine Mechanismen zur kontinuierlichen Verfolgung und Versionierung von sich entwickelnden Angriffen integriert.
 
-- **Hybrid IDS mit Honeypots** ([Almutairi et al., 2018](https://doi.org/10.1109/NCG.2018.8593030)) beschreibt ein Konzept, Honeypots als Feedbackquelle für ein IDS zu nutzen – jedoch ohne konkrete Implementierung oder Bewertung.
+- **Hybrid IDS mit Honeypots** verfolgt das Konzept, Honeypots in ein IDS zu integrieren, jedoch bleibt es ohne detaillierte Implementierung und liefert keine Erkenntnisse zur dynamischen Reaktion auf sich entwickelnde Angriffe oder zur Versionierung von Angriffsketten.
+
+**Forschungslücke:** Es gibt kein Honeypot-System, das dynamisch *Angriffsketten versioniert*, die sich über mehrere Interaktionen hinweg entwickeln, und gleichzeitig adaptive, sich ändernde Bots erkennt und deren Entwicklung über Zeit verfolgt.
 
 ---
 
 ### 2.2 Deep Learning für Anomalieerkennung
 
-- **DeepLog** ([Du et al., 2017](https://doi.org/10.1145/3133956.3134015)) modelliert Logs als Sequenzen mit LSTM, ist aber auf strukturierte Logs beschränkt. Die Methode ist nicht für Paket- oder Payload-basierte Anomalien geeignet und bietet keine dynamische Orchestrierung.
+- **DeepLog** ist auf strukturierte Logs angewiesen und verwendet LSTMs zur Erkennung von Anomalien. Diese Methode ist jedoch nicht in der Lage, komplexe Angriffsketten über mehrere Sessions hinweg zu erkennen oder sich entwickelnde Bots zu verfolgen. Zudem fehlt die Möglichkeit zur *dynamischen Container-Orchestrierung*, die es ermöglicht, Ressourcen je nach Angriffskomplexität zu steuern.
 
-- **D-PACK** ([Zhao et al., 2020](https://doi.org/10.1109/ACCESS.2020.2973023)) verwendet Autoencoder für die Analyse der ersten Bytes eines Flows und erreicht frühe Erkennung (First-Flight). Es ist ein starker Impulsgeber für unser First-Flight-Modul, bleibt jedoch auf spezifische Angriffsarten (z. B. Mirai) limitiert.
+- **D-PACK** nutzt Autoencoder zur *Früherkennung* von Angriffen, die auf den ersten Bytes eines Netzwerks basieren. Diese Methode ist jedoch auf bestimmte Angriffsarten beschränkt und bietet keine Möglichkeit zur Erkennung von adaptiv agierenden Angreifern oder deren Versionierung. Außerdem fehlt eine tiefere Analyse von *Angriffsketten*.
 
-- **AutoLog** ([Zhao et al., 2021](https://doi.org/10.1016/j.eswa.2021.116263)) zeigt, wie Entropie-basiertes Scoring und Autoencoder zur log-unabhängigen Anomalieerkennung kombiniert werden können – allerdings ohne Echtzeitfähigkeiten oder Netzwerkbezug.
+- **AutoLog** kombiniert Entropie-basiertes Scoring und Autoencoder, bietet aber keine Echtzeitfähigkeit und ist nicht auf Netzwerkverkehr ausgerichtet. Hier fehlen ebenfalls Mechanismen zur *Verfolgung und Versionierung* von Angriffen, die sich über Zeit verändern.
+
+**Forschungslücke:** Aktuelle Deep-Learning-Ansätze sind entweder auf spezifische Angriffstypen fokussiert oder nicht in der Lage, *sich entwickelnde Angreifer* zu erkennen und deren Taktiken kontinuierlich zu verfolgen. Ein tiefgehendes Modell, das auch auf *First-Flight-Daten* reagiert, ist bisher nicht verfügbar.
 
 ---
 
 ### 2.3 Multimodale und unüberwachte Netzwerkansätze
 
-- **FedNIDS** ([Chen et al., 2025](https://doi.org/10.1145/3696012)) ist ein föderiertes Intrusion Detection System, das auf rohen Paketdaten arbeitet. Es erreicht gute Genauigkeit, setzt aber auf **supervised DNNs** und benötigt hohe Rechenressourcen.
+- **FedNIDS** basiert auf federierten DNNs, die auf rohen Paketdaten trainiert werden, jedoch auf *überwachten* Ansätzen beruhen, was sie für unüberwachte Honeypot-Umgebungen ungeeignet macht. Zudem erfordert das System hohe Rechenressourcen und bietet keine Echtzeitfähigkeit zur Versionierung von Angriffsstrukturen.
 
-- **ICMLA 2023 (Raw Packet Transformers)** ([Sharan et al.](https://doi.org/10.1109/ICMLA58977.2023.00330)) demonstriert die Anwendung von ByT5-Transformern auf Rohdaten. Das Modell ist vielversprechend, aber schwergewichtig (300M Parameter) und ohne Explainability oder RL-Steuerung.
+- **ICMLA 2023 (Raw Packet Transformers)** setzt ByT5-Transformers auf rohen Netzwerkdaten ein, jedoch hat dieses Modell eine hohe Rechenlast und bietet keine *erklärbare* Entscheidungsfindung. Es fehlt die Fähigkeit zur dynamischen Versionierung und zur Modellierung von Angriffsverhalten im Zeitverlauf.
+
+**Forschungslücke:** Es gibt keine Systeme, die eine dynamische *Angriffs-Ketten-Versionierung* ermöglichen und dabei gleichzeitig *Ressourceneffizienz* bei der Erkennung von Angreifern sicherstellen. Dein Framework zielt darauf ab, *Bots zu versionieren* und zu verfolgen, wenn diese sich im Laufe der Zeit anpassen – ein bisher wenig erforschtes Gebiet.
 
 ---
 
 ### 2.4 Systemvergleichstabelle
 
-Im Folgenden wird der Funktionsumfang relevanter Systeme mit dem in dieser Arbeit vorgestellten adaptiven Framework kontrastiert. Dabei werden zentrale Eigenschaften wie Adaptivität, Dateninput, Modellarchitektur, Ressourcenbewusstsein und Transparenz verglichen:
-
 | **Funktion / System**                                  | T-Pot [1] | DeepLog [2] | UNADA [3] | D-PACK [4] | FedNIDS [5] | **Unser System** |
 |--------------------------------------------------------|-----------|-------------|-----------|------------|--------------|------------------|
 | Adaptive Containersteuerung (RL, Ressourcen-aware)     | ✖         | ✖           | ✖         | ✖          | ✖            | ✅               |
-| First-Flight-Auswertung                          | ✖         | ✖           | ✖         | ✅          | ✖            | ✅               |
+| First-Flight-Auswertung                                | ✖         | ✖           | ✖         | ✅          | ✖            | ✅               |
 | Multi-Modell-Anomalieerkennung (AE+LSTM+GNN)           | ✖         | LSTM        | ✖         | AE         | DNN          | ✅               |
 | Dynamische Angriffsketten-Versionierung                | ✖         | ✖           | teilw.    | ✖          | ✖            | ✅               |
-| Unsupervised Training                                   | ✖         | teilw.      | ✅         | ✅          | ✖ (supervised) | ✅             |
+| Unsupervised Training                                  | ✖         | teilw.      | ✅         | ✅          | ✖ (supervised) | ✅             |
 | Explainability (XAI)                                   | ✖         | ✖           | ✖         | ✖          | ✖            | ✅               |
 | STIX 2.1 / SIEM-Kompatibilität                         | ✖         | ✖           | ✖         | ✖          | ✖            | ✅               |
 | Verarbeitung unstrukturierter Netzwerk-Payload         | ✖ Logs    | ✖ Logs      | ✖ Flows   | ✅          | ✅            | ✅               |
@@ -86,13 +106,8 @@ Im Folgenden wird der Funktionsumfang relevanter Systeme mit dem in dieser Arbei
 
 ### 2.5 Fazit der Analyse
 
-Die analysierten Systeme liefern jeweils wichtige Beiträge – sei es durch First-Flight-Datenverarbeitung, Deep-Learning-Integration oder Flow-basiertes Clustering. Allerdings vereint **keines dieser Systeme** alle folgenden Eigenschaften in einem integrierten Framework:
+Die bestehenden Systeme liefern wertvolle Beiträge zur Erkennung von Angriffen, doch **keines dieser Systeme** bietet eine integrierte Lösung, die *sich entwickelnde Angreifer* erkennt und deren *Angriffsketten versioniert*. Dein Ansatz zur dynamischen Verfolgung von Angriffsketten, kombiniert mit der Versionierung von sich anpassenden Bots, stellt eine neuartige und notwendige Erweiterung bestehender Methoden dar. Es ermöglicht nicht nur die Erkennung von Angriffen in Echtzeit, sondern auch die kontinuierliche Beobachtung und Anpassung an sich entwickelnde Bedrohungen.
 
-- dynamische Emulationsentscheidungen basierend auf Datenqualität,
-- explainable Multi-Path-Anomalieerkennung,
-- und automatisierte Angriffsketten-Versionierung mit SIEM-Anbindung.
-
-Das in dieser Arbeit vorgestellte Framework adressiert diese Lücke und positioniert sich somit als **neuer Architekturtyp eines adaptiven, erklärbaren Honeynet-Systems**.
 
 ---
 
@@ -100,30 +115,29 @@ Das in dieser Arbeit vorgestellte Framework adressiert diese Lücke und position
 
 ### 3.1 Komponentenübersicht
 
-- **Sensoring Layer**: Netzwerkweiterleitung über T7-Proxy, TLS-Termination, Protokollklassifikation.
-- **First-Flight Modul**: Analysiert die initialen Sitzungsmerkmale, die ohne aktive Emulation passiv erfassbar sind. Diese umfassen etwa SYN-Pakete, Protokollheader, Payload-Fragmente und Timing-Indikatoren. Grundlage ist der MADCAT-Ansatz, bei dem sämtliche Verbindungen über DNAT an zentrale Listener weitergeleitet werden. Die Extraktion erfolgt unabhängig von einer festen Zeitspanne, sondern basiert auf dem vollständigen Eingang der ersten Interaktionspakete (TCP, UDP, ICMP, RAW).
-- **Feature Extractor**: Vektorisiert Eingabedaten für alle drei Analysepfade (AE, LSTM, GNN).
-- **Anomalie-Detektion (3-Pfad):**
-    - AE: Rekonstruktionsfehler auf Byte-Ebene
-    - LSTM: Payload-Sequenzanomalien
-    - GNN: Topologie-basierte Session-Embedding-Anomalien
-- **Fusionsmodul**: Siehe Abschnitt 4 (nichtlineare Gewichtung)
-- **Dispatcher:** Steuerung von Containeremulationen via REST-API auf Kubernetes (Pod Templates, Ressourcenlimits, Isolation)
-- **Logger & Analyzer:** Persistenz der Sessions, Feature-Export, Embedding-Vergleich, Angriffskettenrekonstruktion per Clustering
+- **Sensoring Layer**: Netzwerkweiterleitung über T7-Proxy, TLS-Termination und Protokollklassifikation.
+- **First-Flight Modul**: Erfasst passive First-Flight-Verbindungen von MADCAT ohne aktive Emulation. Die ersten Sitzungsmerkmale wie SYN-Pakete, Protokollheader, Payload-Fragmente und Timing-Indikatoren werden extrahiert, sobald die ersten Interaktionspakete (TCP, UDP, ICMP, RAW) empfangen werden.
+- **First-Flight Deep Learning Modul**: Lädt und analysiert First-Flight-Logs aus dem ELK-Stack. Mithilfe eines Autoencoders und einem heuristischen Scoring-Mechanismus werden vielversprechende First-Flight-Sitzungen identifiziert, die zur weiteren Analyse in das System aufgenommen werden.
+- **RL-Dispatcher**: Bei Identifikation einer vielversprechenden Sitzung durch das Deep Learning Modul wird ein Auftrag an den Kubernetes-Dispatcher gesendet, um einen Pod zu erstellen. Der Pod erhält eine Quell-IP und den zugehörigen Port für die Weiterleitung von MADCAT.
+- **Pod-Analyse**: Der erstellte Pod fordert über die MADCAT-API die Quell-IP weiterzuleiten und führt eine tiefere Analyse der Sitzungsdaten durch. Das zweite Deep Learning Modul, das auf einem Single-Line-Autoencoder basiert, untersucht zeitliche Zusammenhänge und berechnet den Fusionsscore für die Session.
+- **Fusionsmodul**: Berechnet den Fusionsscore aus den Ergebnissen der Pod-Analyse, der aus den verschiedenen Anomalieerkennungspfaden (AE, LSTM, GNN) hervorgeht.
+- **Logger & Analyzer**: Persistiert die Sitzungen, vergleicht Embeddings und rekonstruier Angriffsketten durch Clustering.
+- **Ressourcenkostenbewertung (RL)**: Der Reward wird nach der Pod-Analyse an das RL-Modul zurückgegeben, basierend auf der Effizienz und den analysierten Daten der Containeremulation.
+
 
 ---
 
 ### 3.2 Formeller Datenfluss
 
-Der operative Datenfluss unseres Frameworks lässt sich wie folgt formalisieren:
+Der formelle Datenfluss unseres Frameworks kann wie folgt beschrieben werden:
 
 $$
 X := f_{\text{FF}}(\text{pkt}_{\text{init}}) \Rightarrow V := \phi(X) \Rightarrow \text{RL}(V) \Rightarrow \text{Spawn}(C_i) \,|\, \text{Drop} \Rightarrow \text{Pod-Analyse} \Rightarrow \text{Fusionsscore berechnen} \Rightarrow \delta(s_{\text{fusion}}, T)
 $$  
 
-- **\( f_{\text{FF}}(\text{pkt}_{\text{init}}) \)** beschreibt die Erfassung und Vorverarbeitung der First-Flight-Daten. Diese Daten umfassen die initialen Sitzungsmerkmale, die dann an den **Feature Extractor** \( \phi(X) \) weitergeleitet werden.
-- **Das RL-Modul** übernimmt daraufhin die Bewertung dieser Features und entscheidet basierend auf den **Feature-Vektoren**, ob ein Container gestartet, verzögert oder verworfen wird. 
-- Nach dem Start eines Containers erfolgt die detaillierte Anomalieerkennung, bei der der **Fusionsscore** berechnet wird und eine Entscheidung über den weiteren Verlauf (Spawn oder Drop) getroffen wird.
+- **\( f_{\text{FF}}(\text{pkt}_{\text{init}}) \)**: Erfasst First-Flight-Daten basierend auf den ersten Interaktionspaketen. Diese initialen Sitzungsmerkmale werden an den **Feature Extractor** \( \phi(X) \) weitergeleitet.
+- **Das RL-Modul**: Bewertet die **Feature-Vektoren** und entscheidet, ob ein Container gestartet, verzögert oder verworfen wird.
+- **Pod-Analyse**: Nach dem Start des Containers wird eine detaillierte Analyse der Logs im Pod durchgeführt und der Fusionsscore berechnet, basierend auf den an den ELK-Stack gesendeten Logdaten.
 
 
 ---
@@ -132,30 +146,19 @@ $$
 
 #### First-Flight-Erfassung
 
-Die Entscheidung zur Container-Orchestrierung erfolgt **vor der Pod-Analyse** und basiert nur auf den **Feature-Vektoren** und der Bewertung durch das RL-Modul. Der Fusionsscore wird **erst nach der Pod-Analyse** zur weiteren Entscheidung herangezogen (z. B. zum Stoppen oder Fortsetzen der Containeremulation).
-
-#### First-Flight-Erfassung
-
-Das First-Flight-Modul analysiert jenen **inhaltlich begrenzten Datenblock**, der unmittelbar beim Sitzungsbeginn ohne aktive Emulationsantwort aufgezeichnet wird. Dieser umfasst typischerweise:
+Das **First-Flight Modul** erfasst die ersten Verbindungsdaten, die ohne aktive Emulation protokolliert werden. Diese Daten umfassen:
 
 - Verbindungsaufbau (TCP-SYN → ACK → Payload)
-- Protokollkennungen (z. B. HTTP-Header, SSH-Auth)
-- frühe Payloads (z. B. Passworteingabe, Command Stubs)
-- Netzwerkmetadaten (z. B. Timing, TTL, TCP-Options)
+- Protokollkennungen (z. B. HTTP-Header, SSH-Authentifizierung)
+- Frühe Payloads (z. B. Passworteingabe, Command Stubs)
+- Netzwerkmetadaten (z. B. Timing, TTL, TCP-Optionen)
 
-Die First-Flight-Erfassung ist **nicht an ein Zeitfenster gebunden**, sondern an den vollständigen Eingang jener Pakete, die bei passiver Interaktion vollständig beobachtbar sind.
+Die Erfassung erfolgt **nicht zeitgesteuert**, sondern basierend auf dem Eingang aller erforderlichen ersten Interaktionspakete, die bei einer passiven Beobachtung vollständig erfasst werden.
 
-#### Vorteil:
+#### Container-Orchestrierung
 
-- **Generalisierbarkeit auf unterschiedliche Verkehrstypen**
-- **Unabhängigkeit von Netzwerkverzögerung**
-- **Robustheit gegenüber gezieltem Delay-Evasion**
+Die Entscheidung zur Container-Orchestrierung erfolgt **vor der Pod-Analyse**, basierend auf den von First-Flight extrahierten **Feature-Vektoren** und der Bewertung des RL-Moduls. Der Fusionsscore wird jedoch **erst nach der Pod-Analyse** berechnet und beeinflusst spätere Entscheidungen zur Ressourcenzuweisung, z. B. ob der Container gestoppt oder fortgesetzt wird.
 
----
-
-#### **Dispatcher-Logik und Ressourcenmanagement**
-
-Die Entscheidung zur Container-Orchestrierung erfolgt **vor der Pod-Analyse** und basiert nur auf den **Feature-Vektoren** und der Bewertung durch das RL-Modul. Der Fusionsscore wird **erst nach der Pod-Analyse** berechnet und hat Einfluss auf spätere Entscheidungen zur Ressourcenzuweisung, wie etwa das Stoppen oder Fortführen der Containeremulation.
 
 ---
 
@@ -186,28 +189,23 @@ Ein systematischer Vergleich dieser Varianten erfolgt in der Evaluation durch Ab
 
 ### 4.1.1 Adaptive Gewichtungsmatrix nach Protokolltyp
 
-Die ursprüngliche Fusionsformel nutzte fixe Gewichtungen \(\alpha, \beta, \gamma\) für die drei Anomaliepfade:
-
-$$
-s_{fusion} = ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) - 1
-$$
-
-Diese statische Gewichtung ignoriert jedoch den Einfluss des **Protokolltyps \(P\)** und charakteristischer Merkmale \(F\) auf die Modellrelevanz. Daher führen wir eine **adaptive Gewichtungsmatrix** ein:
+Die Fusionsformel nutzt eine adaptive Gewichtungsmatrix basierend auf dem **Protokolltyp \( P \)** und den charakteristischen Merkmalen der **Session \( F \)**, die die Modellrelevanz bestimmen:
 
 $$
 (\alpha, \beta, \gamma) = f(P, F)
 $$
 
-#### Funktion \( f(P, F) \): regelbasiert & lernfähig
-Die Gewichtungen werden über eine Kombination aus regelbasierten Zuordnungen (z. B. SSH bevorzugt AE/LSTM, SMTP bevorzugt GNN) und einem Meta-Modell erzeugt:
+#### Funktion \( f(P, F) \): Regelbasiert & lernfähig
+Die Gewichtungen werden durch eine Kombination von regelbasierten Zuordnungen und einem Meta-Modell erzeugt, das durch das Training optimiert wird:
 
 $$
 f(P, F) := \text{MLP}_{\text{meta}}([\text{enc}(P); \text{stat}(F)])
 $$
 
-- \( \text{enc}(P) \): learned embedding für Protokolltyp
-- \( \text{stat}(F) \): statistische Feature-Vektoren der Session (Entropie, TCP-Flags, Paketanzahl, Payload-Länge)
-- \( \text{MLP}_{\text{meta}} \): kleines Feedforward-Netzwerk mit Sigmoid-Ausgang in \([0,1]^3\), normalisiert zu \(\alpha + \beta + \gamma = 1\)
+- \( \text{enc}(P) \): Gelerntes Embedding für den Protokolltyp
+- \( \text{stat}(F) \): Statistische Merkmale der Session (z. B. Entropie, TCP-Flags, Paketanzahl, Payload-Länge)
+- \( \text{MLP}_{\text{meta}} \): Feedforward-Netzwerk, das die Gewichtungen \( \alpha, \beta, \gamma \) berechnet und normalisiert, sodass \( \alpha + \beta + \gamma = 1 \)
+
 
 ### 4.1.2 Vorteil
 
@@ -218,9 +216,10 @@ $$
 ---
 
 ### 4.2 Schwellenwertfunktion
+
 $$ \delta(s_{fusion}, T) = \begin{cases} 1 & s_{fusion} \geq T \\ 0 & \text{sonst} \end{cases} $$
 
-Nur wenn \( \delta = 1 \) wird ein Emulationscontainer gestartet. Dies reduziert unproduktive Emulationen.
+Nur wenn \( \delta = 1 \) wird ein Emulationscontainer gestartet. Dies reduziert unproduktive Emulationen.**
 
 
 ## 4.3 Ressourcenkostenbewertung (Reinforcement Learning)
@@ -332,6 +331,7 @@ Zusätzlich evaluiert das System stichprobenartig 2 % aller „Drop“-Session
 ## 5. Trainingsstrategie
 
 ### 5.1 Datenbasis
+
 - **MADCAT (BSI)**: Die Datenbasis stammt aus dem MADCAT-System (Modular Analytical Data Collection for Adversarial Traffic), einem vom BSI entwickelten, breitbandigen Sensorframework. Durch die DNAT-Weiterleitung sämtlicher Ports an zentralisierte Listener zeichnet MADCAT alle eingehenden Pakete protokollübergreifend auf, ohne tiefe Emulation. Diese Architektur liefert die Grundlage für unser First-Flight-Modul, das aus den initialen, roh erfassten Paketen aussagekräftige Feature-Vektoren erzeugt.
 - **Replay-Daten**: CVEs (z. B. EternalBlue), Brute-Force-Sessions, Metasploit Payloads
 - **First-Flight-Merkmale:**
@@ -341,14 +341,11 @@ Zusätzlich evaluiert das System stichprobenartig 2 % aller „Drop“-Session
   Diese Merkmale stammen ausschließlich aus **nicht-emulierten Eröffnungsinteraktionen** und definieren damit den First-Flight-Bereich, wie ihn unser Modell verarbeit
 
 ### 5.2 Labels & Supervision
+
 - **Heuristikbasierte Pseudo-Labels:**
     - Ports < 1024 und selten verwendet
     - Abnorme TTL, Window Size
     - DNS-Reputation
-- **Evaluierung:**
-    - AUC, Precision, Recall
-    - Vergleich mit Heuristikbaseline
-Sehr gute Punkte für ein vollständiges, publikationsfähiges Konzept. Hier sind die überarbeiteten und ergänzten Abschnitte, die sich direkt in dein Paper einfügen lassen – mit klarer Beantwortung der drei offenen Fragen:
 
 ---
 
@@ -391,28 +388,20 @@ Gerne! Hier sind deine überarbeiteten Abschnitte mit klaren Definitionen und te
 
 ---
 
-###  **6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)**
+### 6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)
 
-Die Versionierung von Angriffsketten basiert auf einer kontinuierlichen Clusterbildung über den Raum der Session-Embeddings. Eine neue Angriffsversion wird erzeugt, wenn der semantische Abstand \( d(E_i, \mu_k) \) zu den existierenden Zentren \( \mu_k \) eine festgelegte Schwelle \( \epsilon \) übersteigt:
+Die Versionierung von Angriffsketten erfolgt kontinuierlich durch Clusterbildung über den Raum der Session-Embeddings. Eine neue Angriffsversion wird erzeugt, wenn der semantische Abstand \( d(E_i, \mu_k) \) zu den bestehenden Zentren \( \mu_k \) eine festgelegte Schwelle \( \epsilon \) überschreitet:
 
 $$
 d(E_i, \mu_k) > \epsilon \Rightarrow \text{neue Version}
 $$
 
 #### Begriffsdefinition:
-- **\( \mu_k \)**: Bezeichnet den **dynamischen Mittelpunkt des Clusters** \( C_k \) im Embedding-Raum. Dieser wird kontinuierlich durch gewichtetes Mittel der zugeordneten Session-Embeddings aktualisiert:
-  $$
-  \mu_k^{(t+1)} = \frac{1}{|C_k|} \sum_{E_j \in C_k} E_j
-  $$
+- **\( \mu_k \)**: Bezeichnet den **dynamischen Mittelpunkt des Clusters** \( C_k \), der kontinuierlich durch das gewichtete Mittel der zugeordneten Session-Embeddings aktualisiert wird:
+  $$ \mu_k^{(t+1)} = \frac{1}{|C_k|} \sum_{E_j \in C_k} E_j $$
 
-  Eine **Sliding-Window-Strategie** verhindert Konzeptdrift: Nur Sessions der letzten \( N \) Tage (z. B. \( N = 7 \)) fließen in die Berechnung ein. Ältere Sessions werden archiviert, aber nicht für aktuelle Versionierungsentscheidungen berücksichtigt.
+Eine **Sliding-Window-Strategie** verhindert Konzeptdrift: Nur Sessions der letzten \( N \) Tage fließen in die Berechnung ein. Ältere Sessions werden archiviert, aber nicht für aktuelle Versionierungsentscheidungen berücksichtigt.
 
-Zusätzlich erfolgt eine Graphrepräsentation:
-- Knoten = Cluster (Angriffsvarianten)
-- Kanten = zeitliche Transitions zwischen Sessions
-- Visualisierung: Directed Multigraph mit Score-Heatmap
-
-Sehr gute Punkte für ein vollständiges, publikationsfähiges Konzept. Hier sind die überarbeiteten und ergänzten Abschnitte, die sich direkt in dein Paper einfügen lassen – mit klarer Beantwortung der drei offenen Fragen:
 
 ---
 
@@ -486,19 +475,19 @@ Export: STIX 2.1 Mapping, Attribution Timeline, Score-Timeline
 ---
 
 
-###  **9.3 Ablationsstudien**
+### 9.3 Ablationsstudien
 
-Zur Analyse der Wirkungsbeiträge einzelner Modellkomponenten führen wir systematische **Ablation Studies** durch. Dabei wird jeweils genau eine Komponente deaktiviert, um deren Einfluss auf die Gesamterkennungsrate, Fusionsstabilität und Container-Effizienz zu bewerten.
+Um den Einfluss einzelner Modellkomponenten zu evaluieren, werden Ablationsstudien durchgeführt, bei denen jeweils eine Komponente deaktiviert wird, um deren Einfluss auf die Gesamterkennungsrate und die Effizienz zu bewerten.
 
-| Experiment | Deaktiviert | Beschreibung |
-|-----------|-------------|--------------|
-| **AE-only** | LSTM, GNN | Nur Rekonstruktionsfehler auf Byte-Ebene |
-| **LSTM-only** | AE, GNN | Nur sequenzielle Payloadanalyse |
-| **GNN-only** | AE, LSTM | Nur topologiebasierte Sessions |
-| **Fusion–Linear** | Multiplikative Formel → Weighted Sum | Vergleich alternativer Fusionsmethoden |
-| **Ohne RL** | RL-Dispatcher ersetzt durch Schwellenwert-Only | Keine adaptive Containersteuerung |
-| **Fallback Off** | Kein Backup-Spawn bei Low-Scores | Effekt passiver Abwehrstrategien |
-| **XAI-Remove** | Alle Erklärmodule deaktiviert | Einfluss auf interpretierbare Ergebnisqualität |
+| Experiment      | Deaktiviert         | Beschreibung                                        |
+|-----------------|---------------------|-----------------------------------------------------|
+| **AE-only**     | LSTM, GNN           | Nur Rekonstruktionsfehler auf Byte-Ebene            |
+| **LSTM-only**   | AE, GNN             | Nur sequenzielle Payloadanalyse                     |
+| **GNN-only**    | AE, LSTM            | Nur topologiebasierte Sessions                      |
+| **Fusion-Linear**| Multiplikative Formel → Weighted Sum | Vergleich alternativer Fusionsmethoden |
+| **Ohne RL**     | RL-Dispatcher       | Keine adaptive Containersteuerung                   |
+| **Fallback Off**| Kein Backup-Spawn bei Low-Scores | Effekt passiver Abwehrstrategien        |
+| **XAI-Remove**  | Alle Erklärmodule deaktiviert | Einfluss auf interpretierbare Ergebnisqualität |
 
 #### Metriken:
 - ROC-AUC pro Variante
@@ -506,10 +495,6 @@ Zur Analyse der Wirkungsbeiträge einzelner Modellkomponenten führen wir system
 - Anzahl gestarteter Container / Erkenntnisgewinn
 - Decision Latency (ms)
 - Falsche Aktivierungsquote vs. Kettenverlust
-
-Diese Studien liefern entscheidende Hinweise zur Priorisierung der Modellkomponenten im Live-Betrieb und ermöglichen eine differenzierte Optimierung des Tradeoffs zwischen Rechenaufwand und Erkenntnistiefe.
-
-Sehr gerne – hier ist der vollständig überarbeitete und **wissenschaftlich saubere Abschnitt 9.4** in deinem Stil, aber als **konzeptuelle Planung** formuliert. Er ersetzt die frühere „Evaluation mit realen Zahlen“ durch **plausible Angriffstypen**, **methodische Hypothesen** und einen **klar geplanten Versuchsaufbau**, ohne den Eindruck realer Messergebnisse zu erwecken.
 
 ---
 
