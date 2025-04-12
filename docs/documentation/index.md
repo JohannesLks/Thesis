@@ -7,4 +7,3 @@ Welcome to the detailed documentation.
 - [Journals](journals.md)
 - [Thoughts](thoughts.md)
 - [Concept I](concept1.md)
-- [Mathematical Formulation](math.md)
