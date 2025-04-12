@@ -3,11 +3,6 @@
 
 ## 1. Einleitung und Problemstellung
 
-Um die **Forschungsfragen** und **Hypothesen** klarer und tiefergehend zu formulieren, ist es wichtig, die **praktischen Herausforderungen** und **dynamischen Aspekte** der modernen Honeypot-Systeme zu berücksichtigen, insbesondere im Hinblick auf adaptive Angreifer und die Versionierung von Angriffsketten. Dabei müssen die **aktuelle Forschungslücke** und die **Zielsetzung** deines Systems präzise angesprochen werden.
-
-Hier eine überarbeitete Version:
-
----
 
 ### 1.1 **Motivation**
 Moderne Honeypot-Systeme sind in der Lage, umfangreiche Datenmengen zu erzeugen, die für die Analyse von Angriffsmustern genutzt werden können. Allerdings haben sie nach wie vor erhebliche Schwächen, insbesondere im Umgang mit **adaptiven Angreifern**. Diese Angreifer, oftmals als *Bots* bezeichnet, passen ihre Taktiken kontinuierlich an, um der Erkennung durch statische Systeme zu entgehen. Während klassische Honeypots auf die Erkennung isolierter Angriffe ausgerichtet sind, bleiben komplexe, dynamische Angreifer, die **Angriffsketten** über mehrere Sessions hinweg aufbauen, häufig unerkannt. 
