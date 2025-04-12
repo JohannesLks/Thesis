@@ -367,13 +367,6 @@ Um die *Zuverlässigkeit* dieser Heuristik zu quantifizieren, führen wir eine *
 
 In der Evaluation berücksichtigen wir diese Unsicherheit durch Unsicherheitsbalken (Confidence Intervals) in den metrischen Vergleichswerten (z. B. ± 5 % AUC-Varianz).
 
-
----
-
-
-Damit hast du alle notwendigen Elemente ergänzt, um dein Framework wissenschaftlich valide zu präsentieren: Ground Truth Handling, Cluster-Validierung und Ablationsstudien sind zentrale Bestandteile jeder hochwertigen Systemarbeit im ML-Security-Bereich.
-
-Möchtest du als nächstes ein konsolidiertes PDF, ein LaTeX-Template oder eine Integration in deinen bestehenden Text?
 ---
 
 ## 6. Angriffsketten-Rekonstruktion
