@@ -18,15 +18,15 @@ Die folgenden Forschungsfragen ergeben sich aus den praktischen Herausforderunge
 
 1. Wie kann ein hybrides Deep-Learning-Modell, das Autoencoder (AE), Long Short-Term Memory (LSTM) Netzwerke und Graph Neural Networks (GNN) kombiniert, dazu beitragen, **adaptive Angreifer** zu erkennen und **Angriffsketten zu versionieren**, die sich über mehrere Sessions hinweg entwickeln?
 
-   - **Forschungslücke:** Während bestehende Systeme teilweise Angreifer auf Basis von einzelnen Angriffsmustern oder Datenströmen erkennen, wird die Fähigkeit zur **langfristigen, dynamischen Erkennung** adaptiver Angreifer und **Versionierung von Angriffsketten** selten berücksichtigt. Das vorgestellte System adressiert diese Lücke, indem es **First-Flight-Daten** kombiniert mit mehreren **modellen zur Anomalieerkennung** und einer **Attack-Chain-Versionierung** nutzt, um **Verhaltenstrends** von Angreifern über längere Zeiträume hinweg zu verfolgen.
+    - **Forschungslücke:** Während bestehende Systeme teilweise Angreifer auf Basis von einzelnen Angriffsmustern oder Datenströmen erkennen, wird die Fähigkeit zur **langfristigen, dynamischen Erkennung** adaptiver Angreifer und **Versionierung von Angriffsketten** selten berücksichtigt. Das vorgestellte System adressiert diese Lücke, indem es **First-Flight-Daten** kombiniert mit mehreren **modellen zur Anomalieerkennung** und einer **Attack-Chain-Versionierung** nutzt, um **Verhaltenstrends** von Angreifern über längere Zeiträume hinweg zu verfolgen.
 
 2. Wie kann ein Reinforcement-Learning-gestütztes System die **Container-Orchestrierung** in Honeypots effizient steuern, um die Ressourcennutzung zu optimieren und gleichzeitig die **Erkennungsqualität** und **Versionierung** von Angreifern nicht zu beeinträchtigen?
 
-   - **Forschungslücke:** Viele bestehende Systeme emulieren Angriffe ohne Rücksicht auf die **Ressourcenkapazitäten**, was zu einer hohen Belastung des Systems führt, insbesondere bei hochfrequenten Angriffen. Das vorgestellte Framework nutzt **Reinforcement Learning (RL)** zur ressourcensensitiven Steuerung von **Container-Spawns**, um sicherzustellen, dass **nur relevante Angriffsszenarien emuliert werden** und gleichzeitig **Ressourcen** effizient genutzt werden. Dieses System könnte die **Echtzeitreaktionsfähigkeit** erheblich steigern und die **Fehlertoleranz** verbessern.
+    - **Forschungslücke:** Viele bestehende Systeme emulieren Angriffe ohne Rücksicht auf die **Ressourcenkapazitäten**, was zu einer hohen Belastung des Systems führt, insbesondere bei hochfrequenten Angriffen. Das vorgestellte Framework nutzt **Reinforcement Learning (RL)** zur ressourcensensitiven Steuerung von **Container-Spawns**, um sicherzustellen, dass **nur relevante Angriffsszenarien emuliert werden** und gleichzeitig **Ressourcen** effizient genutzt werden. Dieses System könnte die **Echtzeitreaktionsfähigkeit** erheblich steigern und die **Fehlertoleranz** verbessern.
 
 3. Wie können wir ein System zur **erklärbaren Anomalieerkennung (XAI)** entwickeln, das es ermöglicht, sowohl die **Erkennungsentscheidungen** als auch die **Entwicklung von Angriffsketten** für Sicherheitsanalysten nachvollziehbar zu machen?
 
-   - **Forschungslücke:** Erklärbarkeit ist ein kritischer Faktor bei der Implementierung von Sicherheitslösungen, um Vertrauen und Transparenz zu gewährleisten. In bisherigen Ansätzen wird die **Erklärung von Erkennungen** meist vernachlässigt. Diese Arbeit strebt an, eine **explainable AI (XAI)** zu integrieren, um sicherzustellen, dass die **Entscheidungsprozesse des Modells** für Sicherheitsexperten verständlich sind. Dies ist besonders wichtig, um bei komplexen, dynamischen Angriffen wie **APT-Angriffen** oder **langfristigen Botnet-Infiltrationen** die **Angriffsschritte** und deren **Zusammenhänge** transparent zu machen.
+    - **Forschungslücke:** Erklärbarkeit ist ein kritischer Faktor bei der Implementierung von Sicherheitslösungen, um Vertrauen und Transparenz zu gewährleisten. In bisherigen Ansätzen wird die **Erklärung von Erkennungen** meist vernachlässigt. Diese Arbeit strebt an, eine **explainable AI (XAI)** zu integrieren, um sicherzustellen, dass die **Entscheidungsprozesse des Modells** für Sicherheitsexperten verständlich sind. Dies ist besonders wichtig, um bei komplexen, dynamischen Angriffen wie **APT-Angriffen** oder **langfristigen Botnet-Infiltrationen** die **Angriffsschritte** und deren **Zusammenhänge** transparent zu machen.
 
 ---
 
@@ -272,10 +272,10 @@ Zur Erkennung korrelierter, verteilter Angriffe (z. B. APT, DDoS, verteilte Re
 
 - **Knoten** \( V \): individuelle Sessions (nicht einzelne IPs!)
 - **Kanten** \( E \): korrelative Beziehungen, z. B.:
-    - gleiche Quell-IP
-    - ähnliche Payload-Hashes (Simhash > 0.8)
-    - identische Zielports in kurzer Zeit (≤ 30s)
-    - Session-Embedding-Distanz \( d < \epsilon \)
+     - gleiche Quell-IP
+     - ähnliche Payload-Hashes (Simhash > 0.8)
+     - identische Zielports in kurzer Zeit (≤ 30s)
+     - Session-Embedding-Distanz \( d < \epsilon \)
 
 Jede neue Session wird in diesen globalen Graph integriert, wodurch **Angriffscluster auf höherer Ebene** sichtbar werden.
 
@@ -333,17 +333,17 @@ Zusätzlich evaluiert das System stichprobenartig 2 % aller „Drop“-Session
 - **MADCAT (BSI)**: Die Datenbasis stammt aus dem MADCAT-System (Modular Analytical Data Collection for Adversarial Traffic), einem vom BSI entwickelten, breitbandigen Sensorframework. Durch die DNAT-Weiterleitung sämtlicher Ports an zentralisierte Listener zeichnet MADCAT alle eingehenden Pakete protokollübergreifend auf, ohne tiefe Emulation. Diese Architektur liefert die Grundlage für unser First-Flight-Modul, das aus den initialen, roh erfassten Paketen aussagekräftige Feature-Vektoren erzeugt.
 - **Replay-Daten**: CVEs (z. B. EternalBlue), Brute-Force-Sessions, Metasploit Payloads
 - **First-Flight-Merkmale:**
-    - SSH-Passworteingaben, HTTP-Headers, Protokoll-Metadaten
-    - TCP-Fingerprints, TLS-Client-Hellos
-    - Payload-N-Grams, Entropie und Jitter in der Initialphase
+     - SSH-Passworteingaben, HTTP-Headers, Protokoll-Metadaten
+     - TCP-Fingerprints, TLS-Client-Hellos
+     - Payload-N-Grams, Entropie und Jitter in der Initialphase
   Diese Merkmale stammen ausschließlich aus **nicht-emulierten Eröffnungsinteraktionen** und definieren damit den First-Flight-Bereich, wie ihn unser Modell verarbeit
 
 ### 5.2 Labels & Supervision
 
 - **Heuristikbasierte Pseudo-Labels:**
-    - Ports < 1024 und selten verwendet
-    - Abnorme TTL, Window Size
-    - DNS-Reputation
+     - Ports < 1024 und selten verwendet
+     - Abnorme TTL, Window Size
+     - DNS-Reputation
 
 ---
 
