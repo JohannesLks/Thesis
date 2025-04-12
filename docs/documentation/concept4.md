@@ -99,6 +99,7 @@ Das in dieser Arbeit vorgestellte Framework adressiert diese Lücke und position
 ## 3. Systemarchitektur
 
 ### 3.1 Komponentenübersicht
+
 - **Sensoring Layer**: Netzwerkweiterleitung über T7-Proxy, TLS-Termination, Protokollklassifikation.
 - **First-Flight Modul**: Analysiert die initialen Sitzungsmerkmale, die ohne aktive Emulation passiv erfassbar sind. Diese umfassen etwa SYN-Pakete, Protokollheader, Payload-Fragmente und Timing-Indikatoren. Grundlage ist der MADCAT-Ansatz, bei dem sämtliche Verbindungen über DNAT an zentrale Listener weitergeleitet werden. Die Extraktion erfolgt unabhängig von einer festen Zeitspanne, sondern basiert auf dem vollständigen Eingang der ersten Interaktionspakete (TCP, UDP, ICMP, RAW).
 - **Feature Extractor**: Vektorisiert Eingabedaten für alle drei Analysepfade (AE, LSTM, GNN).
@@ -112,36 +113,26 @@ Das in dieser Arbeit vorgestellte Framework adressiert diese Lücke und position
 
 ---
 
-### **3.2 Formeller Datenfluss**
+### 3.2 Formeller Datenfluss
 
 Der operative Datenfluss unseres Frameworks lässt sich wie folgt formalisieren:
 
 $$
-X := f_{\text{FF}}(\text{pkt}_{\text{init}}) \Rightarrow V := \phi(X) \Rightarrow (s_{\text{line}}, s_{\text{session}}, s_{\text{graph}}) \Rightarrow s_{\text{fusion}} \Rightarrow \delta(s_{\text{fusion}}, T) \Rightarrow \text{Spawn}(C_i) \,|\, \text{Drop}
-$$
+X := f_{\text{FF}}(\text{pkt}_{\text{init}}) \Rightarrow V := \phi(X) \Rightarrow \text{RL}(V) \Rightarrow \text{Spawn}(C_i) \,|\, \text{Drop} \Rightarrow \text{Pod-Analyse} \Rightarrow \text{Fusionsscore berechnen} \Rightarrow \delta(s_{\text{fusion}}, T)
+$$  
 
-#### Begriffsdefinitionen:
-
-- **\(\text{pkt}_{\text{init}}\)**: Bezeichnet die **inhaltlich vollständige Repräsentation der ersten Interaktion**, bestehend aus:
-    - TCP/IP-Header (z. B. TTL, Flags, MSS, Window Size)
-    - Rohbytes initialer Payloads (z. B. SSH-Benutzername, HTTP-Request-Line)
-    - Timing-Daten zwischen ersten Paketen (Handshake-Verhalten)
-    - Fingerprintbare Protokollindikatoren (z. B. User-Agent, Cipher Suites)
-
-Diese Datenmenge ist unabhängig von einer festen Dauer und umfasst lediglich jene Informationen, die **ohne tiefergehende Emulation** beobachtbar sind. Das First-Flight-Modul \( f_{\text{FF}} \) extrahiert daraus eine semantisch dichte Signatur zur weiteren Analyse.
-
-- **\( \phi(X) \)** – *Feature Extractor*: Ein hybrides Extraktionsmodul, bestehend aus:
-    - *statistischen Extraktoren* (z. B. Byte-Entropie, N-Gram-Raten)
-    - *regelbasierten Parsern* (z. B. Regex-basierte Shellcode-Detektion)
-    - *vortrainierten Embedding-Modellen* (für ASCII/UTF8-Payloads, auf Token-Ebene via fastText oder Transformer-Encodern)
-
-  Die resultierende Feature-Repräsentation \( V \in \mathbb{R}^n \) ist geeignet für alle drei Downstream-Modelle (AE, LSTM, GNN) und enthält sowohl strukturierte als auch semantische Merkmale der Session.
+- **\( f_{\text{FF}}(\text{pkt}_{\text{init}}) \)** beschreibt die Erfassung und Vorverarbeitung der First-Flight-Daten. Diese Daten umfassen die initialen Sitzungsmerkmale, die dann an den **Feature Extractor** \( \phi(X) \) weitergeleitet werden.
+- **Das RL-Modul** übernimmt daraufhin die Bewertung dieser Features und entscheidet basierend auf den **Feature-Vektoren**, ob ein Container gestartet, verzögert oder verworfen wird. 
+- Nach dem Start eines Containers erfolgt die detaillierte Anomalieerkennung, bei der der **Fusionsscore** berechnet wird und eine Entscheidung über den weiteren Verlauf (Spawn oder Drop) getroffen wird.
 
 
 ---
 
+### 3.3 First-Flight-Modul und Container-Orchestrierung
 
-### **3.3 First-Flight-Modul und Container-Orchestrierung (angepasst)**
+#### First-Flight-Erfassung
+
+Die Entscheidung zur Container-Orchestrierung erfolgt **vor der Pod-Analyse** und basiert nur auf den **Feature-Vektoren** und der Bewertung durch das RL-Modul. Der Fusionsscore wird **erst nach der Pod-Analyse** zur weiteren Entscheidung herangezogen (z. B. zum Stoppen oder Fortsetzen der Containeremulation).
 
 #### First-Flight-Erfassung
 
@@ -155,51 +146,35 @@ Das First-Flight-Modul analysiert jenen **inhaltlich begrenzten Datenblock**, de
 Die First-Flight-Erfassung ist **nicht an ein Zeitfenster gebunden**, sondern an den vollständigen Eingang jener Pakete, die bei passiver Interaktion vollständig beobachtbar sind.
 
 #### Vorteil:
+
 - **Generalisierbarkeit auf unterschiedliche Verkehrstypen**
 - **Unabhängigkeit von Netzwerkverzögerung**
 - **Robustheit gegenüber gezieltem Delay-Evasion**
 
 ---
 
-#### Template-Mapping & Skalierung im Dispatcher
+#### **Dispatcher-Logik und Ressourcenmanagement**
 
-Der Dispatcher entscheidet auf Basis des Fusionsscores und der RL-Policy über den Einsatz vorgefertigter Container-Templates. Diese Templates sind modular in Kubernetes als **Helm-Charts mit Labels** hinterlegt (z. B. `emulation:ssh-low`, `web:php-cve2019`, `windows:rdp-echo`), und umfassen folgende Parameter:
-
-- **Service-Typ (z. B. SSH, HTTP, RDP)**
-- **Reaktionstiefe (low, med, deep)**
-- **System-Fingerprint (Linux, Win7, IoT, ...)**
-- **CPU/RAM-Limits und TTLs**
-
-Das Mapping erfolgt über eine Hash-basierte Matching-Funktion:
-$$
-T_i := \psi(s_{fusion}, P, F) \Rightarrow C_i
-$$
-wobei \( P \) = Protokoll, \( F \) = Fingerprint-Features (z. B. User-Agent), und \( \psi \) eine regelbasierte Zuordnung auf verfügbaren Templates ist.
-
-##### Skalierbarkeit bei hoher Sessionzahl
-
-Für den Fall > 100 gleichzeitiger Sessions wird ein **Token Bucket Scheduling** verwendet:
-- Jeder Template-Typ hat ein Token-Limit \( N_{max} \)
-- Nur bei ausreichend Systemressourcen (RAM, CPU, I/O) wird ein neuer Container gespawnt
-- Alternativ wird ein bestehender Container durch Sidecar-Isolation parallel wiederverwendet („Shadow Logging“)
-
-Darüber hinaus erlaubt das System *Prefetching* für populäre Protokolle (z. B. Port 22, 23, 80), wodurch Startzeiten minimiert werden.
+Die Entscheidung zur Container-Orchestrierung erfolgt **vor der Pod-Analyse** und basiert nur auf den **Feature-Vektoren** und der Bewertung durch das RL-Modul. Der Fusionsscore wird **erst nach der Pod-Analyse** berechnet und hat Einfluss auf spätere Entscheidungen zur Ressourcenzuweisung, wie etwa das Stoppen oder Fortführen der Containeremulation.
 
 ---
 
 ## 4. Anomaliefusion & Entscheidungsmodell
 
 ### 4.1 Herleitung der Fusionsformel
+
 Die Fusion von Anomalie-Scores aus verschiedenen Modellen (Autoencoder, LSTM, GNN) erfordert eine Aggregationsmethode, die sowohl Synergieeffekte erkennt als auch extreme Einzelwerte dämpfen kann. Die gewählte Formel basiert auf einer exponentiell gewichteten Multiplikation:
 
 $$ s_{fusion} = ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) - 1 $$
 
 #### Begründung:
+
 - Die additive Verschiebung um +1 verhindert Degeneration durch Nullwerte in einzelnen Scores.
 - Die Multiplikation erzeugt Synergieeffekte: Nur wenn mehrere Komponenten gleichzeitig eine hohe Anomalie erkennen, wird das Gesamtsignal signifikant.
 - Die Exponenten \(\alpha, \beta, \gamma\) dienen zur priorisierten Gewichtung und erlauben eine Feinjustierung je nach Modellvertrauen.
 
 #### Alternative Fusionsansätze (Vergleichbar in Evaluation):
+
 | Methode | Formel | Eigenschaft |
 |--------|--------|-------------|
 | Weighted Sum | \( \alpha s_{line} + \beta s_{session} + \gamma s_{graph} \) | Linear, interpretierbar |
@@ -247,7 +222,8 @@ $$ \delta(s_{fusion}, T) = \begin{cases} 1 & s_{fusion} \geq T \\ 0 & \text{sons
 
 Nur wenn \( \delta = 1 \) wird ein Emulationscontainer gestartet. Dies reduziert unproduktive Emulationen.
 
-### 4.3 Ressourcenkostenbewertung (Reinforcement Learning)
+
+## 4.3 Ressourcenkostenbewertung (Reinforcement Learning)
 
 #### Reward-Funktion:
 $$ R_t = \frac{I_t^{\text{neu}}}{I_t^{\text{total}}} - \lambda \cdot C_t $$
@@ -291,6 +267,7 @@ $$
 $$
 
 Die Ableitung zeigt, dass geringe Werte in \( s_{line} \) exponentiell verstärkt werden, sobald die anderen Scores hoch sind. Daher führen wir in der Implementation einen **Clamp-Mechanismus** ein, der einzelne Scores auf ein Intervall \([0.01, 10]\) begrenzt und so numerische Dominanzen verhindert. Zusätzlich testen wir die Robustheit gegen schwankende Einzelwerte durch **Monte-Carlo-Simulationen** auf synthetischen Score-Sets, um Verläufe und Anfälligkeiten zu evaluieren.
+
 
 ### 4.4.1 Cross-Session Graph: verteilte Angriffserkennung
 
@@ -394,6 +371,7 @@ Um die *Zuverlässigkeit* dieser Heuristik zu quantifizieren, führen wir eine *
 - **Fehlertypen**: 71 % der False Labels waren *False Positives* bei ungewöhnlichen aber legitimen Nutzungen (z. B. OpenSSH Keyscan)
 
 In der Evaluation berücksichtigen wir diese Unsicherheit durch Unsicherheitsbalken (Confidence Intervals) in den metrischen Vergleichswerten (z. B. ± 5 % AUC-Varianz).
+
 
 ---
 
@@ -574,6 +552,7 @@ Basierend auf früheren Arbeiten zur Adversarial Robustness in Autoencodern und 
 
 Diese Werte stellen keine empirisch gemessenen Resultate dar, sondern dienen der **planerischen Orientierung für die spätere Evaluation**. Sie basieren auf Modellannahmen und bekannten Schwächen ähnlicher Architekturen.
 
+
 ### 9.4.4 Abwehrstrategien und geplante Evaluierung
 
 Um adversarialer Einflussnahme entgegenzuwirken, sieht das Konzept folgende Verteidigungsmaßnahmen vor:
@@ -587,7 +566,7 @@ In einer geplanten Evaluationsreihe („Ours-AdvDef“) soll das System mit akti
 
 ---
 
-### 🔚 Fazit für 9.4
+###  Fazit für 9.4
 
 Diese strukturierte Robustheitsplanung ermöglicht es, bereits im Konzeptstadium klare Angriffsszenarien und Schwachstellen zu benennen – ohne Ergebnisse zu behaupten. Damit bleibt dein Paper **wissenschaftlich korrekt, glaubwürdig und publikationsfähig**, während es gleichzeitig Tiefe und Relevanz demonstriert.
 
