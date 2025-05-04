@@ -17,6 +17,9 @@ Dieses Dokument enthält den aktuellen Fortschritt meiner Bachelorarbeit sowie a
 
 | Datum       | Fortschritt                                                        |
 |-------------|--------------------------------------------------------------------|
+| 30.04.2025 | Thesis Anmeldung eingereicht|
+| 28.04.2025 | Hive Sensor Instalaltion läuft über Docker, GCP ist konfiguriert|
+| 19.04.2025 | Madcat Container Läuft|
 | 3.04.2025 | T-Pot aufgesetzt|
 | 24.03.2025 | Grobe Gliederung und erste Konzeptskizze erstellen|
 | 22.03.2025 | Mögliche Forschungslücken sind skizziert.|
@@ -28,18 +31,19 @@ Dieses Dokument enthält den aktuellen Fortschritt meiner Bachelorarbeit sowie a
 
 ## 📅 Woran ich gerade arbeite
 
-- [ ] Konzept umstellen, BSI bishe rnur first flight
-- [ ] Erste Code Umsetzung des Konzept
-- [ ] Abstimmung des Konzepts mit Prof. Dr. Krauss und Prof. Dr. Schneider 
+- [ ] Implementierung RL-Agent auf Hive
+- [ ] Anbindung RL-Agent an Cluster VM und sicherstellung Deployment möglich
+
 
 ---
 
 ## ⏳ Geplant (Backlog)  
 
+- [ ] Netzwerk in Google Cloud visualisieren, inklusive Segmentierung und Firewallregeln
+- [ ] Google Cloud neu aufstzen mit naming Convention und richtiger Segmentierung und validierten Firewall Regeln 
 - [ ] Passendes Journal auswählen (mit guten Veröffentlichungsaussichten)  
 - [ ] Mit den Einreichungs- und Formatierungsrichtlinien des Journals vertraut machen  
 - [ ] Struktur und Layout des Papers anhand der Vorgaben und des Konzepts definieren  
-- [ ] Beginn der praktischen Implementierungsphase  
 - [ ] Testen von Prof. Dr. Schneiders AI-Server Setup mit meinem Modell  
 - [ ] Entwicklung und Verfeinerung des Deep-Learning-Modells gemäß Forschungsfrage  
 - [ ] Ggf. Durchführung vergleichender Analysen oder vertiefter Implementationen  
