@@ -30,4 +30,3 @@
 [**Reinforcement Learning-assisted Threshold Optimization for Dynamic Honeypot Adaptation to Enhance IoBT Networks Security**](https://doi.org/10.1109/SSCI50451.2021.9660066) | opinioin | journal | rating | annotated link | year |  |
 [**QRASSH - A Self-Adaptive SSH Honeypot Driven by Q-Learning**](https://doi.org/10.1109/iccomm.2018.8430173) | opinioin | journal | rating | annotated link | year |  |
 [**On the rewards of self-adaptive IoT honeypots**](https://doi.org/10.1007/s12243-018-0695-7) | opinioin | journal | rating | annotated link | year |  |
-[**On the rewards of self-adaptive IoT honeypots**](https://doi.org/10.1007/s12243-018-0695-7) | opinioin | journal | rating | annotated link | year |  |

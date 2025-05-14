@@ -62,6 +62,13 @@ Actions = {
   Ignore
 }
 ```
+It might be better to make the decision of the service dependent on other methods then the RL:
+```
+Actions = {
+  Deploy,
+  Ignore
+}
+```
 
 ---
 

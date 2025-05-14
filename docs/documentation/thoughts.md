@@ -17,6 +17,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+> *Date: 14.5.2025*  
+-  How does my approach reacts for example to port scanners like nmap?
 > *Date: 24.3.2025*  
 -  Question BSI, can i expect that the dataset has less then 5% Attack logs? Have there been analysis of the logs and is there a clean log subset
 > *Date: 21.3.2025*  
