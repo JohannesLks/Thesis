@@ -17,6 +17,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+> *Date: 19.5.2025*  
+-  I should/could compare my honeynet with and without RL. Computing resources? Data?
 > *Date: 14.5.2025*  
 -  How does my approach reacts for example to port scanners like nmap?
 > *Date: 24.3.2025*  
