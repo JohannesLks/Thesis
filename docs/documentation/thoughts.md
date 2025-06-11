@@ -17,6 +17,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+> *Date: 11.6.2025*  
+- I want to focus on my introduction and the mistake that many papers expect human attackers instead of bots in most interactions. Then i want to describe the vision basen on this, detecting interesting connections and emulate deeply, also adaptiveoy which well known pod to spawn for example cowrie, maybe fork cowrie to make it more adaptive, maybe emulate command answers based on ML. Based on the deeper Logs, we can add recognition of attack chains if they follow the same pattern and can so detect bots, and if they change minimally, we can add versions to them. Also, with an autoencoder, we can detect anomalies in the logs. Also, an implementation can detect attack chains across multiple sessions, maybe an attacker is working with two different source IPs, not to get detected.
 > *Date: 19.5.2025*  
 -  I should/could compare my honeynet with and without RL. Computing resources? Data?
 > *Date: 14.5.2025*  
