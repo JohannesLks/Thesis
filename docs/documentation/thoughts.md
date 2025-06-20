@@ -17,6 +17,9 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+
+> *Date: 20.6.2025*  
+- ads to paper approch integrate full iac and devops approach
 > *Date: 14.6.2025*  
 - Write in Paper about connection to game theory, many dqns are games and there are many papers about game Theory. I can focus deeply in paper on theoratically architecture.
 > *Date: 11.6.2025*  
