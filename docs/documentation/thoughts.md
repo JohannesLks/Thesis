@@ -17,7 +17,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
-
+> *Date: 27.6.2025*  
+- I must configure kubenretes to prepare pods for fast forward. so no classic deploy initialization
 > *Date: 20.6.2025*  
 - adds to paper approch integrate full iac and devops approach
 > *Date: 14.6.2025*  
