@@ -17,6 +17,8 @@ This document serves as a structured place to record spontaneous thoughts, obser
 ---
 
 ## General Observations
+> *Date: 9.7.2025*  
+- I would like to demonstarte the attacker perspective in the paper.
 > *Date: 27.6.2025*  
 - I must configure kubenretes to prepare pods for fast forward. so no classic deploy initialization
 > *Date: 20.6.2025*  
