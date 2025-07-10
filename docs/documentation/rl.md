@@ -1,7 +1,7 @@
 
-# 🧠 Adaptive Container-Orchestrierung mit Reinforcement Learning (RL)
+# Adaptive Container-Orchestrierung mit Reinforcement Learning (RL)
 
-## 🎯 Motivation
+## Motivation
 
 Statische Honeypot-Ansätze wie T-Pot bieten dauerhaft eine Vielzahl von Services auf festen Ports an – unabhängig davon, ob ein Angreifer tatsächlich mit ihnen interagieren möchte. Diese Strategie erzeugt zwar große Mengen an Daten, führt jedoch zu:
 
@@ -25,7 +25,7 @@ Um diese Nachteile zu überwinden, setzt unser System auf **adaptive Containerbe
 
 ---
 
-## 🧬 Entscheidungsgrundlage: First-Flight-Daten
+## Entscheidungsgrundlage: First-Flight-Daten
 
 Der RL-Agent trifft seine Entscheidungen auf Basis sogenannter **First-Flight-Daten** – also aller Merkmale, die direkt zu Beginn einer Netzwerkverbindung verfügbar sind, z. B.:
 
@@ -39,7 +39,7 @@ Diese Daten werden zu einem Feature-Vektor verarbeitet und bilden den **Zustand 
 
 ---
 
-## 🧠 Reinforcement Learning Aufbau (MDP)
+##  Reinforcement Learning Aufbau (MDP)
 
 ### Markov Decision Process (MDP)
 
