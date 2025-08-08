@@ -1,0 +1,725 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://johanneslks.github.io/Thesis/documentation/rl/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Adaptive Container-Orchestrierung mit Reinforcement Learning (RL) - Honeypot Anomaly Detection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#adaptive-container-orchestrierung-mit-reinforcement-learning-rl" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-header__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Honeypot Anomaly Detection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Adaptive Container-Orchestrierung mit Reinforcement Learning (RL)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-nav__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Honeypot Anomaly Detection
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatedWork/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Related Work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Journals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thoughts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concept1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vorteile-des-rl-basierten-deployments-gegenuber-statischen-systemen" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Vorteile des RL-basierten Deployments gegenüber statischen Systemen
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entscheidungsgrundlage-first-flight-daten" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entscheidungsgrundlage: First-Flight-Daten
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reinforcement-learning-aufbau-mdp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reinforcement Learning Aufbau (MDP)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reinforcement Learning Aufbau (MDP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#markov-decision-process-mdp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Markov Decision Process (MDP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moglicher-aktionsraum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Möglicher Aktionsraum
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#belohnungsfunktion" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Belohnungsfunktion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modellwahl-q-learning-vs-deep-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Modellwahl: Q-Learning vs. Deep RL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ergebnis" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Ergebnis
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="adaptive-container-orchestrierung-mit-reinforcement-learning-rl">Adaptive Container-Orchestrierung mit Reinforcement Learning (RL)</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Statische Honeypot-Ansätze wie T-Pot bieten dauerhaft eine Vielzahl von Services auf festen Ports an – unabhängig davon, ob ein Angreifer tatsächlich mit ihnen interagieren möchte. Diese Strategie erzeugt zwar große Mengen an Daten, führt jedoch zu:</p>
+<ul>
+<li>hoher Ressourcenlast durch permanent laufende Container</li>
+<li>reduzierter Tarnung (alle Ports offen = Honeypot-Indikator)</li>
+<li>vielen irrelevanten Sessions (z. B. durch einfache Scanner oder Bots)</li>
+</ul>
+<p>Um diese Nachteile zu überwinden, setzt unser System auf <strong>adaptive Containerbereitstellung mithilfe von Reinforcement Learning (RL)</strong>. Ziel ist es, nur dann einen Emulationscontainer zu starten, wenn <strong>First-Flight-Daten</strong> einer Quell-IP ein hohes Potenzial für wertvolle Angreiferinteraktionen aufweisen.</p>
+<hr />
+<h2 id="vorteile-des-rl-basierten-deployments-gegenuber-statischen-systemen">✅ Vorteile des RL-basierten Deployments gegenüber statischen Systemen</h2>
+<table>
+<thead>
+<tr>
+<th>Kriterium</th>
+<th>Statisches System (z. B. T-Pot)</th>
+<th>RL-basiertes System</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ressourceneffizienz</td>
+<td>Gering</td>
+<td>Hoch</td>
+</tr>
+<tr>
+<td>Tarnung</td>
+<td>Gering (alle Ports offen)</td>
+<td>Hoch (on-demand-Emulation)</td>
+</tr>
+<tr>
+<td>Datenqualität</td>
+<td>Viel Bot-Rauschen</td>
+<td>Fokus auf wertvolle Interaktionen</td>
+</tr>
+<tr>
+<td>Reaktion auf Angreiferverhalten</td>
+<td>Keine</td>
+<td>Host-spezifisch, lernfähig</td>
+</tr>
+<tr>
+<td>Skalierbarkeit</td>
+<td>Begrenzt durch Last</td>
+<td>Dynamisch skalierbar</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="entscheidungsgrundlage-first-flight-daten">Entscheidungsgrundlage: First-Flight-Daten</h2>
+<p>Der RL-Agent trifft seine Entscheidungen auf Basis sogenannter <strong>First-Flight-Daten</strong> – also aller Merkmale, die direkt zu Beginn einer Netzwerkverbindung verfügbar sind, z. B.:</p>
+<ul>
+<li>Zielport, Protokoll, TCP-Flags</li>
+<li>Payload-Länge, Entropie, Keywords (z. B. „GET“, „root“)</li>
+<li>Zeit zwischen Paketen, Sessiondauer</li>
+<li>Herkunfts-IP, ASN, geographische Lage</li>
+<li>Häufigkeit und Art der Sessions in den letzten Minuten</li>
+</ul>
+<p>Diese Daten werden zu einem Feature-Vektor verarbeitet und bilden den <strong>Zustand (state)</strong> für das RL-Modell.</p>
+<hr />
+<h2 id="reinforcement-learning-aufbau-mdp">Reinforcement Learning Aufbau (MDP)</h2>
+<h3 id="markov-decision-process-mdp">Markov Decision Process (MDP)</h3>
+<ul>
+<li><strong>Agent</strong>: Das Decision-Modul zur Containerwahl</li>
+<li><strong>Environment</strong>: Das Honeypot-System mit dynamischer Orchestrierung</li>
+<li><strong>State (𝑠ₜ)</strong>: Feature-Vektor der First-Flight-Daten</li>
+<li><strong>Action (𝑎ₜ)</strong>: Auswahl eines Containers oder Verzicht (<code>Ignore</code>)</li>
+<li><strong>Reward (𝑟ₜ)</strong>: Bewertung auf Basis von Session-Qualität und Ressourcenverbrauch</li>
+<li><strong>Policy (π)</strong>: Funktion zur Entscheidung (z. B. Deep Neural Network)</li>
+</ul>
+<h3 id="moglicher-aktionsraum">Möglicher Aktionsraum</h3>
+<p><div class="highlight"><pre><span></span><code>Actions = {
+  Deploy_HTTP,
+  Deploy_SSH,
+  Deploy_SMB,
+  Deploy_Telnet,
+  Deploy_MySQL,
+  Ignore
+}
+</code></pre></div>
+It might be better to make the decision of the service dependent on other methods then the RL:
+<div class="highlight"><pre><span></span><code>Actions = {
+  Deploy,
+  Ignore
+}
+</code></pre></div></p>
+<hr />
+<h2 id="belohnungsfunktion">💡 Belohnungsfunktion</h2>
+<p>Die Belohnung ist so definiert, dass sie gute Entscheidungen fördert, die zu <strong>neuen, tiefen Interaktionen</strong> führen – ohne Ressourcen zu verschwenden:</p>
+<div class="highlight"><pre><span></span><code>Reward = (Informationsgewinn / Containerkosten) - Redundanzstrafe
+</code></pre></div>
+<p><strong>Komponenten:</strong>
+- Informationsgewinn: neue Payloads, Authentifizierungsversuche, Shell-Zugriffe etc.
+- Containerkosten: CPU-Zeit, RAM, Laufzeit
+- Redundanzstrafe: wenn Angreifer bereits bekannt / typisches Botverhalten</p>
+<hr />
+<h2 id="modellwahl-q-learning-vs-deep-rl">🧠 Modellwahl: Q-Learning vs. Deep RL</h2>
+<p>Für einfache Proof-of-Concepts kann tabellarisches Q-Learning verwendet werden.<br />
+Für realistische Anwendungen mit kontinuierlichen, hochdimensionalen Zuständen wird <strong>Deep Reinforcement Learning</strong> empfohlen (z. B. DQN oder PPO).</p>
+<hr />
+<h2 id="ergebnis">🚀 Ergebnis</h2>
+<p>Mit diesem Ansatz entsteht ein <strong>lernfähiges, ressourcenschonendes und realistisches Honeypot-System</strong>, das:</p>
+<ul>
+<li>gezielt eskalierende oder zielgerichtete Angreifer erkennt</li>
+<li>adaptive Emulation bietet (→ schwerer zu enttarnen)</li>
+<li>Container dynamisch auf Nachfrage startet</li>
+<li>bekannte Bots ignoriert und neue Angriffsformen priorisiert</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

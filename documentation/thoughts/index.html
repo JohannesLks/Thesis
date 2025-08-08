@@ -1,0 +1,819 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://johanneslks.github.io/Thesis/documentation/thoughts/">
+      
+      
+        <link rel="prev" href="../journals/">
+      
+      
+        <link rel="next" href="../concept1/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Thoughts - Honeypot Anomaly Detection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#thoughts-and-ideas" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-header__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Honeypot Anomaly Detection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Thoughts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-nav__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Honeypot Anomaly Detection
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatedWork/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Related Work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Journals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-observations" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Observations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible-research-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      possible research gaps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-to-clarify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questions to Clarify
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#potential-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Potential Improvements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literature-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Literature Insights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-research-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Research Ideas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-investigate" class="md-nav__link">
+    <span class="md-ellipsis">
+      To Investigate
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concept1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-observations" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Observations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible-research-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      possible research gaps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-to-clarify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questions to Clarify
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#potential-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Potential Improvements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literature-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Literature Insights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-research-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Research Ideas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-investigate" class="md-nav__link">
+    <span class="md-ellipsis">
+      To Investigate
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="thoughts-and-ideas">Thoughts and Ideas</h1>
+<p>This document serves as a structured place to record spontaneous thoughts, observations, and ideas related to the thesis.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#thoughts-and-ideas">Thoughts and Ideas</a></li>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#general-observations">General Observations</a></li>
+<li><a href="#possible-research-gaps">possible research gaps</a></li>
+<li><a href="#questions-to-clarify">Questions to Clarify</a></li>
+<li><a href="#potential-improvements">Potential Improvements</a></li>
+<li><a href="#literature-insights">Literature Insights</a></li>
+<li><a href="#future-research-ideas">Future Research Ideas</a></li>
+<li><a href="#to-investigate">To Investigate</a></li>
+</ul>
+<hr />
+<h2 id="general-observations">General Observations</h2>
+<blockquote>
+<p><em>Date: 9.7.2025</em><br />
+- I would like to demonstarte the attacker perspective in the paper.
+<em>Date: 27.6.2025</em><br />
+- I must configure kubenretes to prepare pods for fast forward. so no classic deploy initialization
+<em>Date: 20.6.2025</em><br />
+- adds to paper approch integrate full iac and devops approach
+<em>Date: 14.6.2025</em><br />
+- Write in Paper about connection to game theory, many dqns are games and there are many papers about game Theory. I can focus deeply in paper on theoratically architecture.
+<em>Date: 11.6.2025</em><br />
+- I want to focus on my introduction and the mistake that many papers expect human attackers instead of bots in most interactions. Then i want to describe the vision basen on this, detecting interesting connections and emulate deeply, also adaptiveoy which well known pod to spawn for example cowrie, maybe fork cowrie to make it more adaptive, maybe emulate command answers based on ML. Based on the deeper Logs, we can add recognition of attack chains if they follow the same pattern and can so detect bots, and if they change minimally, we can add versions to them. Also, with an autoencoder, we can detect anomalies in the logs. Also, an implementation can detect attack chains across multiple sessions, maybe an attacker is working with two different source IPs, not to get detected.
+<em>Date: 19.5.2025</em><br />
+-  I should/could compare my honeynet with and without RL. Computing resources? Data?
+<em>Date: 14.5.2025</em><br />
+-  How does my approach reacts for example to port scanners like nmap?
+<em>Date: 24.3.2025</em><br />
+-  Question BSI, can i expect that the dataset has less then 5% Attack logs? Have there been analysis of the logs and is there a clean log subset
+<em>Date: 21.3.2025</em><br />
+-  Nearly no paper is about anomaly detection in honeypots. That makes sense, because NIDS are the main usecase and there is no big difference between the both in my research context, but it should be possible to use this fact for my research gap
+<em>Date: 19.3.2025</em><br />
+-  Metrics (Precision, Recall, ...) should be explained as formula.
+<em>Date: 19.3.2025</em><br />
+-  The paper should cover basic math concepts, backpropagation might be to basic but in the explanation of teh Autoencoder or lstm it would fit really well.
+<em>Date: 18.3.2025</em><br />
+-  The paper should mention the differences and parallels between IDS and Honeypot. The proposed solution could find application in both domains.</p>
+</blockquote>
+<hr />
+<h2 id="possible-research-gaps">possible research gaps</h2>
+<ol>
+<li>practical implementation of an Autoencoder with the specific BSI data. (Not enough theoratically work)</li>
+<li>integrating current aproaches but developing a solution to use the classified information to make the honeypot adaptive to the attacker to gather more information of its behaviour</li>
+<li>combining current approaches to one new solution (just first bytes, without preprocessing and feature extraction on raw data, system logs als language sequences, non-symmetric data dimensionality reduction, stacked NDAEs and the RF classification algorithm)</li>
+<li><strong>Analyze logs on line, sessio and cross session level</strong>  <ul>
+<li>Attacker behavior spans multiple sessions and sequences.  </li>
+<li>Logs are unstructured and not always tied to a single user or continuous flow.  </li>
+<li>Single-sequence modeling (like DeepLog) misses cross-session patterns.</li>
+<li><strong>Proposed Solution:</strong>  </li>
+<li><strong>Line-level anomaly detection</strong>: Autoencoder or text reconstruction for individual log entries.  </li>
+<li><strong>Intra-session modeling</strong>: LSTM to detect sequential anomalies within sessions.  </li>
+<li><strong>Cross-session modeling</strong>:  <ul>
+<li>LSTM or Graph-based structure over session embeddings.  </li>
+<li>Capture patterns across multiple sessions over time.  </li>
+</ul>
+</li>
+<li><strong>Global attention layer</strong>: Focus on key sessions or time periods.  </li>
+<li><strong>Fusion layer</strong>: Combine all scores into one anomaly indicator.</li>
+</ul>
+</li>
+<li>be able to extract maybe with the lstm the attack chain or at least parts of the attacker to have a output of the honeypot which is usefull. Adaptiveness could build up on that data.</li>
+<li>the focus could also be on the prblem, that i have not a labeled dataset and thus, no clean training data</li>
+</ol>
+<hr />
+<h2 id="questions-to-clarify">Questions to Clarify</h2>
+<blockquote>
+<p><em>Date: 24.3.2025</em><br />
+-  Should i use byt5 es transformer at first step to big?
+<em>Date: 22.3.2025</em><br />
+-  How can i use generative AI? If i write a text based on my thoughts and with referenced literature, can i input this text, for instance, to ChatGpt and let it rewrite it so its wriiten in a academic and typical journal article manner?
+<em>Date: 21.3.2025</em><br />
+-  What is the BSI doing at the momant with the Honeypot Data? What analysis is happening?
+<em>Date: 20.3.2025</em><br />
+-  Can i make the BSI Dataset public? Could it be transfered to a cloud provider?
+<em>Date: 19.3.2025</em><br />
+-  How can i evaluate the performance of my model, if i do not have labeled test data? That restriction might influence the whole approach.
+<em>Date: 19.3.2025</em><br />
+-  A typical journal paper ranges from 5 to 20 pages, while a regular bachelor's thesis is around 40-50 pages. Would a highly focused and concentrated 15-page paper, demonstrating significant research quality and depth, be sufficient as a bachelor's thesis?</p>
+</blockquote>
+<hr />
+<h2 id="potential-improvements">Potential Improvements</h2>
+<hr />
+<h2 id="literature-insights">Literature Insights</h2>
+<hr />
+<h2 id="future-research-ideas">Future Research Ideas</h2>
+<hr />
+<h2 id="to-investigate">To Investigate</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

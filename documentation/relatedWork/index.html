@@ -1,0 +1,916 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://johanneslks.github.io/Thesis/documentation/relatedWork/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../journals/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Related Work - Honeypot Anomaly Detection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-header__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Honeypot Anomaly Detection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Related Work
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-nav__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Honeypot Anomaly Detection
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Related Work
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Journals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thoughts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concept1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Related Work</h1>
+
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Content</strong></th>
+<th><strong>Relevance</strong></th>
+<th><strong>Journal/Conference</strong></th>
+<th><strong>Publisher</strong></th>
+<th><strong>Personal Rating</strong></th>
+<th><strong>Link to annotated paper</strong></th>
+<th><strong>Year</strong></th>
+<th><strong>Cites</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://doi.org/10.1109/ACCESS.2020.2973023"><strong>An Unsupervised Deep Learning Model for Early Network Traffic Anomaly Detection</strong></a></td>
+<td>D-PACK: A deep-learning-based anomaly detection system for IoT traffic. Combines a Convolutional Neural Network (CNN) with an unsupervised Autoencoder to automatically learn traffic patterns and detect malicious flows. Instead of relying on manual, flow-level features or signatures, D-PACK analyzes only the first few bytes of the first two packets of each flow, enabling ultra-early detection. Demonstrates near 100% detection accuracy with a very low false-positive rate (0.83%) in large-scale DDoS scenarios like Mirai-based attacks. Designed for real-time, resource-efficient mitigation of abnormal traffic.</td>
+<td>This approach could be helpful, as it utilizes the first bytes of the network packet payload. It might be worth exploring whether I can integrate this method and combine it with other techniques to enhance detection accuracy and keep the model slim.</td>
+<td>IEEE Access</td>
+<td>IEEE</td>
+<td>⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/An_Unsupervised_Deep_Learning_Model_for_Early_Network_Traffic_Anomaly_Detection.pdf">Click Me</a></td>
+<td>2020</td>
+<td>159</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1007/978-3-030-54994-7_15"><strong>Anomaly Detection From Log Files Using Unsupervised Deep Learning</strong></a></td>
+<td>Unsupervised LSTM Autoencoder model that processes raw log text without preprocessing or handcrafted features. It outputs an anomaly score per log entry, reflecting content and temporal rarity. Trained on 1M HDFS log lines and tested on 1M lines. Acts as a coarse filter for anomaly detection when labeled data is unavailable.</td>
+<td>The approach has not been applied to security-related data. However, it aligns well with my concept, as it combines temporal context modeling through LSTMs with an autoencoder. Additionally, it may offer valuable insights, given that it operates on raw, unlabeled data without requiring preprocessing — matching the conditions of my use case.</td>
+<td>Formal Methods. FM 2019 International Workshops</td>
+<td>Springer</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Anomaly_Detection_From_Log_Files_Using_Unsupervised_Deep_Learning.pdf">Click Me</a></td>
+<td>2020</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1145/3133956.3134015"><strong>DeepLog: Anomaly Detection and Diagnosis from System Logs through Deep Learning</strong></a></td>
+<td>DeepLog: Uses an LSTM-based deep learning model to treat system logs as language sequences. Automatically learns normal log patterns and detects anomalies when deviations occur. Supports incremental online updates to adapt to new patterns over time. Builds workflows from logs to aid in root cause analysis. Outperforms traditional log-based anomaly detection methods in large-scale experiments.</td>
+<td>While DeepLog presents an elegant approach by modeling system logs as sequences using LSTM-based architectures and autoencoders to learn normal patterns, it also has significant limitations in the context of this work. The entire approach is focused on structured system logs and does not extend to network traffic, interactive attacker behavior, or unstructured data streams. This log-centric design makes it far from suitable for honeypot or intrusion detection scenarios, where anomalies frequently occur in network flows, command sequences, or multi-modal attacker interactions. Additionally, the model is not designed to handle complex, heterogeneous data sources typical in security monitoring setups, and it lacks flexibility for incorporating contextual or behavioral information beyond static logs. Therefore, despite being a prominent example of sequence-based anomaly detection, its applicability in honeypot-based or network-level anomaly detection is limited.</td>
+<td>CCS '17: Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security</td>
+<td>ACM</td>
+<td>⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/DeepLog_Anomaly_Detection_and_Diagnosis_from_System_Logs.pdf">Click Me</a></td>
+<td>2017</td>
+<td>1055</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/CSNet50428.2020.9265461"><strong>Unsupervised Machine Learning Techniques for Network Intrusion Detection on Modern Data</strong></a></td>
+<td>The paper compares four unsupervised models (PCA, Isolation Forest, One-Class SVM, and Autoencoder) for intrusion detection on the CIC-IDS-2017 dataset. All models are trained on benign traffic only, focusing on zero-day attack detection. The autoencoder outperforms others with an AUROC of 0.9775 and an F1 score of 0.9616, combining high recall and precision. The OC-SVM is best when low false positives are critical. The study highlights the trade-off between detection performance and computational efficiency, with all models being fast and suitable for real-time deployment. Autoencoders and OC-SVMs are recommended for robust, adaptive NIDS.</td>
+<td>This paper is highly relevant to my thesis as it provides a structured comparison between several unsupervised learning algorithms for intrusion detection, directly addressing the challenge of detecting unknown, zero-day attacks. The evaluation on CIC-IDS-2017 aligns with my focus on modern, realistic datasets. In particular, the paper's demonstration of autoencoders' ability to capture complex attack patterns without manual feature engineering supports my approach of using deep learning for feature extraction in honeypot-based environments. Moreover, the discussion on computational overhead, model optimization, and threshold selection provides valuable insights for practical system design. The results showing the superior balance between detection accuracy and runtime efficiency of autoencoders can guide my architecture choice. The OC-SVM’s performance in minimizing false positives also offers potential for integration as a fallback or secondary detection stage in my work.</td>
+<td>2020 4th Cyber Security in Networking Conference (CSNet)</td>
+<td>IEEE</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Unsupervised_Machine_Learning_Techniques_for_Network_Intrusion_Detection_on_Modern_Data.pdf">Click Me</a></td>
+<td>2020</td>
+<td>26</td>
+</tr>
+<tr>
+<td><a href="http://dx.doi.org/10.1109/ACCESS.2017.2762418"><strong>A Deep Learning Approach for Intrusion Detection Using Recurrent Neural Networks</strong></a></td>
+<td>The authors test their RNN-based IDS (RNN-IDS) on the NSL-KDD dataset for both binary (normal vs. anomaly) and multiclass classification (normal, DoS, R2L, U2R, Probe). They preprocess the dataset with feature encoding and normalization and use a fully connected RNN model. The paper compares RNN-IDS against traditional machine learning algorithms (J48, SVM, Random Forest, ANN) and a reduced-size RNN approach from prior work. Results show that RNN-IDS outperforms classical methods in accuracy, detection rate, and false-positive rate, although training times are longer (not GPU-enabled). The authors suggest that with GPU acceleration and advanced architectures (LSTM, BiRNNs), even better results are achievable.</td>
+<td>This paper is helpful for my thesis in multiple ways. First, it demonstrates that even relatively simple RNN architectures can outperform classical machine learning models on benchmark datasets like NSL-KDD — without GPU acceleration and using fairly basic setups. This reassures me that more modern approaches (GPU training, LSTMs, attention mechanisms) will easily surpass those results. Second, the paper is very technical and methodical; it explains each step, including dataset structure, feature preprocessing, and hyperparameter tuning. This shows me how straightforward it is to fill out these sections in my own thesis. Finally, by showing performance analysis in both binary and multiclass classification with confusion matrices, training times, and metrics like accuracy, TPR, and FPR, it sets a clear template for how I can structure and present my own results in a way that will be accepted as thorough and rigorous.</td>
+<td>IEEE Access</td>
+<td>IEEE</td>
+<td>⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/A_Deep_Learning_Approach_for_Intrusion_Detection_Using_Recurrent_Neural_Networks.pdf">Click Me</a></td>
+<td>2017</td>
+<td>1228</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1016/j.eswa.2021.116263"><strong>AutoLog: Anomaly detection by deep autoencoding of system logs</strong></a></td>
+<td>AutoLog proposes a semi-supervised deep autoencoder model that uses entropy-based scoring on log chunks from heterogeneous systems. Scores from normal operations train the model; deviations are detected via reconstruction error. It does not rely on log structure or templates and works across distributed systems. Evaluated on industrial, microservices, BG/L supercomputer, and Hadoop logs, AutoLog achieved recall between 0.96 and 0.99 and precision between 0.93 and 0.98, outperforming isolation forest, one-class SVM, decision trees, and variational autoencoders.</td>
+<td>This work is relevant due to its template-independent design and ability to handle heterogeneous, unstructured log data without prior feature engineering. The entropy-based scoring combined with deep autoencoding offers a robust method for anomaly detection in noisy, multi-source environments. This aligns with my approach for adaptive anomaly detection in dynamic, complex honeypot setups, where structured features are not always available.</td>
+<td>Expert Systems with Applications</td>
+<td>Elsevier</td>
+<td>⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/AutoLog_Anomaly_detectio_%20by_deep_autoencoding_of_system_logs.pdf">Click Me</a></td>
+<td>2021</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://dx.doi.org/10.1109/CFIS.2018.8336654"><strong>An anomaly detection method to detect web attacks using Stacked Auto-Encoder</strong></a></td>
+<td>Proposes an anomaly detection method for web attacks using a stacked autoencoder (SAE) for feature extraction and isolation forest as a one-class classifier. Uses character-level n-gram models for feature construction (mostly unigram and bigram), which suffers from high dimensionality. SAE architecture consists of layers with 1000, 400, and 100 hidden neurons, quadratic loss function, and experiments with different optimizers (Adam, RMSProp, etc.). Results show improvement over simple n-gram models, but the paper is written in poor English, uses outdated hardware, and lacks depth.</td>
+<td>Only marginally relevant. The approach (SAE + isolation forest) is interesting but not innovative. Mostly helpful for fine-tuning my research gap and showing how not to design evaluation setups. Demonstrates the difference between short conference papers and more thorough research.</td>
+<td>2018 6th Iranian Joint Congress on Fuzzy and Intelligent Systems (CFIS)</td>
+<td>IEEE</td>
+<td>⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/An_anomaly_detection_method_to_detect_web_attacks_using_Stacked_Auto-Encoder.pdf">Click Me</a></td>
+<td>2018</td>
+<td>73</td>
+</tr>
+<tr>
+<td><a href="http://dx.doi.org/10.1109/ACCESS.2018.2881003"><strong>Anomaly Detection for HTTP Using Convolutional Autoencoders</strong></a></td>
+<td>Proposes a novel anomaly detection approach for HTTP traffic using a convolutional autoencoder (CAE) combined with character-level binary image transformation. Instead of manual feature engineering, HTTP messages are converted into binary "images" representing characters, which are then processed by a modified Inception-ResNet-v2 CAE. Detection is based on reconstruction errors (BCE) and a novel decision metric, binary cross varentropy (BCV), which captures variance properties. The model is trained unsupervised on normal HTTP traffic and achieves superior performance compared to one-class SVMs, Isolation Forest, and a shallower CREPE-based CAE. The paper also evaluates character embedding but finds minimal performance gains. Trained on ~129,000 HTTP messages and evaluated on ~26,000 messages. Demonstrates strong results with low false-positive rates (~4% at TPR 0.99) and high MCC/F1.</td>
+<td>Very interesting due to the use of CAEs with character-level transformation, showing that feature engineering can be avoided. The use of BCV as a decision metric is novel and may offer inspiration for alternative scoring metrics in my honeypot setup. However, the approach is tailored to structured HTTP data and image-like transformations; it’s unlikely that this technique would generalize to packet-level byte streams or more complex, mixed traffic. Additionally, their infrastructure relies on large GPU resources (4× Tesla P100), which might not scale well for real-time inference without significant optimization. Overall, the paper helps to sharpen my research gap: my focus is on packet-level raw byte processing, multi-modal attacker behavior, and resource-efficient, real-time detection rather than protocol-specific image encodings</td>
+<td>IEEE Access</td>
+<td>IEEE</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Anomaly_Detection_for_HTTP_Using_Convolutional_Autoencoders.pdf">Click Me</a></td>
+<td>2018</td>
+<td>33</td>
+</tr>
+<tr>
+<td><a href="http://dx.doi.org/10.1109/TETCI.2017.2772792"><strong>A Deep Learning Approach to Network Intrusion Detection</strong></a></td>
+<td>This paper presents a novel intrusion detection approach using multi-layer non-symmetric deep auto-encoders (NDAEs) for unsupervised feature learning, followed by a shallow learning classifier based on Random Forest. The architecture consists of multiple stacked NDAEs for deep feature extraction, after which the learned representations are classified using a Random Forest model. The system is implemented in GPU-enabled TensorFlow and evaluated on the KDD Cup '99 and NSL-KDD datasets. Results demonstrate significant improvements in detection accuracy and false positive rates compared to traditional machine learning approaches, showcasing its potential for application in modern network intrusion detection systems.</td>
+<td>This paper is highly relevant, as it presents a deep feature extraction approach combined with a lightweight classifier (Random Forest). The concept of using unsupervised representation learning and passing the results to a separate shallow classifier aligns well with my idea of balancing deep learning and efficiency. The methodology could serve as a foundation for combining unsupervised feature learning with scalable classifiers in modern honeypot-based anomaly detection. The use of the kdd dataset and the reference to other paperps who used this dataset could be helpful for my evaluation. The overall structure could be helpful for my paper as well.</td>
+<td>IEEE Transactions on Emerging Topics in Computational Intelligence</td>
+<td>IEEE</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/A_Deep_Learning_Approach_to_Network_Intrusion_Detection_.pdf">Click Me</a></td>
+<td>2017</td>
+<td>1039</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.3390/APP9163414"><strong>An LSTM-Based Deep Learning Approach for Classifying Malicious Traffic at the Packet Level</strong></a></td>
+<td>The paper presents a packet-level intrusion detection model using word embeddings and a three-layer LSTM architecture. Each packet is parsed into a fixed 54-byte representation, converted into "sentences" of header fields, and embedded for input into the LSTM. The model is trained on large datasets (ISCX2012, USTC-TFC2016, Mirai-RGU, and self-collected Mirai-CCU), demonstrating extremely high accuracy (near 100%) on both training and validation sets. The focus on real-time detection without flow aggregation is innovative. However, the model's practicality is questionable due to heavy GPU requirements (Tesla K80) and large model complexity (&gt;4 million parameters). Evaluation lacks discussion on handling encrypted payloads or highly variable traffic, and no adversarial robustness evaluation is provided.</td>
+<td>Relevant as it shows packet-level detection without requiring flow reconstruction, using LSTMs on raw headers. However, the paper mainly focuses on syntactic structure and known datasets. Their embedding strategy is interesting but heavily handcrafted and limited to static header structures. It does not generalize well to dynamic payload-based anomalies or encrypted/obfuscated traffic. This reinforces my research gap: going beyond static header field embeddings towards dynamic, payload-level learning and multi-modal behavior modeling.</td>
+<td>Applied sciences</td>
+<td>Basel : MDPI AG</td>
+<td>⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/An_LSTM-Based_Deep_Learning_Approach_for_Classifying_Malicious_Traffic_at_the_Packet_Level.pdf">Click Me</a></td>
+<td>2020</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/ECAI52376.2021.9515039"><strong>A Machine Learning Approach to Classify Network Traffic</strong></a></td>
+<td>The paper focuses on classifying benign vs. darknet traffic using the CIC-Darknet 2020 dataset. The authors apply preprocessing (PCA for dimensionality reduction), balance the dataset using SMOTE, and compare various classical machine learning algorithms (e.g., Random Forest, Decision Tree, Extra Trees, AdaBoost). The best results are achieved by Decision Tree and Extra Trees classifiers, with near 100% accuracy and MCC. The paper lacks any deep learning approaches, does not handle real-time performance evaluation, and relies on feature-based manual preprocessing rather than automated feature learning.</td>
+<td>Only slightly relevant. It provides a good overview of classical machine learning baselines for traffic classification, which can serve as a comparison point for deep learning-based approaches. However, the approach is heavily dependent on manual feature extraction (via PCA and dataset features), lacks discussion on real-time applicability, adversarial robustness, or packet-level raw data processing. The work confirms that classical methods are useful but also highlights their limitations for dynamic or unknown attack patterns.</td>
+<td>13th International Conference on ELECTRONICS, COMPUTERS and ARTIFICIAL INTELLIGENCE – ECAI-2021</td>
+<td>International Conference on ELECTRONICS, COMPUTERS and ARTIFICIAL INTELLIGENCE – ECAI</td>
+<td>⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/A_Machine_Learning_Approach_to_Classify_Network_Traffic.pdf">Click Me</a></td>
+<td>2021</td>
+<td>7</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/ICMLA58977.2023.00330"><strong>Raw Packet Data Ingestion with Transformers for Malicious Activity Classifications</strong></a></td>
+<td>This paper proposes using the ByT5 transformer — a token-free, byte-level NLP model — for direct classification of raw packet data as malicious or benign without manual feature engineering or tokenization. The model is fine-tuned on the ISOT dataset and evaluated across multiple days with different malicious traffic compositions. Achieves a maximum recall of 0.834 and F1 score of 0.693. Shows that short truncated packets (100 bytes) yield better results than larger truncations. The paper emphasizes the advantage of direct byte ingestion but also notes large resource requirements (300M parameter model, Tesla V100 GPUs), long training times (37 hours per epoch), and convergence issues (vanishing gradients).</td>
+<td>Highly relevant, as this paper is among the first to apply large transformer models directly on raw packet data — very close to my goal. It demonstrates that direct byte-level learning is feasible but computationally heavy. The results are not yet production-ready (F1 = 0.693), and real-time deployment issues are not addressed. This reinforces my gap: developing more lightweight architectures or hybrid models that can achieve comparable detection results without requiring massive infrastructure. The discussion around training complexities, truncation, and input sequence lengths is very helpful.</td>
+<td>2023 International Conference on Machine Learning and Applications (ICMLA)</td>
+<td>International Conference on Machine Learning and Applications (ICMLA)</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Raw_Packet_Data_Ingestion_with_Transformers_for_Malicious_Activity_Classifications.pdf">Click Me</a></td>
+<td>2023</td>
+<td>0</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/NCG.2018.8593030"><strong>Hybrid System Between Anomaly Based Detection System and Honeypot to Detect Zero Day Attack</strong></a></td>
+<td>The paper discusses the limitations and strengths of anomaly-based detection systems and honeypots and proposes a hybrid model to detect zero-day attacks more effectively. The proposed system uses honeypots to lure attackers and gather behavior data, while anomaly-based systems detect deviations from learned normal behavior. They suggest feeding honeypot observations back into the anomaly detection system to improve accuracy and reduce false positives. However, the paper remains conceptual without presenting concrete experimental validation or implementation details.</td>
+<td>Conceptually interesting, as it aligns with the idea of dynamic, feedback-based anomaly detection. But the paper is weak in terms of experimental contribution and lacks any implementation or performance evaluation. It can serve as theoretical support for integrating honeypot data into anomaly detection models, but adds little technical depth. It reinforces my focus on actually implementing and validating such hybrid systems with deep learning components.</td>
+<td>2018 21st Saudi Computer Society National Computer Conference (NCC)</td>
+<td>IEEE</td>
+<td>⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/HybridSystemBetweenAnomalyBasedDetectionSystemandHoneypottoDetectZeroDayAttack.pdf">Click Me</a></td>
+<td>2018</td>
+<td>11</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1145/2714576.2714580"><strong>A Near Real-Time Algorithm for Autonomous Identification and Characterization of Honeypot Attacks</strong></a></td>
+<td>The paper presents UNADA, an unsupervised anomaly detection and characterization algorithm designed for honeypot traffic. It uses sub-space clustering, evidence accumulation, and inter-cluster correlation to identify and characterize attacks from unlabeled honeypot traffic in near real-time. Signatures are automatically generated and can be used to configure firewalls or routers autonomously. The algorithm is evaluated on real-world data from the University of Maryland, showing high detection accuracy and efficient parallelization for scalability. The work addresses both classification and risk-based prioritization of detected anomalies.</td>
+<td>Highly relevant. It demonstrates an unsupervised clustering-based approach for automatically identifying and characterizing honeypot-based attacks. The combination of clustering ensemble methods and signature generation is interesting and confirms the value of using honeypot data in combination with unsupervised ML techniques. However, the paper focuses on flow-level NetFlow data and classical clustering techniques rather than deep learning. This highlights a gap that my research addresses: leveraging packet-level raw data and neural architectures for autonomous anomaly detection, rather than relying on flow aggregation and handcrafted features.</td>
+<td>ASIA CCS '15: Proceedings of the 10th ACM Symposium on Information, Computer and Communications Security</td>
+<td>ACM</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/A_Near_Real-Time_Algorithm_for_Autonomous_Identification_and_Characterization_of_Honeypot_Attacks.pdf">Click Me</a></td>
+<td>2015</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1587/TRANSINF.E93.D.2544"><strong>A Comparative Study of Unsupervised Anomaly Detection Techniques Using Honeypot Data</strong></a></td>
+<td>The paper presents an extensive comparative analysis of eight unsupervised anomaly detection techniques (three outlier detection methods, four clustering approaches, and one-class SVM) using real-world honeypot traffic data from Kyoto University. The study evaluates detection accuracy, false positive rates, robustness to noise, training data size impact, detection of unknown attacks, and time complexity. Key findings: clustering-based methods outperform outlier detection for IDS purposes; DBScan and LOF are computationally heavy; Chebyshev and Euclidean distances are most suitable similarity metrics; and one-class SVM performs in between clustering and outlier detection methods. While the methodology is solid and the use of real honeypot data was ahead of its time, the paper is now over 15 years old and focused entirely on classical machine learning methods without any consideration of deep learning, modern high-throughput environments, or encrypted traffic. This strongly emphasizes the need for updated approaches that leverage deep neural models and raw packet data to handle current attack vectors</td>
+<td>Still relevant for understanding the evolution of anomaly detection and as a reference point for older methods. However, its age and focus on classical methods make it insufficient for addressing modern, dynamic attack landscapes. It reinforces my research gap: integrating deep learning-based packet-level detection in honeypot scenarios, moving beyond handcrafted features and clustering methods.</td>
+<td>IEICE Transactions on Information and Systems VOL.E93–D, NO.9 SEPTEMBER 2010</td>
+<td>IEICE</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/A_Comparative_Study_of_Unsupervised_Anomaly_Detection_Techniques_Using_Honeypot_Data.pdf">Click Me</a></td>
+<td>2010</td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1145/3696012"><strong>FedNIDS: A Federated Learning Framework for Packet-Based Network Intrusion Detection System</strong></a></td>
+<td>TFedNIDS proposes a two-stage federated learning framework combining decentralized training on packet-based data (using a DNN) and subsequent fine-tuning for novel attack detection. It addresses challenges with non-IID data distributions and adapts rapidly (in ~4 rounds) to zero-day attacks. The paper demonstrates high accuracy (F1 = 0.97) on CIC-IDS2017/2018 datasets and robust defense against adversarial attacks after fine-tuning. It uses raw packet features (normalized byte values) instead of handcrafted flow features. While impressive, it still requires substantial infrastructure and focuses on supervised DNN classification with federated aggregation, rather than unsupervised or self-supervised methods for anomaly detection.</td>
+<td>Highly relevant. It shows current progress in federated NIDS on packet-level data, emphasizing scalability and adaptability. However, the focus is on federated supervised classification, not unsupervised detection or lightweight models. My research gap lies in creating real-time-capable, unsupervised, or self-supervised transformer/autoencoder hybrids for honeypot environments, where labeled attack data is not guaranteed, and lightweight inference is critical. FedNIDS also does not address encrypted payload handling or multi-modal attacker behavior detection.</td>
+<td>Digital Threats: Research and Practice, Vol. 6, No. 1, Article 4 (February 2025)</td>
+<td>ACM</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/fednids_A_Federated_Learning_Framework_for_Packet-Based_Network_Intrusion_Detection_System.pdf">Click Me</a></td>
+<td>2025</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1080/23742917.2018.1495375"><strong>Improving Adaptive Honeypot Functionality with Efficient Reinforcement Learning Parameters for Automated Malware</strong></a></td>
+<td>Proposes parameter tuning for RL agents in adaptive honeypots. Explores discount factor and learning rate settings in Q-learning setups to improve response behavior against malware. Evaluates against simulated attacks.</td>
+<td>Minor technical relevance but helpful for parameter optimization. Offers hints on tuning Q-table based agents for better learning speed and stability.</td>
+<td>Journal of Cyber Security Technology</td>
+<td>Taylor &amp; Francis</td>
+<td>⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Improving_adaptive_honeypot_functionality_with_efficient_RL_parameters.pdf">Click Me</a></td>
+<td>2018</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1007/978-3-030-10997-4_21"><strong>Using Reinforcement Learning to Conceal Honeypot Functionality</strong></a></td>
+<td>Uses Q-learning to tune honeypot responses and delay detection by attackers. Focuses on balancing stealth (concealment) with engagement. Evaluates the timing and response manipulation to reduce detectability.</td>
+<td>Relevant for RL-based deception tactics. Complements my goal of increasing attacker trust in the honeypot through learned response realism.</td>
+<td>AIxIA 2018, Italian Conference on Artificial Intelligence</td>
+<td>Springer</td>
+<td>⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Using_Reinforcement_Learning_to_Conceal_Honeypot_Functionality.pdf">Click Me</a></td>
+<td>2018</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.4218/etrij.2019-0155"><strong>New Framework for Adaptive and Agile Honeypots</strong></a></td>
+<td>Proposes HARM: honeypots using reinforcement learning to handle repetitive malware like worms. Introduces agile policy updates, automated redeployment, and captures attacker interaction via Q-learning/SARSA. Evaluates state-action space for malware behavior.</td>
+<td>Supports dynamic policy learning and system redeployment, relevant for container-based honeypots. Shows benefits of agility and adaptability in active threat environments.</td>
+<td>ETRI Journal</td>
+<td>Wiley</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/New_framework_for_adaptive_and_agile_honeypots.pdf">Click Me</a></td>
+<td>2020</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.3390/app12105224"><strong>A Comparison of an Adaptive Self-Guarded Honeypot with Conventional Honeypots</strong></a></td>
+<td>Compares Asgard and Midgard (adaptive SSH honeypots with Q-learning) to Cowrie and real Linux. Focuses on trade-off between attacker engagement and containment. Asgard uses state-action dependent rewards for fine-grained policy learning.</td>
+<td>Directly aligns with my goals: adaptive interaction, attacker deception, and safe containment. Highlights design strategies for maximizing data collection while preventing full system compromise.</td>
+<td>Applied Sciences</td>
+<td>MDPI</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/applsci-12-05224-v2.pdf">Click Me</a></td>
+<td>2022</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/ICITISEE57756.2022.10057816"><strong>Evaluation of Reinforcement Learning Algorithm on SSH Honeypot</strong></a></td>
+<td>The paper evaluates the impact of reinforcement learning on SSH honeypots using Cowrie. It aims to increase the duration and depth of attacker interaction by learning behavioral sequences before certain commands (e.g. download). It explores how RL can guide interaction policies and discusses the reward function design for deeper attacker engagement.</td>
+<td>Helpful as a basic empirical test of RL in honeypots, especially focused on SSH. Offers insight into sequence-based reward strategies and attacker behavior profiling. Can inform RL reward tuning in my framework.</td>
+<td>2022 6th International Conference on Information Technology, Information Systems and Electrical Engineering (ICITISEE)</td>
+<td>IEEE</td>
+<td>⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Evaluation_of_Reinforcement_Learning_Algorithm_on_SSH_Honeypot.pdf">Click Me</a></td>
+<td>2022</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.5220/0010719100003058"><strong>Asguard: Adaptive Self-guarded Honeypot</strong></a></td>
+<td>opinioin</td>
+<td>journal</td>
+<td>rating</td>
+<td>annotated link</td>
+<td>year</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1002/int.22708"><strong>Deep Reinforcement Learning for Building Honeypots Against Runtime DoS Attack</strong></a></td>
+<td>Introduces DARLH, a system combining deep reinforcement learning with IDS agents to respond to DoS attacks. Uses Deep RNNs and event tracking on datasets like UNSW-NB20 and Bot-IoT. Evaluates DARLH against prior methods like Naïve Bayes Honeypot and Blockchain-based systems, showing 5–10% performance gains.</td>
+<td>Valuable for the use of DRL in real-time detection with structured datasets. Though more focused on DoS, it informs model architectures and agent behaviors in honeypot-based defense. Could inspire hybrid detection components in adaptive honeypots.</td>
+<td>Int. J. of Intelligent Systems</td>
+<td>Wiley</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Deep_reinforcement_learning_for_building_honeypots_against_runtime_DoS_attack.pdf">Click Me</a></td>
+<td>2021</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/ICCOMM.2014.6866707"><strong>RASSH – Reinforced Adaptive SSH Honeypot</strong></a></td>
+<td>Proposes RASSH, a medium-interaction SSH honeypot using SARSA and Markov models to adapt based on attacker commands. Implemented in Python using PyBrain and Kippo as base. The system learns to keep attackers engaged while detecting typical behaviors.</td>
+<td>Foundational for RL-based honeypots. Demonstrates early, working application of SARSA to attacker behavior. Can guide state-action modeling and inspire comparisons with modern RL techniques.</td>
+<td>2014 International Conference on Communications (COMM)</td>
+<td>IEEE</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/RASSH_-_Reinforced_adaptive_SSH_honeypot.pdf">Click Me</a></td>
+<td>2014</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/INM.2011.5990710"><strong>Adaptive and Self-Configurable Honeypots</strong></a></td>
+<td>One of the first high-interaction honeypots using reinforcement learning. Based on UML and a probabilistic automaton of attacker behavior. Adapts program responses (allow/block/modify) based on attack state. Focuses on self-management and attacker deception.</td>
+<td>Seminal work in adaptive honeypots. Introduces attacker-driven feedback loop via RL and explores adversarial learning. Supports the case for dynamic honeypot control policies.</td>
+<td>12th IFIP/IEEE International Symposium on Integrated Network Management</td>
+<td>IEEE</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/Adaptive_and_self-configurable_honeypots.pdf">Click Me</a></td>
+<td>2011</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1145/3558482.3590195"><strong>HoneyIoT: Adaptive High-Interaction Honeypot for IoT Devices Through Reinforcement Learning</strong></a></td>
+<td>HoneyIoT uses MDP modeling and reinforcement learning to mimic IoT devices and evade detection. Learns optimal attacker engagement via attack trace replay and differential response mutation. Covert against honeypot detection tools, deployed publicly.</td>
+<td>Very relevant due to adaptive interaction design. Shows strong RL use in realistic honeypot deployment. Supports my goal of making attack sessions longer and more informative.</td>
+<td>WiSec '23: ACM Conference on Security and Privacy in Wireless and Mobile Networks</td>
+<td>ACM</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/3558482.3590195.pdf">Click Me</a></td>
+<td>2023</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1007/978-3-030-32430-8_13"><strong>Adaptive Honeypot Engagement through Reinforcement Learning of Semi-Markov Decision Processes</strong></a></td>
+<td>opinioin</td>
+<td>journal</td>
+<td>rating</td>
+<td>annotated link</td>
+<td>year</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/SSCI50451.2021.9660066"><strong>Reinforcement Learning-assisted Threshold Optimization for Dynamic Honeypot Adaptation to Enhance IoBT Networks Security</strong></a></td>
+<td>opinioin</td>
+<td>journal</td>
+<td>rating</td>
+<td>annotated link</td>
+<td>year</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1109/iccomm.2018.8430173"><strong>QRASSH - A Self-Adaptive SSH Honeypot Driven by Q-Learning</strong></a></td>
+<td>opinioin</td>
+<td>journal</td>
+<td>rating</td>
+<td>annotated link</td>
+<td>year</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1007/s12243-018-0695-7"><strong>On the Rewards of Self-Adaptive IoT Honeypots</strong></a></td>
+<td>Describes IRASSH-T, a self-adaptive honeypot using Inverse Reinforcement Learning (IRL) to model attacker behavior and derive optimal reward functions. Applied to SSH and Telnet-based IoT honeypots. Focuses on learning behavior patterns like Mirai botnet actions.</td>
+<td>Important for reward design and IRL perspective. Shows how real attacker behavior can be modeled and used to train RL agents effectively, even without explicit labels.</td>
+<td>Annals of Telecommunications</td>
+<td>Springer</td>
+<td>⭐⭐⭐⭐</td>
+<td><a href="https://github.com/JohannesLks/Thesis/blob/main/literature/annotated/s12243-018-0695-7.pdf">Click Me</a></td>
+<td>2019</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://ieeexplore.ieee.org/document/10968591"><strong>Generative AI SSH Honeypot With Reinforcement Learning</strong></a></td>
+<td>opinioin</td>
+<td>14th IEEE International Conference on Communication Systems and Network Technologies 2025</td>
+<td>rating</td>
+<td>annotated link</td>
+<td>2025</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.48550/arXiv.1312.5602"><strong>Playing Atari with Deep Reinforcement Learning</strong></a></td>
+<td>DeepMind first DQN</td>
+<td>journal</td>
+<td>rating</td>
+<td>annotated link</td>
+<td>2013</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1007/BF00992698"><strong>Q-learning</strong></a></td>
+<td>first Q-Learning</td>
+<td>Springer Nature Machine learning</td>
+<td>rating</td>
+<td>annotated link</td>
+<td>1992</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

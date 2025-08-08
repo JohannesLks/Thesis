@@ -1,0 +1,811 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://johanneslks.github.io/Thesis/documentation/math/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Math - Honeypot Anomaly Detection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-mathematical-background" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-header__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Honeypot Anomaly Detection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Math
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-nav__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Honeypot Anomaly Detection
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatedWork/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Related Work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Journals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thoughts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concept1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#4-mathematical-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Mathematical Background
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Mathematical Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-problem-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Problem Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cross-session-anomaly-cohesion-score-csacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Cross-Session Anomaly Cohesion Score (CSACS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-optimization-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Optimization Objective
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-statistical-stability-under-a-null-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Statistical Stability Under a Null Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 Statistical Stability Under a Null Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441-null-model-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.1 Null Model Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-lemma-dominance-of-exponential-tails" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.2 Lemma: Dominance of Exponential Tails
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443-theorem-statistical-stability-of-csacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.3 Theorem: Statistical Stability of CSACS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#444-proof-outline" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.4 Proof (Outline)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#445-explicit-constant" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.5 Explicit Constant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#446-hypothesis-testing-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.6 Hypothesis Testing Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#447-search-space-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.7 Search Space Correction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#448-limitations-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.8 Limitations and Future Work
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Math</h1>
+
+<h2 id="4-mathematical-background">4. Mathematical Background</h2>
+<h3 id="41-problem-setup">4.1 Problem Setup</h3>
+<p>We consider honeypot log data consisting of a set of log lines:
+$$
+L = {l_1, l_2, \dots, l_n}
+$$<br />
+These lines are grouped into sessions:
+$$
+S = {s_1, s_2, \dots, s_m}
+$$<br />
+Each log line is embedded into a continuous vector space:
+$$
+e_{l_i} \in \mathbb{R}^d
+$$<br />
+A session embedding is derived via a Transformer-LSTM encoder:
+$$
+e_{s_i} = \text{TransformerLSTM}(s_i)
+$$  </p>
+<hr />
+<h3 id="42-cross-session-anomaly-cohesion-score-csacs">4.2 Cross-Session Anomaly Cohesion Score (CSACS)</h3>
+<p>We define the <strong>Cross-Session Anomaly Cohesion Score (CSACS)</strong> for a community <span class="arithmatex">\( C \subseteq S \)</span> as:
+$$
+CSACS(C) = \frac{ \sum_{(s_i, s_j) \in E_C} \left( \lambda_1 \cdot \frac{1}{D(s_i, s_j) + \epsilon} + \lambda_2 \cdot \frac{1}{T(s_i, s_j) + \delta} \right) \cdot \min(A(s_i), A(s_j)) }{ |E_C| }
+$$<br />
+Where:<br />
+- <span class="arithmatex">\(E_C\)</span> is the edge set induced by <span class="arithmatex">\(C.\)</span><br />
+- <span class="arithmatex">\(D(s_i, s_j)\)</span> is the Euclidean distance between session embeddings.<br />
+- <span class="arithmatex">\(T(s_i, s_j)\)</span> is the temporal gap between sessions.<br />
+- <span class="arithmatex">\(A(s_i)\)</span> is the anomaly score of session <span class="arithmatex">\(s_i.\)</span><br />
+- <span class="arithmatex">\(\lambda_1, \lambda_2, \epsilon, \delta &gt; 0\)</span> are weighting and stability parameters.  </p>
+<hr />
+<h3 id="43-optimization-objective">4.3 Optimization Objective</h3>
+<p>The objective in identifying clusters is to maximize:
+$$
+\max_{C} CSACS(C) - \gamma \cdot |C|
+$$
+with <span class="arithmatex">\(\gamma &gt; 0\)</span> serving as a size penalty to avoid trivial large clusters.  </p>
+<hr />
+<h3 id="44-statistical-stability-under-a-null-model">4.4 Statistical Stability Under a Null Model</h3>
+<h4 id="441-null-model-setup">4.4.1 Null Model Setup</h4>
+<p>We analyze the probability that a randomly formed cluster achieves high cohesion under a null hypothesis in which no structured anomaly exists. We assume:  </p>
+<ul>
+<li>
+<p><strong>Embedding noise model:</strong><br />
+$$
+e_{s_i} = \mu_{s_i} + \eta_{s_i}, \quad \eta_{s_i} \sim \mathcal{N}(0, \sigma^2 I_d)
+$$<br />
+with independent noise <span class="arithmatex">\(\eta_{s_i}.\)</span>  </p>
+</li>
+<li>
+<p><strong>Temporal gaps:</strong><br />
+Independent random variables with density <span class="arithmatex">\(f_T(t)\)</span> bounded by <span class="arithmatex">\(\frac{1}{T_{\max}}\)</span> on <span class="arithmatex">\([0, T_{\max}]\)</span>.  </p>
+</li>
+<li>
+<p><strong>Anomaly scores:</strong><br />
+Independent, bounded random variables in <span class="arithmatex">\([0, A_{\max}]\)</span>, independent of embeddings and temporal gaps.  </p>
+</li>
+<li>
+<p><strong>Clusters:</strong><br />
+Community <span class="arithmatex">\(C\)</span> and edge set <span class="arithmatex">\(E_C\)</span> are selected independently of all random variables described.  </p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Interpretation:</strong> This null model forms the baseline scenario against which discovered clusters can be tested. High cohesion under this model is highly unlikely; observed deviations indicate structure.  </p>
+</blockquote>
+<hr />
+<h4 id="442-lemma-dominance-of-exponential-tails">4.4.2 Lemma: Dominance of Exponential Tails</h4>
+<p><strong>Lemma 1 (Tail Dominance):</strong><br />
+Let <span class="arithmatex">\(X = \left( \lambda_1 \cdot \frac{1}{D + \epsilon} + \lambda_2 \cdot \frac{1}{T + \delta} \right) \cdot A,\)</span> where:<br />
+- <span class="arithmatex">\(D^2 \sim 2 \sigma^2 \chi^2_d,\)</span><br />
+- <span class="arithmatex">\(T \sim f_T\)</span> bounded by <span class="arithmatex">\(\frac{1}{T_{\max}}\)</span>,<br />
+- <span class="arithmatex">\(A \in [0, A_{\max}]\)</span> is independent.  </p>
+<p>Then <span class="arithmatex">\(X\)</span> is sub-exponential with exponential tail decay dominated by the distance inversion term. In particular, there exist constants <span class="arithmatex">\(c_1, c_2 &gt; 0\)</span> such that for large <span class="arithmatex">\(x\)</span>:
+$$
+P(X &gt; x) \leq c_1 \exp(-c_2 x^2)
+$$  </p>
+<p><strong>Proof Sketch:</strong><br />
+- Distance tail deviations decay exponentially in <span class="arithmatex">\(d.\)</span><br />
+- Temporal term is polynomially decaying but multiplied by a random bounded variable and added to an exponentially decaying component.<br />
+- By known results in convolution of distributions (Boucheron–Lugosi–Massart, Lemma 2.7), exponential tails dominate.  </p>
+<hr />
+<h4 id="443-theorem-statistical-stability-of-csacs">4.4.3 Theorem: Statistical Stability of CSACS</h4>
+<p><strong>Theorem (Statistical Stability Under the Null):</strong><br />
+Under the null model described, let <span class="arithmatex">\(C\)</span> be a random community with <span class="arithmatex">\(|E_C|\)</span> edges. Suppose <span class="arithmatex">\(\epsilon &gt; c_1 \sigma,\ \delta &gt; c_2 / T_{\max}.\)</span> Then for any threshold <span class="arithmatex">\(\theta &gt; 0,\)</span>
+$$
+P\bigl(CSACS(C) \geq \theta \bigr) \leq \exp\bigl(- \alpha \cdot |E_C| \cdot \theta^2 \bigr),
+$$
+where <span class="arithmatex">\(\alpha &gt; 0\)</span> depends on <span class="arithmatex">\(\sigma^2, d, \lambda_1, \lambda_2, A_{\max}, c_1, c_2, T_{\max}.\)</span>  </p>
+<blockquote>
+<p><strong>Corollary:</strong> As dimension <span class="arithmatex">\(d\)</span> increases, <span class="arithmatex">\(\alpha\)</span> scales proportionally with <span class="arithmatex">\(d,\)</span> reinforcing stability in high-dimensional embeddings.  </p>
+</blockquote>
+<hr />
+<h4 id="444-proof-outline">4.4.4 Proof (Outline)</h4>
+<ol>
+<li><strong>Individual edge contributions</strong> follow sub-exponential tails due to Lemma 1.  </li>
+<li><strong>Sums of independent sub-exponential random variables</strong> concentrate according to Vershynin (2018), Theorem 2.7.1:
+$$
+P\left( \sum_{(i,j) \in E_C} X_{(i,j)} \geq |E_C| \theta \right) \leq \exp\left(-c |E_C| \cdot \min\left(\frac{\theta^2}{v^2}, \frac{\theta}{M}\right) \right)
+$$<br />
+where <span class="arithmatex">\(v^2\)</span> is total variance and <span class="arithmatex">\(M\)</span> bounds the tails.  </li>
+<li>All constants can be expressed in terms of <span class="arithmatex">\(\sigma, d, A_{\max}, T_{\max}, \lambda_1, \lambda_2.\)</span>  </li>
+</ol>
+<hr />
+<h4 id="445-explicit-constant">4.4.5 Explicit Constant</h4>
+<p>An explicit lower bound on <span class="arithmatex">\(\alpha\)</span> is given by:
+$$
+\alpha = c \cdot \min \left( \frac{d \lambda_1^2}{\sigma^2}, \frac{\lambda_2^2 \delta^2}{T_{\max}^2}, \frac{1}{A_{\max}^2} \right)
+$$
+with universal constant <span class="arithmatex">\(c &gt; 0.\)</span>  </p>
+<hr />
+<h4 id="446-hypothesis-testing-interpretation">4.4.6 Hypothesis Testing Interpretation</h4>
+<blockquote>
+<p>The stability theorem provides a null hypothesis threshold: if an observed cluster exceeds
+$$
+CSACS(C) &gt; \theta_{\text{crit}}
+$$
+with <span class="arithmatex">\(\theta_{\text{crit}}\)</span> chosen such that
+$$
+\exp\left(- \alpha \cdot |E_C| \cdot \theta_{\text{crit}}^2 \right) &lt; \delta
+$$
+(for some desired significance level <span class="arithmatex">\(\delta\)</span>), we can reject the null hypothesis that the cluster is random.  </p>
+<p>This reframes CSACS detection as a hypothesis testing procedure rather than relying on strong assumptions about the clustering algorithm.  </p>
+</blockquote>
+<hr />
+<h4 id="447-search-space-correction">4.4.7 Search Space Correction</h4>
+<p>If the clustering algorithm searches over a candidate set <span class="arithmatex">\(\mathcal{C}\)</span> of communities with <span class="arithmatex">\(|\mathcal{C}|\)</span> polynomial in <span class="arithmatex">\(m,\)</span> a union bound corrects for search:
+$$
+P\left( \exists C \in \mathcal{C}: CSACS(C) \geq \theta \right) \leq |\mathcal{C}| \cdot \exp\bigl(- \alpha \cdot |E_C| \cdot \theta^2 \bigr)
+$$
+For polynomial-sized <span class="arithmatex">\(|\mathcal{C}|\)</span>, the exponential decay dominates for large thresholds.  </p>
+<hr />
+<h4 id="448-limitations-and-future-work">4.4.8 Limitations and Future Work</h4>
+<ul>
+<li>The result applies under independence assumptions. In practice, embeddings are correlated outputs of deep models.  </li>
+<li>Extending stability results to dependent embeddings and data-conditioned cluster search remains open. This will likely require bounding the complexity of clustering algorithms (e.g., via VC dimension or covering number arguments).  </li>
+<li>Heavier-tailed temporal distributions and bursty behavior are not covered here; extending to sub-exponential temporal gap distributions is part of ongoing theoretical work.  </li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li>Vershynin, R. (2018). <em>High-Dimensional Probability: An Introduction with Applications in Data Science.</em> Cambridge University Press.  </li>
+<li>Boucheron, S., Lugosi, G., &amp; Massart, P. (2013). <em>Concentration Inequalities: A Nonasymptotic Theory of Independence.</em> Oxford University Press.  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

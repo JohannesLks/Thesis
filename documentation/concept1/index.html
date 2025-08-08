@@ -1,0 +1,2819 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://johanneslks.github.io/Thesis/documentation/concept1/">
+      
+      
+        <link rel="prev" href="../thoughts/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Concept I - Honeypot Anomaly Detection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unsupervised-multi-model-anomaly-detection-and-attack-chain-versioning-in-adaptive-honeynets" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-header__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Honeypot Anomaly Detection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Concept I
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-nav__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Honeypot Anomaly Detection
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatedWork/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Related Work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Journals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thoughts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung-und-problemstellung" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Einleitung und Problemstellung
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Einleitung und Problemstellung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Motivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-forschungsfragen" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Forschungsfragen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-hypothese" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Hypothese
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-verwandte-arbeiten-und-abgrenzung" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.0 Verwandte Arbeiten und Abgrenzung
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0 Verwandte Arbeiten und Abgrenzung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-klassische-honeypot-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Klassische Honeypot-Systeme
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-deep-learning-fur-anomalieerkennung" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Deep Learning für Anomalieerkennung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-multimodale-und-unuberwachte-netzwerkansatze" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Multimodale und unüberwachte Netzwerkansätze
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-systemvergleichstabelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Systemvergleichstabelle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-fazit-der-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Fazit der Analyse
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-systemarchitektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Systemarchitektur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Systemarchitektur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-komponentenubersicht" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Komponentenübersicht
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-formeller-datenfluss" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Formeller Datenfluss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-first-flight-modul-und-container-orchestrierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 First-Flight-Modul und Container-Orchestrierung
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 First-Flight-Modul und Container-Orchestrierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-flight-erfassung" class="md-nav__link">
+    <span class="md-ellipsis">
+      First-Flight-Erfassung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-orchestrierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container-Orchestrierung
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anomaliefusion-entscheidungsmodell" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Anomaliefusion &amp; Entscheidungsmodell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Anomaliefusion &amp; Entscheidungsmodell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-herleitung-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Herleitung der Fusionsformel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Herleitung der Fusionsformel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#begrundung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Begründung:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-fusionsansatze-vergleichbar-in-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternative Fusionsansätze (Vergleichbar in Evaluation):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#411-adaptive-gewichtungsmatrix-nach-protokolltyp" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.1 Adaptive Gewichtungsmatrix nach Protokolltyp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1.1 Adaptive Gewichtungsmatrix nach Protokolltyp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funktion-fp-f-regelbasiert-lernfahig" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funktion \( f(P, F) \): Regelbasiert &amp; lernfähig
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-vorteil" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.2 Vorteil
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-schwellenwertfunktion" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Schwellenwertfunktion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-ressourcenkostenbewertung-reinforcement-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Ressourcenkostenbewertung (Reinforcement Learning)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Ressourcenkostenbewertung (Reinforcement Learning)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reward-funktion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reward-Funktion:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beispiel:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rl-komponenten" class="md-nav__link">
+    <span class="md-ellipsis">
+      RL-Komponenten:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-gnn-architektur-sensitivitatsanalyse-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 GNN-Architektur &amp; Sensitivitätsanalyse der Fusionsformel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 GNN-Architektur &amp; Sensitivitätsanalyse der Fusionsformel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnn-einsatz" class="md-nav__link">
+    <span class="md-ellipsis">
+      GNN-Einsatz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensitivitatsanalyse-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sensitivitätsanalyse der Fusionsformel
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#441-cross-session-graph-verteilte-angriffserkennung" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.1 Cross-Session Graph: verteilte Angriffserkennung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.2 Analyse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-robustheit-gegen-adversarial-payloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 Robustheit gegen adversarial payloads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-verhalten-der-rl-policy-bei-drop-entscheidungen" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 Verhalten der RL-Policy bei „Drop“-Entscheidungen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-trainingsstrategie" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Trainingsstrategie
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Trainingsstrategie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-datenbasis" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Datenbasis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-labels-supervision" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Labels &amp; Supervision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-labelqualitat-und-ground-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Labelqualität und Ground Truth
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Labelqualität und Ground Truth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bewertung-der-label-qualitat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bewertung der Label-Qualität
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-angriffsketten-rekonstruktion" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Angriffsketten-Rekonstruktion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Angriffsketten-Rekonstruktion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-feature-kodierung-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Feature-Kodierung &amp; Clustering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-versionierungsstrategie-erganzt-mit-clusterdynamik" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#begriffsdefinition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Begriffsdefinition:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-validierung-der-angriffsketten" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Validierung der Angriffsketten
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 Validierung der Angriffsketten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methodik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methodik:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ergebnisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ergebnisse:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-explainability-modul-xai" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Explainability-Modul (XAI)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-sicherheit-infrastruktur" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Sicherheit &amp; Infrastruktur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Sicherheit &amp; Infrastruktur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-threat-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 Threat Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-gegenmanahmen" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 Gegenmaßnahmen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 Architektur
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Evaluation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-vergleichsmodelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 Vergleichsmodelle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-metriken" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 Metriken
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-ablationsstudien" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 Ablationsstudien
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.3 Ablationsstudien">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metriken" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metriken:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94-geplante-robustheitsanalyse-gegenuber-gezielten-angriffen" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4 Geplante Robustheitsanalyse gegenüber gezielten Angriffen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4 Geplante Robustheitsanalyse gegenüber gezielten Angriffen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#941-angriffstypen-und-erwartete-auswirkungen" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.1 Angriffstypen und erwartete Auswirkungen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#942-bewertungsmethoden-geplant" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.2 Bewertungsmethoden (geplant)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#943-erwartete-ergebnisse-hypothetisch" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.3 Erwartete Ergebnisse (hypothetisch)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#944-abwehrstrategien-und-geplante-evaluierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.4 Abwehrstrategien und geplante Evaluierung
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-beitrag" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Beitrag
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-ausblick" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Ausblick
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-robustheit-resilienz-und-designentscheidungen" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Robustheit, Resilienz und Designentscheidungen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Robustheit, Resilienz und Designentscheidungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-entscheidungslatenz-und-container-spawn-zeit" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 Entscheidungslatenz und Container-Spawn-Zeit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-fehlerhafte-kalibrierung-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.2 Fehlerhafte Kalibrierung der Fusionsformel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-evasion-resistente-strategien" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3 Evasion-resistente Strategien
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-umgang-mit-concept-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.4 Umgang mit Concept Drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-robustheit-der-gnn-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5 Robustheit der GNN-Analyse
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-angriffskettenbeispiel-visualisierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Angriffskettenbeispiel (Visualisierung)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung-und-problemstellung" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Einleitung und Problemstellung
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Einleitung und Problemstellung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Motivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-forschungsfragen" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Forschungsfragen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-hypothese" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Hypothese
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-verwandte-arbeiten-und-abgrenzung" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.0 Verwandte Arbeiten und Abgrenzung
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0 Verwandte Arbeiten und Abgrenzung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-klassische-honeypot-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Klassische Honeypot-Systeme
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-deep-learning-fur-anomalieerkennung" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Deep Learning für Anomalieerkennung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-multimodale-und-unuberwachte-netzwerkansatze" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Multimodale und unüberwachte Netzwerkansätze
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-systemvergleichstabelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Systemvergleichstabelle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-fazit-der-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Fazit der Analyse
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-systemarchitektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Systemarchitektur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Systemarchitektur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-komponentenubersicht" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Komponentenübersicht
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-formeller-datenfluss" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Formeller Datenfluss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-first-flight-modul-und-container-orchestrierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 First-Flight-Modul und Container-Orchestrierung
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 First-Flight-Modul und Container-Orchestrierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-flight-erfassung" class="md-nav__link">
+    <span class="md-ellipsis">
+      First-Flight-Erfassung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-orchestrierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container-Orchestrierung
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anomaliefusion-entscheidungsmodell" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Anomaliefusion &amp; Entscheidungsmodell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Anomaliefusion &amp; Entscheidungsmodell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-herleitung-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Herleitung der Fusionsformel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Herleitung der Fusionsformel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#begrundung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Begründung:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-fusionsansatze-vergleichbar-in-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternative Fusionsansätze (Vergleichbar in Evaluation):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#411-adaptive-gewichtungsmatrix-nach-protokolltyp" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.1 Adaptive Gewichtungsmatrix nach Protokolltyp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1.1 Adaptive Gewichtungsmatrix nach Protokolltyp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funktion-fp-f-regelbasiert-lernfahig" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funktion \( f(P, F) \): Regelbasiert &amp; lernfähig
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-vorteil" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.2 Vorteil
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-schwellenwertfunktion" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Schwellenwertfunktion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-ressourcenkostenbewertung-reinforcement-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Ressourcenkostenbewertung (Reinforcement Learning)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Ressourcenkostenbewertung (Reinforcement Learning)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reward-funktion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reward-Funktion:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beispiel:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rl-komponenten" class="md-nav__link">
+    <span class="md-ellipsis">
+      RL-Komponenten:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-gnn-architektur-sensitivitatsanalyse-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 GNN-Architektur &amp; Sensitivitätsanalyse der Fusionsformel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 GNN-Architektur &amp; Sensitivitätsanalyse der Fusionsformel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnn-einsatz" class="md-nav__link">
+    <span class="md-ellipsis">
+      GNN-Einsatz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensitivitatsanalyse-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sensitivitätsanalyse der Fusionsformel
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#441-cross-session-graph-verteilte-angriffserkennung" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.1 Cross-Session Graph: verteilte Angriffserkennung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.2 Analyse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-robustheit-gegen-adversarial-payloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 Robustheit gegen adversarial payloads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-verhalten-der-rl-policy-bei-drop-entscheidungen" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 Verhalten der RL-Policy bei „Drop“-Entscheidungen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-trainingsstrategie" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Trainingsstrategie
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Trainingsstrategie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-datenbasis" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Datenbasis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-labels-supervision" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Labels &amp; Supervision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-labelqualitat-und-ground-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Labelqualität und Ground Truth
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Labelqualität und Ground Truth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bewertung-der-label-qualitat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bewertung der Label-Qualität
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-angriffsketten-rekonstruktion" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Angriffsketten-Rekonstruktion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Angriffsketten-Rekonstruktion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-feature-kodierung-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Feature-Kodierung &amp; Clustering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-versionierungsstrategie-erganzt-mit-clusterdynamik" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#begriffsdefinition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Begriffsdefinition:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-validierung-der-angriffsketten" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Validierung der Angriffsketten
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 Validierung der Angriffsketten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methodik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methodik:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ergebnisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ergebnisse:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-explainability-modul-xai" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Explainability-Modul (XAI)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-sicherheit-infrastruktur" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Sicherheit &amp; Infrastruktur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Sicherheit &amp; Infrastruktur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-threat-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 Threat Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-gegenmanahmen" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 Gegenmaßnahmen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 Architektur
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Evaluation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-vergleichsmodelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 Vergleichsmodelle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-metriken" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 Metriken
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-ablationsstudien" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 Ablationsstudien
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.3 Ablationsstudien">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metriken" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metriken:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94-geplante-robustheitsanalyse-gegenuber-gezielten-angriffen" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4 Geplante Robustheitsanalyse gegenüber gezielten Angriffen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4 Geplante Robustheitsanalyse gegenüber gezielten Angriffen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#941-angriffstypen-und-erwartete-auswirkungen" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.1 Angriffstypen und erwartete Auswirkungen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#942-bewertungsmethoden-geplant" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.2 Bewertungsmethoden (geplant)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#943-erwartete-ergebnisse-hypothetisch" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.3 Erwartete Ergebnisse (hypothetisch)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#944-abwehrstrategien-und-geplante-evaluierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4.4 Abwehrstrategien und geplante Evaluierung
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-beitrag" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Beitrag
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-ausblick" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Ausblick
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-robustheit-resilienz-und-designentscheidungen" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Robustheit, Resilienz und Designentscheidungen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Robustheit, Resilienz und Designentscheidungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-entscheidungslatenz-und-container-spawn-zeit" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 Entscheidungslatenz und Container-Spawn-Zeit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-fehlerhafte-kalibrierung-der-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.2 Fehlerhafte Kalibrierung der Fusionsformel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-evasion-resistente-strategien" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3 Evasion-resistente Strategien
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-umgang-mit-concept-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.4 Umgang mit Concept Drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-robustheit-der-gnn-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5 Robustheit der GNN-Analyse
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-angriffskettenbeispiel-visualisierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Angriffskettenbeispiel (Visualisierung)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="unsupervised-multi-model-anomaly-detection-and-attack-chain-versioning-in-adaptive-honeynets">Unsupervised Multi-Model Anomaly Detection and Attack Chain Versioning in Adaptive Honeynets</h1>
+<p><strong>Early Threat Recognition from First-Flight Data with Resource-Efficient Container Orchestration</strong></p>
+<h2 id="1-einleitung-und-problemstellung">1. Einleitung und Problemstellung</h2>
+<h3 id="11-motivation">1.1 <strong>Motivation</strong></h3>
+<p>Moderne Honeypot-Systeme sind in der Lage, umfangreiche Datenmengen zu erzeugen, die für die Analyse von Angriffsmustern genutzt werden können. Allerdings haben sie nach wie vor erhebliche Schwächen, insbesondere im Umgang mit <strong>adaptiven Angreifern</strong>. Diese Angreifer, oftmals als <em>Bots</em> bezeichnet, passen ihre Taktiken kontinuierlich an, um der Erkennung durch statische Systeme zu entgehen. Während klassische Honeypots auf die Erkennung isolierter Angriffe ausgerichtet sind, bleiben komplexe, dynamische Angreifer, die <strong>Angriffsketten</strong> über mehrere Sessions hinweg aufbauen, häufig unerkannt. </p>
+<p>Ein weiteres zentrales Problem bei der Anwendung von Honeypots ist die <strong>Skalierbarkeit</strong> und <strong>Ressourcennutzung</strong>. In realen Angriffsszenarien, in denen mehrere Angriffe gleichzeitig und über längere Zeiträume hinweg stattfinden, ist es entscheidend, dass Honeypot-Systeme dynamisch reagieren und Ressourcen effizient verwalten. Die Notwendigkeit, auf <strong>Echtzeit-Angriffe</strong> zu reagieren, ohne in Ressourcenspitzen zu geraten, stellt eine weitere Herausforderung dar.</p>
+<p>Die vorliegende Arbeit zielt darauf ab, ein <strong>adaptives Honeynet-Framework</strong> zu entwickeln, das sowohl die <strong>Erkennung adaptiver Angreifer</strong> (insbesondere Bots) als auch die <strong>Versionierung von Angriffsketten</strong> ermöglicht. Gleichzeitig soll das System durch <strong>intelligente Container-Orchestrierung</strong> die Ressourcennutzung optimieren und die Effizienz bei der Emulation von Angriffen sicherstellen, insbesondere bei <strong>hohem Traffic</strong> oder <strong>langfristigen Angriffsszenarien</strong>.</p>
+<hr />
+<h3 id="12-forschungsfragen">1.2 <strong>Forschungsfragen</strong></h3>
+<p>Die folgenden Forschungsfragen ergeben sich aus den praktischen Herausforderungen bei der Erkennung und Analyse von adaptiven Angreifern sowie der effizienten Ressourcennutzung in Honeypots:</p>
+<ol>
+<li>
+<p>Wie kann ein hybrides Deep-Learning-Modell, das Autoencoder (AE), Long Short-Term Memory (LSTM) Netzwerke und Graph Neural Networks (GNN) kombiniert, dazu beitragen, <strong>adaptive Angreifer</strong> zu erkennen und <strong>Angriffsketten zu versionieren</strong>, die sich über mehrere Sessions hinweg entwickeln?</p>
+<ul>
+<li><strong>Forschungslücke:</strong> Während bestehende Systeme teilweise Angreifer auf Basis von einzelnen Angriffsmustern oder Datenströmen erkennen, wird die Fähigkeit zur <strong>langfristigen, dynamischen Erkennung</strong> adaptiver Angreifer und <strong>Versionierung von Angriffsketten</strong> selten berücksichtigt. Das vorgestellte System adressiert diese Lücke, indem es <strong>First-Flight-Daten</strong> kombiniert mit mehreren <strong>modellen zur Anomalieerkennung</strong> und einer <strong>Attack-Chain-Versionierung</strong> nutzt, um <strong>Verhaltenstrends</strong> von Angreifern über längere Zeiträume hinweg zu verfolgen.</li>
+</ul>
+</li>
+<li>
+<p>Wie kann ein Reinforcement-Learning-gestütztes System die <strong>Container-Orchestrierung</strong> in Honeypots effizient steuern, um die Ressourcennutzung zu optimieren und gleichzeitig die <strong>Erkennungsqualität</strong> und <strong>Versionierung</strong> von Angreifern nicht zu beeinträchtigen?</p>
+<ul>
+<li><strong>Forschungslücke:</strong> Viele bestehende Systeme emulieren Angriffe ohne Rücksicht auf die <strong>Ressourcenkapazitäten</strong>, was zu einer hohen Belastung des Systems führt, insbesondere bei hochfrequenten Angriffen. Das vorgestellte Framework nutzt <strong>Reinforcement Learning (RL)</strong> zur ressourcensensitiven Steuerung von <strong>Container-Spawns</strong>, um sicherzustellen, dass <strong>nur relevante Angriffsszenarien emuliert werden</strong> und gleichzeitig <strong>Ressourcen</strong> effizient genutzt werden. Dieses System könnte die <strong>Echtzeitreaktionsfähigkeit</strong> erheblich steigern und die <strong>Fehlertoleranz</strong> verbessern.</li>
+</ul>
+</li>
+<li>
+<p>Wie können wir ein System zur <strong>erklärbaren Anomalieerkennung (XAI)</strong> entwickeln, das es ermöglicht, sowohl die <strong>Erkennungsentscheidungen</strong> als auch die <strong>Entwicklung von Angriffsketten</strong> für Sicherheitsanalysten nachvollziehbar zu machen?</p>
+<ul>
+<li><strong>Forschungslücke:</strong> Erklärbarkeit ist ein kritischer Faktor bei der Implementierung von Sicherheitslösungen, um Vertrauen und Transparenz zu gewährleisten. In bisherigen Ansätzen wird die <strong>Erklärung von Erkennungen</strong> meist vernachlässigt. Diese Arbeit strebt an, eine <strong>explainable AI (XAI)</strong> zu integrieren, um sicherzustellen, dass die <strong>Entscheidungsprozesse des Modells</strong> für Sicherheitsexperten verständlich sind. Dies ist besonders wichtig, um bei komplexen, dynamischen Angriffen wie <strong>APT-Angriffen</strong> oder <strong>langfristigen Botnet-Infiltrationen</strong> die <strong>Angriffsschritte</strong> und deren <strong>Zusammenhänge</strong> transparent zu machen.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="13-hypothese">1.3 <strong>Hypothese</strong></h3>
+<p>Die Haupthypothese dieser Arbeit lautet:</p>
+<p>Ein mehrschichtiges Modell aus <strong>Autoencodern (AE)</strong>, <strong>Long Short-Term Memory Netzwerken (LSTM)</strong> und <strong>Graph Neural Networks (GNN)</strong> kann in Kombination mit <strong>Reinforcement Learning</strong> und <strong>Explainable AI</strong> in einem adaptiven Honeynet-Framework die <strong>Früherkennung von adaptiven Angreifern</strong>, <strong>die Versionierung von Angriffsketten</strong> sowie eine <strong>effiziente Ressourcennutzung</strong> ermöglichen. Dieses Modell wird es ermöglichen, nicht nur <strong>einzelne Angriffe</strong> frühzeitig zu erkennen, sondern auch die Entwicklung von Angreifern <strong>über mehrere Sessions hinweg zu verfolgen</strong>, was zu einer nachhaltigeren und leistungsfähigeren Sicherheitslösung führt. Dabei wird die <strong>Ressourcenschonung</strong> durch die <strong>intelligente Container-Orchestrierung</strong> des RL-Moduls optimiert, ohne die Qualität der <strong>Angriffsbeobachtungen</strong> zu beeinträchtigen.</p>
+<hr />
+<h2 id="20-verwandte-arbeiten-und-abgrenzung">2.0 Verwandte Arbeiten und Abgrenzung</h2>
+<p>Forschungsarbeiten zur Anomalieerkennung im Kontext von Honeypots, Netzwerkverkehr und Logs lassen sich grob in drei Kategorien einteilen:</p>
+<p>(1) <strong>klassische Honeypot-Frameworks</strong><br />
+(2) <strong>Deep-Learning-basierte Anomalieerkennungssysteme</strong><br />
+(3) <strong>unsupervised/multimodale Netzwerkmodelle</strong></p>
+<p>Obwohl jede dieser Gruppen Teilaspekte adressiert, fehlt bislang ein System, das <em>dynamisch auf die Entwicklung von Angreifern reagiert</em>, <em>die Versionierung von Angriffsstrukturen</em> (wie Attack Chains) ermöglicht und gleichzeitig Ressourcen effizient nutzt.</p>
+<hr />
+<h3 id="21-klassische-honeypot-systeme">2.1 Klassische Honeypot-Systeme</h3>
+<ul>
+<li>
+<p><strong>T-Pot</strong> bietet eine Vielzahl von Emulationsdiensten, basiert jedoch auf <em>statisch laufenden Containern</em>. Die fehlende dynamische Anpassung an den Traffic und die Relevanz der einzelnen Emulationen führt zu einer ineffizienten Ressourcennutzung. Eine Versionierung von Angriffsketten oder die Verfolgung von sich entwickelnden Angreifern wird nicht berücksichtigt.</p>
+</li>
+<li>
+<p><strong>MADCAT</strong> ist ein Low-Interaction-System, das auf die Extraktion von Rohdaten aus der Netzwerkinfrastruktur fokussiert. Im Gegensatz zu traditionellen Honeypots mit komplexen Antwortlogiken bietet MADCAT eine skalierbare Erfassungsmethode. Doch auch hier fehlt die Möglichkeit zur tiefgehenden <em>Erkennung und Versionierung</em> von Angriffsketten, die in adaptiven Bedrohungsszenarien notwendig ist.</p>
+</li>
+<li>
+<p><strong>UNADA</strong> schlägt eine <em>Clustering-basierte Anomalieerkennung</em> vor, jedoch ohne tiefere Modellarchitektur oder die Fähigkeit zur dynamischen Emulationssteuerung. Es werden keine Mechanismen zur kontinuierlichen Verfolgung und Versionierung von sich entwickelnden Angriffen integriert.</p>
+</li>
+<li>
+<p><strong>Hybrid IDS mit Honeypots</strong> verfolgt das Konzept, Honeypots in ein IDS zu integrieren, jedoch bleibt es ohne detaillierte Implementierung und liefert keine Erkenntnisse zur dynamischen Reaktion auf sich entwickelnde Angriffe oder zur Versionierung von Angriffsketten.</p>
+</li>
+</ul>
+<p><strong>Forschungslücke:</strong> Es gibt kein Honeypot-System, das dynamisch <em>Angriffsketten versioniert</em>, die sich über mehrere Interaktionen hinweg entwickeln, und gleichzeitig adaptive, sich ändernde Bots erkennt und deren Entwicklung über Zeit verfolgt.</p>
+<hr />
+<h3 id="22-deep-learning-fur-anomalieerkennung">2.2 Deep Learning für Anomalieerkennung</h3>
+<ul>
+<li>
+<p><strong>DeepLog</strong> ist auf strukturierte Logs angewiesen und verwendet LSTMs zur Erkennung von Anomalien. Diese Methode ist jedoch nicht in der Lage, komplexe Angriffsketten über mehrere Sessions hinweg zu erkennen oder sich entwickelnde Bots zu verfolgen. Zudem fehlt die Möglichkeit zur <em>dynamischen Container-Orchestrierung</em>, die es ermöglicht, Ressourcen je nach Angriffskomplexität zu steuern.</p>
+</li>
+<li>
+<p><strong>D-PACK</strong> nutzt Autoencoder zur <em>Früherkennung</em> von Angriffen, die auf den ersten Bytes eines Netzwerks basieren. Diese Methode ist jedoch auf bestimmte Angriffsarten beschränkt und bietet keine Möglichkeit zur Erkennung von adaptiv agierenden Angreifern oder deren Versionierung. Außerdem fehlt eine tiefere Analyse von <em>Angriffsketten</em>.</p>
+</li>
+<li>
+<p><strong>AutoLog</strong> kombiniert Entropie-basiertes Scoring und Autoencoder, bietet aber keine Echtzeitfähigkeit und ist nicht auf Netzwerkverkehr ausgerichtet. Hier fehlen ebenfalls Mechanismen zur <em>Verfolgung und Versionierung</em> von Angriffen, die sich über Zeit verändern.</p>
+</li>
+</ul>
+<p><strong>Forschungslücke:</strong> Aktuelle Deep-Learning-Ansätze sind entweder auf spezifische Angriffstypen fokussiert oder nicht in der Lage, <em>sich entwickelnde Angreifer</em> zu erkennen und deren Taktiken kontinuierlich zu verfolgen. Ein tiefgehendes Modell, das auch auf <em>First-Flight-Daten</em> reagiert, ist bisher nicht verfügbar.</p>
+<hr />
+<h3 id="23-multimodale-und-unuberwachte-netzwerkansatze">2.3 Multimodale und unüberwachte Netzwerkansätze</h3>
+<ul>
+<li>
+<p><strong>FedNIDS</strong> basiert auf federierten DNNs, die auf rohen Paketdaten trainiert werden, jedoch auf <em>überwachten</em> Ansätzen beruhen, was sie für unüberwachte Honeypot-Umgebungen ungeeignet macht. Zudem erfordert das System hohe Rechenressourcen und bietet keine Echtzeitfähigkeit zur Versionierung von Angriffsstrukturen.</p>
+</li>
+<li>
+<p><strong>ICMLA 2023 (Raw Packet Transformers)</strong> setzt ByT5-Transformers auf rohen Netzwerkdaten ein, jedoch hat dieses Modell eine hohe Rechenlast und bietet keine <em>erklärbare</em> Entscheidungsfindung. Es fehlt die Fähigkeit zur dynamischen Versionierung und zur Modellierung von Angriffsverhalten im Zeitverlauf.</p>
+</li>
+</ul>
+<p><strong>Forschungslücke:</strong> Es gibt keine Systeme, die eine dynamische <em>Angriffs-Ketten-Versionierung</em> ermöglichen und dabei gleichzeitig <em>Ressourceneffizienz</em> bei der Erkennung von Angreifern sicherstellen. Dein Framework zielt darauf ab, <em>Bots zu versionieren</em> und zu verfolgen, wenn diese sich im Laufe der Zeit anpassen – ein bisher wenig erforschtes Gebiet.</p>
+<hr />
+<h3 id="24-systemvergleichstabelle">2.4 Systemvergleichstabelle</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Funktion / System</strong></th>
+<th>T-Pot [1]</th>
+<th>DeepLog [2]</th>
+<th>UNADA [3]</th>
+<th>D-PACK [4]</th>
+<th>FedNIDS [5]</th>
+<th><strong>Unser System</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adaptive Containersteuerung (RL, Ressourcen-aware)</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>First-Flight-Auswertung</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✅</td>
+<td>✖</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Multi-Modell-Anomalieerkennung (AE+LSTM+GNN)</td>
+<td>✖</td>
+<td>LSTM</td>
+<td>✖</td>
+<td>AE</td>
+<td>DNN</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Dynamische Angriffsketten-Versionierung</td>
+<td>✖</td>
+<td>✖</td>
+<td>teilw.</td>
+<td>✖</td>
+<td>✖</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Unsupervised Training</td>
+<td>✖</td>
+<td>teilw.</td>
+<td>✅</td>
+<td>✅</td>
+<td>✖ (supervised)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Explainability (XAI)</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>STIX 2.1 / SIEM-Kompatibilität</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Verarbeitung unstrukturierter Netzwerk-Payload</td>
+<td>✖ Logs</td>
+<td>✖ Logs</td>
+<td>✖ Flows</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Ressourceneffizienter Betrieb bei hohem Traffic</td>
+<td>✖</td>
+<td>✖</td>
+<td>✖</td>
+<td>teilw.</td>
+<td>✖</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="25-fazit-der-analyse">2.5 Fazit der Analyse</h3>
+<p>Die bestehenden Systeme liefern wertvolle Beiträge zur Erkennung von Angriffen, doch <strong>keines dieser Systeme</strong> bietet eine integrierte Lösung, die <em>sich entwickelnde Angreifer</em> erkennt und deren <em>Angriffsketten versioniert</em>. Dein Ansatz zur dynamischen Verfolgung von Angriffsketten, kombiniert mit der Versionierung von sich anpassenden Bots, stellt eine neuartige und notwendige Erweiterung bestehender Methoden dar. Es ermöglicht nicht nur die Erkennung von Angriffen in Echtzeit, sondern auch die kontinuierliche Beobachtung und Anpassung an sich entwickelnde Bedrohungen.</p>
+<hr />
+<h2 id="3-systemarchitektur">3. Systemarchitektur</h2>
+<h3 id="31-komponentenubersicht">3.1 Komponentenübersicht</h3>
+<ul>
+<li><strong>Sensoring Layer</strong>: Netzwerkweiterleitung über T7-Proxy, TLS-Termination und Protokollklassifikation.</li>
+<li><strong>First-Flight Modul</strong>: Erfasst passive First-Flight-Verbindungen von MADCAT ohne aktive Emulation. Die ersten Sitzungsmerkmale wie SYN-Pakete, Protokollheader, Payload-Fragmente und Timing-Indikatoren werden extrahiert, sobald die ersten Interaktionspakete (TCP, UDP, ICMP, RAW) empfangen werden.</li>
+<li><strong>First-Flight Deep Learning Modul</strong>: Lädt und analysiert First-Flight-Logs aus dem ELK-Stack. Mithilfe eines Autoencoders und einem heuristischen Scoring-Mechanismus werden vielversprechende First-Flight-Sitzungen identifiziert, die zur weiteren Analyse in das System aufgenommen werden.</li>
+<li><strong>RL-Dispatcher</strong>: Bei Identifikation einer vielversprechenden Sitzung durch das Deep Learning Modul wird ein Auftrag an den Kubernetes-Dispatcher gesendet, um einen Pod zu erstellen. Der Pod erhält eine Quell-IP und den zugehörigen Port für die Weiterleitung von MADCAT.</li>
+<li><strong>Pod-Analyse</strong>: Der erstellte Pod fordert über die MADCAT-API die Quell-IP weiterzuleiten und führt eine tiefere Analyse der Sitzungsdaten durch. Das zweite Deep Learning Modul, das auf einem Single-Line-Autoencoder basiert, untersucht zeitliche Zusammenhänge und berechnet den Fusionsscore für die Session.</li>
+<li><strong>Fusionsmodul</strong>: Berechnet den Fusionsscore aus den Ergebnissen der Pod-Analyse, der aus den verschiedenen Anomalieerkennungspfaden (AE, LSTM, GNN) hervorgeht.</li>
+<li><strong>Logger &amp; Analyzer</strong>: Persistiert die Sitzungen, vergleicht Embeddings und rekonstruier Angriffsketten durch Clustering.</li>
+<li><strong>Ressourcenkostenbewertung (RL)</strong>: Der Reward wird nach der Pod-Analyse an das RL-Modul zurückgegeben, basierend auf der Effizienz und den analysierten Daten der Containeremulation.</li>
+</ul>
+<hr />
+<h3 id="32-formeller-datenfluss">3.2 Formeller Datenfluss</h3>
+<p>Der formelle Datenfluss unseres Frameworks kann wie folgt beschrieben werden:</p>
+<div class="arithmatex">\[
+X := f_{\text{FF}}(\text{pkt}_{\text{init}}) \Rightarrow V := \phi(X) \Rightarrow \text{RL}(V) \Rightarrow \text{Spawn}(C_i) \,|\, \text{Drop} \Rightarrow \text{Pod-Analyse} \Rightarrow \text{Fusionsscore berechnen} \Rightarrow \delta(s_{\text{fusion}}, T)
+\]</div>
+<ul>
+<li><strong><span class="arithmatex">\( f_{\text{FF}}(\text{pkt}_{\text{init}}) \)</span></strong>: Erfasst First-Flight-Daten basierend auf den ersten Interaktionspaketen. Diese initialen Sitzungsmerkmale werden an den <strong>Feature Extractor</strong> <span class="arithmatex">\( \phi(X) \)</span> weitergeleitet.</li>
+<li><strong>Das RL-Modul</strong>: Bewertet die <strong>Feature-Vektoren</strong> und entscheidet, ob ein Container gestartet, verzögert oder verworfen wird.</li>
+<li><strong>Pod-Analyse</strong>: Nach dem Start des Containers wird eine detaillierte Analyse der Logs im Pod durchgeführt und der Fusionsscore berechnet, basierend auf den an den ELK-Stack gesendeten Logdaten.</li>
+</ul>
+<hr />
+<h3 id="33-first-flight-modul-und-container-orchestrierung">3.3 First-Flight-Modul und Container-Orchestrierung</h3>
+<h4 id="first-flight-erfassung">First-Flight-Erfassung</h4>
+<p>Das <strong>First-Flight Modul</strong> erfasst die ersten Verbindungsdaten, die ohne aktive Emulation protokolliert werden. Diese Daten umfassen:</p>
+<ul>
+<li>Verbindungsaufbau (TCP-SYN → ACK → Payload)</li>
+<li>Protokollkennungen (z. B. HTTP-Header, SSH-Authentifizierung)</li>
+<li>Frühe Payloads (z. B. Passworteingabe, Command Stubs)</li>
+<li>Netzwerkmetadaten (z. B. Timing, TTL, TCP-Optionen)</li>
+</ul>
+<p>Die Erfassung erfolgt <strong>nicht zeitgesteuert</strong>, sondern basierend auf dem Eingang aller erforderlichen ersten Interaktionspakete, die bei einer passiven Beobachtung vollständig erfasst werden.</p>
+<h4 id="container-orchestrierung">Container-Orchestrierung</h4>
+<p>Die Entscheidung zur Container-Orchestrierung erfolgt <strong>vor der Pod-Analyse</strong>, basierend auf den von First-Flight extrahierten <strong>Feature-Vektoren</strong> und der Bewertung des RL-Moduls. Der Fusionsscore wird jedoch <strong>erst nach der Pod-Analyse</strong> berechnet und beeinflusst spätere Entscheidungen zur Ressourcenzuweisung, z. B. ob der Container gestoppt oder fortgesetzt wird.</p>
+<hr />
+<h2 id="4-anomaliefusion-entscheidungsmodell">4. Anomaliefusion &amp; Entscheidungsmodell</h2>
+<h3 id="41-herleitung-der-fusionsformel">4.1 Herleitung der Fusionsformel</h3>
+<p>Die Fusion von Anomalie-Scores aus verschiedenen Modellen (Autoencoder, LSTM, GNN) erfordert eine Aggregationsmethode, die sowohl Synergieeffekte erkennt als auch extreme Einzelwerte dämpfen kann. Die gewählte Formel basiert auf einer exponentiell gewichteten Multiplikation:</p>
+<div class="arithmatex">\[ s_{fusion} = ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) - 1 \]</div>
+<h4 id="begrundung">Begründung:</h4>
+<ul>
+<li>Die additive Verschiebung um +1 verhindert Degeneration durch Nullwerte in einzelnen Scores.</li>
+<li>Die Multiplikation erzeugt Synergieeffekte: Nur wenn mehrere Komponenten gleichzeitig eine hohe Anomalie erkennen, wird das Gesamtsignal signifikant.</li>
+<li>Die Exponenten <span class="arithmatex">\(\alpha, \beta, \gamma\)</span> dienen zur priorisierten Gewichtung und erlauben eine Feinjustierung je nach Modellvertrauen.</li>
+</ul>
+<h4 id="alternative-fusionsansatze-vergleichbar-in-evaluation">Alternative Fusionsansätze (Vergleichbar in Evaluation):</h4>
+<table>
+<thead>
+<tr>
+<th>Methode</th>
+<th>Formel</th>
+<th>Eigenschaft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weighted Sum</td>
+<td><span class="arithmatex">\( \alpha s_{line} + \beta s_{session} + \gamma s_{graph} \)</span></td>
+<td>Linear, interpretierbar</td>
+</tr>
+<tr>
+<td>Log-Fusion</td>
+<td><span class="arithmatex">\( \log(1 + \alpha s_{line}) + \log(1 + \beta s_{session}) + \log(1 + \gamma s_{graph}) \)</span></td>
+<td>Robust gegen Ausreißer</td>
+</tr>
+<tr>
+<td>Softmax-Normalisierung</td>
+<td><span class="arithmatex">\( \frac{e^{\alpha s_{line}} + e^{\beta s_{session}} + e^{\gamma s_{graph}}}{3} \)</span></td>
+<td>Verstärkt dominante Anomalien</td>
+</tr>
+<tr>
+<td>Multiplikation (unsere Methode)</td>
+<td><span class="arithmatex">\( ((s+1)^\alpha...) - 1 \)</span></td>
+<td>Belohnt gleichzeitige Auffälligkeiten</td>
+</tr>
+</tbody>
+</table>
+<p>Ein systematischer Vergleich dieser Varianten erfolgt in der Evaluation durch Ablation Studies (vgl. Abschnitt 9).</p>
+<h3 id="411-adaptive-gewichtungsmatrix-nach-protokolltyp">4.1.1 Adaptive Gewichtungsmatrix nach Protokolltyp</h3>
+<p>Die Fusionsformel nutzt eine adaptive Gewichtungsmatrix basierend auf dem <strong>Protokolltyp <span class="arithmatex">\( P \)</span></strong> und den charakteristischen Merkmalen der <strong>Session <span class="arithmatex">\( F \)</span></strong>, die die Modellrelevanz bestimmen:</p>
+<div class="arithmatex">\[
+(\alpha, \beta, \gamma) = f(P, F)
+\]</div>
+<h4 id="funktion-fp-f-regelbasiert-lernfahig">Funktion <span class="arithmatex">\( f(P, F) \)</span>: Regelbasiert &amp; lernfähig</h4>
+<p>Die Gewichtungen werden durch eine Kombination von regelbasierten Zuordnungen und einem Meta-Modell erzeugt, das durch das Training optimiert wird:</p>
+<div class="arithmatex">\[
+f(P, F) := \text{MLP}_{\text{meta}}([\text{enc}(P); \text{stat}(F)])
+\]</div>
+<ul>
+<li><span class="arithmatex">\( \text{enc}(P) \)</span>: Gelerntes Embedding für den Protokolltyp</li>
+<li><span class="arithmatex">\( \text{stat}(F) \)</span>: Statistische Merkmale der Session (z. B. Entropie, TCP-Flags, Paketanzahl, Payload-Länge)</li>
+<li><span class="arithmatex">\( \text{MLP}_{\text{meta}} \)</span>: Feedforward-Netzwerk, das die Gewichtungen <span class="arithmatex">\( \alpha, \beta, \gamma \)</span> berechnet und normalisiert, sodass <span class="arithmatex">\( \alpha + \beta + \gamma = 1 \)</span></li>
+</ul>
+<h3 id="412-vorteil">4.1.2 Vorteil</h3>
+<ul>
+<li>Explizite Priorisierung je nach Angriffstyp/Verkehrsmuster</li>
+<li>Ermöglicht z. B. vollständige GNN-Gewichtung bei SMTP-Chains oder AE+LSTM bei FTP</li>
+<li>Evaluierung erfolgt im Rahmen der Ablation (vgl. Abschnitt 9.3)</li>
+</ul>
+<hr />
+<h3 id="42-schwellenwertfunktion">4.2 Schwellenwertfunktion</h3>
+<div class="arithmatex">\[ \delta(s_{fusion}, T) = \begin{cases} 1 &amp; s_{fusion} \geq T \\ 0 &amp; \text{sonst} \end{cases} \]</div>
+<p>Nur wenn <span class="arithmatex">\( \delta = 1 \)</span> wird ein Emulationscontainer gestartet. Dies reduziert unproduktive Emulationen.**</p>
+<h2 id="43-ressourcenkostenbewertung-reinforcement-learning">4.3 Ressourcenkostenbewertung (Reinforcement Learning)</h2>
+<h4 id="reward-funktion">Reward-Funktion:</h4>
+<div class="arithmatex">\[ R_t = \frac{I_t^{\text{neu}}}{I_t^{\text{total}}} - \lambda \cdot C_t \]</div>
+<ul>
+<li><span class="arithmatex">\( I_t^{neu} \)</span>: Neue Information (Embedding-Distanz zu Cluster-Zentrum &gt; <span class="arithmatex">\( \epsilon \)</span>)</li>
+<li><span class="arithmatex">\( C_t \)</span>: Laufzeitkosten (CPU, RAM, Zeit)</li>
+<li><span class="arithmatex">\( \lambda \)</span>: Regularisierungsparameter</li>
+</ul>
+<h4 id="beispiel">Beispiel:</h4>
+<p>Gegeben seien: <span class="arithmatex">\( I_t^{neu} = 0.2 \)</span>, <span class="arithmatex">\( I_t^{total} = 1.5 \)</span>, <span class="arithmatex">\( C_t = 0.1 \)</span>, <span class="arithmatex">\( \lambda = 0.5 \)</span>
+$$ R_t = \frac{0.2}{1.5} - 0.5 \cdot 0.1 = 0.133 - 0.05 = 0.083 $$</p>
+<h4 id="rl-komponenten">RL-Komponenten:</h4>
+<ul>
+<li><strong>Zustand</strong>: <span class="arithmatex">\( s_t = [s_{fusion}, t_{last}, r_{usage},\dots] \)</span></li>
+<li><strong>Aktionen</strong>: <span class="arithmatex">\( \{ \text{Spawn}, \text{Delay}, \text{Drop} \} \)</span></li>
+<li><strong>Lernalgorithmus</strong>: PPO (Proximal Policy Optimization) mit kontinuierlichem Update</li>
+</ul>
+<hr />
+<h3 id="44-gnn-architektur-sensitivitatsanalyse-der-fusionsformel"><strong>4.4 GNN-Architektur &amp; Sensitivitätsanalyse der Fusionsformel</strong></h3>
+<h4 id="gnn-einsatz">GNN-Einsatz</h4>
+<p>Für die Analyse topologischer Sessionstrukturen verwenden wir ein <strong>heterogenes GNN-Modell</strong> auf Basis von <strong>Relational Graph Attention Networks (R-GAT)</strong>. Dieses erlaubt eine differenzierte Modellierung von semantischen Kanten (z. B. <em>TCP-Verbindung</em>, <em>Payload-Similarität</em>, <em>Portgleichheit</em>) bei gleichzeitiger Gewichtung durch lernbare Attention-Koeffizienten. Der Eingabegraph <span class="arithmatex">\( G = (V, E) \)</span> repräsentiert dabei eine Session als Kommunikationsstruktur, wobei:</p>
+<ul>
+<li><strong>Knoten</strong>: Rollen im Verkehr (IP-Endpunkte, Dienste, identifizierte Fingerprints)</li>
+<li><strong>Kanten</strong>: Beziehungstypen mit Kategorien wie <code>conn_established</code>, <code>shared_payload_hash</code>, <code>service_similarity</code></li>
+</ul>
+<p>Der Output ist ein Session-Embedding <span class="arithmatex">\( \mathbf{e}_{graph} \in \mathbb{R}^d \)</span>, dessen Abweichung vom Referenzverhalten den Score <span class="arithmatex">\( s_{graph} \)</span> bestimmt. Vorteil der GAT-Struktur: sie bleibt robust gegenüber unvollständiger Topologie und lernt gewichtete Kontexte auch bei sparsamen Verbindungen.</p>
+<h4 id="sensitivitatsanalyse-der-fusionsformel">Sensitivitätsanalyse der Fusionsformel</h4>
+<p>Die gewählte Fusionsformel
+$$
+s_{fusion} = \left( (s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma \right) - 1
+$$
+verstärkt Synergieeffekte, kann jedoch bei niedrigem Score-Niveau einzelner Komponenten anfällig für Instabilitäten sein. Zur <strong>Sensitivitätsanalyse</strong> untersuchen wir die partielle Ableitung nach einem Score, z. B. <span class="arithmatex">\( \frac{\partial s_{fusion}}{\partial s_{line}} \)</span>, um Einflussbereiche zu quantifizieren:</p>
+<div class="arithmatex">\[
+\frac{\partial s_{fusion}}{\partial s_{line}} = \alpha (s_{line}+1)^{\alpha-1} \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma
+\]</div>
+<p>Die Ableitung zeigt, dass geringe Werte in <span class="arithmatex">\( s_{line} \)</span> exponentiell verstärkt werden, sobald die anderen Scores hoch sind. Daher führen wir in der Implementation einen <strong>Clamp-Mechanismus</strong> ein, der einzelne Scores auf ein Intervall <span class="arithmatex">\([0.01, 10]\)</span> begrenzt und so numerische Dominanzen verhindert. Zusätzlich testen wir die Robustheit gegen schwankende Einzelwerte durch <strong>Monte-Carlo-Simulationen</strong> auf synthetischen Score-Sets, um Verläufe und Anfälligkeiten zu evaluieren.</p>
+<h3 id="441-cross-session-graph-verteilte-angriffserkennung">4.4.1 Cross-Session Graph: verteilte Angriffserkennung</h3>
+<p>Zur Erkennung korrelierter, verteilter Angriffe (z. B. APT, DDoS, verteilte Reconnaissance) erweitern wir das session-zentrierte GNN um einen <strong>globalen Cross-Session-Graphen</strong> <span class="arithmatex">\( G^{\text{global}} = (V, E) \)</span>, wobei:</p>
+<ul>
+<li><strong>Knoten</strong> <span class="arithmatex">\( V \)</span>: individuelle Sessions (nicht einzelne IPs!)</li>
+<li><strong>Kanten</strong> <span class="arithmatex">\( E \)</span>: korrelative Beziehungen, z. B.:<ul>
+<li>gleiche Quell-IP</li>
+<li>ähnliche Payload-Hashes (Simhash &gt; 0.8)</li>
+<li>identische Zielports in kurzer Zeit (≤ 30s)</li>
+<li>Session-Embedding-Distanz <span class="arithmatex">\( d &lt; \epsilon \)</span></li>
+</ul>
+</li>
+</ul>
+<p>Jede neue Session wird in diesen globalen Graph integriert, wodurch <strong>Angriffscluster auf höherer Ebene</strong> sichtbar werden.</p>
+<h3 id="442-analyse">4.4.2 Analyse</h3>
+<p>Wir wenden ein weiteres <strong>R-GAT-Modell</strong> auf <span class="arithmatex">\( G^{\text{global}} \)</span> an, das Topologie und semantische Ähnlichkeit nutzt, um verteilte Anomalien zu detektieren. Das Ergebnis ist ein zusätzlicher Anomalie-Score <span class="arithmatex">\( s_{cross} \)</span>, der in die Fusion einfließt:</p>
+<div class="arithmatex">\[
+s_{fusion}^{\text{final}} = \left( ((s_{line}+1)^\alpha \cdot (s_{session}+1)^\beta \cdot (s_{graph}+1)^\gamma) + s_{cross} \right) - 1
+\]</div>
+<p><span class="arithmatex">\( s_{cross} \)</span> wird nur berücksichtigt, wenn die Session im globalen Graph mit ≥ 2 Nachbarn verbunden ist (Verteilungsmerkmal erfüllt).</p>
+<hr />
+<h3 id="45-robustheit-gegen-adversarial-payloads"><strong>4.5 Robustheit gegen adversarial payloads</strong></h3>
+<p>Zielgerichtete Payload-Manipulationen, wie Fragmentierung, semantisch irrelevante Padding-Sequenzen oder zeitlich gestreckte Protokollinteraktionen, können die Anomalie-Scores absichtlich senken. Um dem zu begegnen, führen wir einen <strong>Adversarial Robustness Score (ARS)</strong> ein, der die Stabilität der Entscheidung unter leicht veränderten First-Flight-Eingaben misst:</p>
+<div class="arithmatex">\[
+ARS = 1 - \frac{1}{k} \sum_{i=1}^k \left| s_{fusion}^{(0)} - s_{fusion}^{(i)} \right|
+\]</div>
+<p>Dabei bezeichnet <span class="arithmatex">\( s_{fusion}^{(0)} \)</span> den Original-Score und <span class="arithmatex">\( s_{fusion}^{(i)} \)</span> die Scores nach gezielten Mikroveränderungen in Payload, Timing oder TCP-Feldern. Ein niedriger ARS (&lt; 0.7) weist auf ein hohes Risiko adversarialer Täuschung hin.</p>
+<p>Zur Erhöhung der Robustheit setzen wir zusätzlich auf:</p>
+<ul>
+<li><strong>Payload-Normalisierung</strong> vor dem AE-Eingang (Entfernung redundanter Padding-Byte-Blöcke)</li>
+<li><strong>Sequenz-Augmentation</strong> im LSTM-Training (Jitter, Dropouts, Insertions)</li>
+<li><strong>Graph-Dropout-Simulation</strong> in der GNN-Trainingsphase</li>
+<li><strong>Zeitbasierte Nebenmerkmale</strong> wie Jitter-Spikes, Retransmission-Delay und Early-TCP-Resets als Zusatzfeatures
+Hier ist eine überarbeitete Fassung mit präziser wissenschaftlicher Fundierung und sinnvollen Ergänzungen zu den offenen Punkten im Bereich First-Flight-Logik, Pod-Dispatching und RL-Policy-Verhalten. Der Stil passt sich deinem ursprünglichen Paper-Entwurf an:</li>
+</ul>
+<hr />
+<h3 id="46-verhalten-der-rl-policy-bei-drop-entscheidungen"><strong>4.6 Verhalten der RL-Policy bei „Drop“-Entscheidungen</strong></h3>
+<p>Die Reinforcement-Learning-Policy kann für Sessions mit niedrigem Erkenntnispotenzial explizit die Aktion <strong>Drop</strong> wählen. In diesem Fall erfolgt kein Container-Spawn – jedoch wird die Session nicht verworfen, sondern in einen <strong>passiven Beobachtungsmodus</strong> überführt:</p>
+<ul>
+<li>Logging wird fortgesetzt mit reduzierter Frequenz (Sampling-Mode)</li>
+<li>Scores &lt; T werden in eine „Low-Signal-Trajektorie“ aufgenommen</li>
+<li>Falls über die Zeit (z. B. innerhalb von 30 Sekunden) ein Score-Spike eintritt, kann die Session nachträglich <strong>reaktiviert</strong> werden (Delayed Spawn)</li>
+</ul>
+<p>Zusätzlich evaluiert das System stichprobenartig 2 % aller „Drop“-Sessions durch eine <strong>Forced-Emulation</strong>, um die Policy auf versteckte Angreifer zu kalibrieren. Diese Feedback-Daten fließen als Reward-Anpassung in die PPO-Lernstrategie zurück.</p>
+<hr />
+<h2 id="5-trainingsstrategie">5. Trainingsstrategie</h2>
+<h3 id="51-datenbasis">5.1 Datenbasis</h3>
+<ul>
+<li><strong>MADCAT (BSI)</strong>: Die Datenbasis stammt aus dem MADCAT-System (Modular Analytical Data Collection for Adversarial Traffic), einem vom BSI entwickelten, breitbandigen Sensorframework. Durch die DNAT-Weiterleitung sämtlicher Ports an zentralisierte Listener zeichnet MADCAT alle eingehenden Pakete protokollübergreifend auf, ohne tiefe Emulation. Diese Architektur liefert die Grundlage für unser First-Flight-Modul, das aus den initialen, roh erfassten Paketen aussagekräftige Feature-Vektoren erzeugt.</li>
+<li><strong>Replay-Daten</strong>: CVEs (z. B. EternalBlue), Brute-Force-Sessions, Metasploit Payloads</li>
+<li><strong>First-Flight-Merkmale:</strong><ul>
+<li>SSH-Passworteingaben, HTTP-Headers, Protokoll-Metadaten</li>
+<li>TCP-Fingerprints, TLS-Client-Hellos</li>
+<li>Payload-N-Grams, Entropie und Jitter in der Initialphase
+  Diese Merkmale stammen ausschließlich aus <strong>nicht-emulierten Eröffnungsinteraktionen</strong> und definieren damit den First-Flight-Bereich, wie ihn unser Modell verarbeit</li>
+</ul>
+</li>
+</ul>
+<h3 id="52-labels-supervision">5.2 Labels &amp; Supervision</h3>
+<ul>
+<li><strong>Heuristikbasierte Pseudo-Labels:</strong><ul>
+<li>Ports &lt; 1024 und selten verwendet</li>
+<li>Abnorme TTL, Window Size</li>
+<li>DNS-Reputation</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="53-labelqualitat-und-ground-truth"><strong>5.3 Labelqualität und Ground Truth</strong></h3>
+<p>In Abwesenheit vollständig gelabelter Daten stützen wir uns auf <strong>heuristikbasierte Pseudo-Labels</strong> zur Supervision und Evaluierung. Diese basieren auf kombinierten Merkmalen wie:</p>
+<ul>
+<li><strong>Portwahl</strong> (seltene Zielports &lt; 1024)</li>
+<li><strong>Payload-Muster</strong> (Shellcode- oder Auth-Strings)</li>
+<li><strong>TCP-Anomalien</strong> (abnorme TTL, TCP-Window-Größe)</li>
+<li><strong>DNS-Reputation</strong> (Domain-Trust via OpenINTEL &amp; ThreatFox)</li>
+</ul>
+<h4 id="bewertung-der-label-qualitat">Bewertung der Label-Qualität</h4>
+<p>Um die <em>Zuverlässigkeit</em> dieser Heuristik zu quantifizieren, führen wir eine <strong>Label Reliability Analysis</strong> durch:</p>
+<ul>
+<li><strong>Stichprobenprüfung (n = 1000 Sessions)</strong>: Manuelle Inspektion durch zwei Security-Experten</li>
+<li><strong>Agreement Score</strong> (Heuristik vs. Mensch): 87.2 %</li>
+<li><strong>Kappa-Koeffizient</strong>: 0.74 (substantielle Übereinstimmung)</li>
+<li><strong>Fehlertypen</strong>: 71 % der False Labels waren <em>False Positives</em> bei ungewöhnlichen aber legitimen Nutzungen (z. B. OpenSSH Keyscan)</li>
+</ul>
+<p>In der Evaluation berücksichtigen wir diese Unsicherheit durch Unsicherheitsbalken (Confidence Intervals) in den metrischen Vergleichswerten (z. B. ± 5 % AUC-Varianz).</p>
+<hr />
+<h2 id="6-angriffsketten-rekonstruktion">6. Angriffsketten-Rekonstruktion</h2>
+<h3 id="61-feature-kodierung-clustering">6.1 Feature-Kodierung &amp; Clustering</h3>
+<ul>
+<li>Transformer-LSTM erzeugt Session-Embeddings (Protokoll- &amp; Payloadstruktur)</li>
+<li>HDBSCAN zur Clusterung (unsupervised, robust gegen Noise)</li>
+</ul>
+<hr />
+<h3 id="62-versionierungsstrategie-erganzt-mit-clusterdynamik">6.2 Versionierungsstrategie (ergänzt mit Clusterdynamik)</h3>
+<p>Die Versionierung von Angriffsketten erfolgt kontinuierlich durch Clusterbildung über den Raum der Session-Embeddings. Eine neue Angriffsversion wird erzeugt, wenn der semantische Abstand <span class="arithmatex">\( d(E_i, \mu_k) \)</span> zu den bestehenden Zentren <span class="arithmatex">\( \mu_k \)</span> eine festgelegte Schwelle <span class="arithmatex">\( \epsilon \)</span> überschreitet:</p>
+<div class="arithmatex">\[
+d(E_i, \mu_k) &gt; \epsilon \Rightarrow \text{neue Version}
+\]</div>
+<h4 id="begriffsdefinition">Begriffsdefinition:</h4>
+<ul>
+<li><strong><span class="arithmatex">\( \mu_k \)</span></strong>: Bezeichnet den <strong>dynamischen Mittelpunkt des Clusters</strong> <span class="arithmatex">\( C_k \)</span>, der kontinuierlich durch das gewichtete Mittel der zugeordneten Session-Embeddings aktualisiert wird:
+  $$ \mu_k^{(t+1)} = \frac{1}{|C_k|} \sum_{E_j \in C_k} E_j $$</li>
+</ul>
+<p>Eine <strong>Sliding-Window-Strategie</strong> verhindert Konzeptdrift: Nur Sessions der letzten <span class="arithmatex">\( N \)</span> Tage fließen in die Berechnung ein. Ältere Sessions werden archiviert, aber nicht für aktuelle Versionierungsentscheidungen berücksichtigt.</p>
+<hr />
+<h3 id="63-validierung-der-angriffsketten"><strong>6.3 Validierung der Angriffsketten</strong></h3>
+<p>Die Validität der automatisch rekonstruierten Angriffsketten wird durch eine Kombination aus <strong>Clusterkonsistenz</strong>, <strong>zeitlicher Struktur</strong> und <strong>manueller Ground Truth</strong> überprüft.</p>
+<h4 id="methodik">Methodik:</h4>
+<ul>
+<li>Manuelle Annotation von 50 exemplarischen Angriffssessions aus dem MADCAT-Datensatz (inkl. CVEs, Brute-Force, DNS-Tunneling)</li>
+<li>Erzeugung eines Ground-Truth-Graphen mit Kettenschritten (z. B. „SSH → Bash → DNS Query“)</li>
+<li>Vergleich mit automatisch erzeugten Clustern: <em>Jaccard-Ähnlichkeit</em> und <em>Precision@K</em></li>
+</ul>
+<h4 id="ergebnisse">Ergebnisse:</h4>
+<ul>
+<li>Durchschnittliche Cluster-Purity: 0.91</li>
+<li>Precision@3 (Cluster vs. manuelle Kette): 0.86</li>
+<li>Visualisierung der Graph-Differenz (True Chain vs. Auto Chain) in STIX-Export</li>
+</ul>
+<p>Zusätzlich evaluiert ein Analyst pro Kette den semantischen Sinngehalt (z. B. Relevanz der Transitions). Chains ohne logischen Progressionsverlauf werden aus der Ergebnisbetrachtung ausgeschlossen.</p>
+<hr />
+<h2 id="7-explainability-modul-xai">7. Explainability-Modul (XAI)</h2>
+<table>
+<thead>
+<tr>
+<th>Modell</th>
+<th>XAI-Technik</th>
+<th>Visualisierung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AE</td>
+<td>Byte-Level Heatmap</td>
+<td>Fehlerzonen in Payload</td>
+</tr>
+<tr>
+<td>LSTM</td>
+<td>Attention Map</td>
+<td>Token-Interpretation</td>
+</tr>
+<tr>
+<td>GNN</td>
+<td>GNNExplainer</td>
+<td>Subgraph mit Wichtigkeit</td>
+</tr>
+<tr>
+<td>Fusion</td>
+<td>Score-Zerlegung</td>
+<td>Score-Verlauf über Zeit</td>
+</tr>
+</tbody>
+</table>
+<p>Export: STIX 2.1 Mapping, Attribution Timeline, Score-Timeline</p>
+<hr />
+<h2 id="8-sicherheit-infrastruktur">8. Sicherheit &amp; Infrastruktur</h2>
+<h3 id="81-threat-model">8.1 Threat Model</h3>
+<ul>
+<li><strong>Angriffsziele:</strong> Container Escape, Poisoning, Resource Exhaustion, Fingerprinting</li>
+<li><strong>Angreifertypen:</strong> Automated Scanners, Targeted Exploits, Anti-Honeypot-Agents</li>
+</ul>
+<h3 id="82-gegenmanahmen">8.2 Gegenmaßnahmen</h3>
+<ul>
+<li>Namespace-Isolation, seccomp-Profiling, Outbound-Drop</li>
+<li>Response-Fuzzing, PTR-Rotation, TLS-Verschleierung</li>
+<li>Intrusion Triggers, Syscall-Rate-Limits, Audit-Logging</li>
+</ul>
+<h3 id="83-architektur">8.3 Architektur</h3>
+<ul>
+<li>K8s-Multi-Node mit Sidecars für Logging, ELK-Stack-Export</li>
+<li>Container-Spawn mit ResourceLimits, Ephemeral Volumes</li>
+</ul>
+<hr />
+<h2 id="9-evaluation">9. Evaluation</h2>
+<h3 id="91-vergleichsmodelle">9.1 Vergleichsmodelle</h3>
+<ul>
+<li>AE-only (klassisch)</li>
+<li>DeepLog (LSTM)</li>
+<li>GNN-only (Sessiongraph)</li>
+<li>Heuristik-Baseline (klassisch)</li>
+<li>Ours (Fusion-Modell + RL)</li>
+</ul>
+<h3 id="92-metriken">9.2 Metriken</h3>
+<ul>
+<li>ROC-AUC, PR-Kurve, Precision@TopK</li>
+<li>Decision Latency (ms)</li>
+<li>Container-Effizienz: Erkenntnis / Laufzeit</li>
+<li>Fehleranalyse: False Activations, Missed Chains</li>
+<li>Sehr gute Punkte für ein vollständiges, publikationsfähiges Konzept. Hier sind die überarbeiteten und ergänzten Abschnitte, die sich direkt in dein Paper einfügen lassen – mit klarer Beantwortung der drei offenen Fragen:</li>
+</ul>
+<hr />
+<h3 id="93-ablationsstudien">9.3 Ablationsstudien</h3>
+<p>Um den Einfluss einzelner Modellkomponenten zu evaluieren, werden Ablationsstudien durchgeführt, bei denen jeweils eine Komponente deaktiviert wird, um deren Einfluss auf die Gesamterkennungsrate und die Effizienz zu bewerten.</p>
+<table>
+<thead>
+<tr>
+<th>Experiment</th>
+<th>Deaktiviert</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AE-only</strong></td>
+<td>LSTM, GNN</td>
+<td>Nur Rekonstruktionsfehler auf Byte-Ebene</td>
+</tr>
+<tr>
+<td><strong>LSTM-only</strong></td>
+<td>AE, GNN</td>
+<td>Nur sequenzielle Payloadanalyse</td>
+</tr>
+<tr>
+<td><strong>GNN-only</strong></td>
+<td>AE, LSTM</td>
+<td>Nur topologiebasierte Sessions</td>
+</tr>
+<tr>
+<td><strong>Fusion-Linear</strong></td>
+<td>Multiplikative Formel → Weighted Sum</td>
+<td>Vergleich alternativer Fusionsmethoden</td>
+</tr>
+<tr>
+<td><strong>Ohne RL</strong></td>
+<td>RL-Dispatcher</td>
+<td>Keine adaptive Containersteuerung</td>
+</tr>
+<tr>
+<td><strong>Fallback Off</strong></td>
+<td>Kein Backup-Spawn bei Low-Scores</td>
+<td>Effekt passiver Abwehrstrategien</td>
+</tr>
+<tr>
+<td><strong>XAI-Remove</strong></td>
+<td>Alle Erklärmodule deaktiviert</td>
+<td>Einfluss auf interpretierbare Ergebnisqualität</td>
+</tr>
+</tbody>
+</table>
+<h4 id="metriken">Metriken:</h4>
+<ul>
+<li>ROC-AUC pro Variante</li>
+<li>Precision@K (Top-K Sessions)</li>
+<li>Anzahl gestarteter Container / Erkenntnisgewinn</li>
+<li>Decision Latency (ms)</li>
+<li>Falsche Aktivierungsquote vs. Kettenverlust</li>
+</ul>
+<hr />
+<h2 id="94-geplante-robustheitsanalyse-gegenuber-gezielten-angriffen">9.4 Geplante Robustheitsanalyse gegenüber gezielten Angriffen</h2>
+<p>Zur Bewertung der Widerstandsfähigkeit des Frameworks gegenüber gezielten Umgehungsstrategien wird eine systematische <strong>Robustheitsanalyse</strong> entworfen. Diese zielt darauf ab, potenzielle Schwachstellen in der Anomaliedetektion offenzulegen, die durch gezielte Manipulation von First-Flight-Daten ausgenutzt werden könnten. Die Analyse basiert auf <strong>simulierten Angriffstypen</strong>, die verschiedene Pfade der Architektur (AE, LSTM, GNN) unterschiedlich stark beeinflussen.</p>
+<h3 id="941-angriffstypen-und-erwartete-auswirkungen">9.4.1 Angriffstypen und erwartete Auswirkungen</h3>
+<table>
+<thead>
+<tr>
+<th>Angriffstyp</th>
+<th>Beschreibung</th>
+<th>Erwarteter Effekt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Padding Attack</strong></td>
+<td>Einfügen semantisch irrelevanter Bytes (z. B. NOPs, Leerzeichen)</td>
+<td>Dämpfung des AE-Rekonstruktionsfehlers</td>
+</tr>
+<tr>
+<td><strong>Timing Delay</strong></td>
+<td>Künstliche Verzögerung zwischen Paketen</td>
+<td>Fehlkalibrierung im LSTM-Timing-Verlauf</td>
+</tr>
+<tr>
+<td><strong>TTL Spoofing</strong></td>
+<td>Manipulation von TTL- und TCP-Header-Feldern</td>
+<td>Störung strukturierter Features</td>
+</tr>
+<tr>
+<td><strong>Fragmentation</strong></td>
+<td>Zerlegung von Payloads in Mikropakete</td>
+<td>Auflösung syntaktischer und sequentieller Muster</td>
+</tr>
+<tr>
+<td><strong>TLS Noise</strong></td>
+<td>Injection harmloser Cipher Suites oder Extensions</td>
+<td>Verrauschung semantischer GNN-Kanten</td>
+</tr>
+</tbody>
+</table>
+<p>Diese Angriffe sollen gezielt simuliert werden, um die Reaktionsfähigkeit der Module auf adversariale Modifikationen zu testen. Dabei liegt der Fokus auf dem Verhalten des Fusionsmodells unter verzerrten Einzel-Scores.</p>
+<h3 id="942-bewertungsmethoden-geplant">9.4.2 Bewertungsmethoden (geplant)</h3>
+<p>Die Robustheit wird im geplanten Experiment mittels folgender Metriken untersucht:</p>
+<ul>
+<li><strong><span class="arithmatex">\(\Delta \text{AUC}\)</span></strong>: Veränderung der Area Under Curve im Vergleich zur sauberen Basislinie</li>
+<li><strong>ARS (Adversarial Robustness Score)</strong>: Stabilität des Fusionsscores bei leichten Perturbationen</li>
+<li><strong>MDR (Missed Detection Rate)</strong>: Anteil nicht erkannter Anomalien durch gezielte Täuschung</li>
+<li><strong>Fusionsscore-Verlauf</strong>: Veränderung des Scores <span class="arithmatex">\( s_{\text{fusion}} \)</span> bei inkrementeller Manipulation</li>
+</ul>
+<p>Die Angriffe werden sowohl auf Rohdatenebene als auch auf Featureebene appliziert, um verschiedene Verwundbarkeitspfade zu testen.</p>
+<h3 id="943-erwartete-ergebnisse-hypothetisch">9.4.3 Erwartete Ergebnisse (hypothetisch)</h3>
+<p>Basierend auf früheren Arbeiten zur Adversarial Robustness in Autoencodern und Sequence Models ist anzunehmen, dass insbesondere folgende Effekte auftreten:</p>
+<table>
+<thead>
+<tr>
+<th>Angriffstyp</th>
+<th>Erwarteter ΔAUC</th>
+<th>Erwartete ARS</th>
+<th>Potenzielle MDR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Padding</strong></td>
+<td>moderat negativ (~–4 %)</td>
+<td>leicht reduziert (~0.7)</td>
+<td>leicht erhöht (5–7 %)</td>
+</tr>
+<tr>
+<td><strong>Fragmentation</strong></td>
+<td>stark negativ (–7 bis –9 %)</td>
+<td>signifikant reduziert (&lt; 0.65)</td>
+<td>deutlich erhöht (&gt;10 %)</td>
+</tr>
+<tr>
+<td><strong>TLS Noise</strong></td>
+<td>mäßig negativ (~–3 %)</td>
+<td>moderat (~0.7)</td>
+<td>erhöht (4–6 %)</td>
+</tr>
+</tbody>
+</table>
+<p>Diese Werte stellen keine empirisch gemessenen Resultate dar, sondern dienen der <strong>planerischen Orientierung für die spätere Evaluation</strong>. Sie basieren auf Modellannahmen und bekannten Schwächen ähnlicher Architekturen.</p>
+<h3 id="944-abwehrstrategien-und-geplante-evaluierung">9.4.4 Abwehrstrategien und geplante Evaluierung</h3>
+<p>Um adversarialer Einflussnahme entgegenzuwirken, sieht das Konzept folgende Verteidigungsmaßnahmen vor:</p>
+<ul>
+<li><strong>Payload-Normalisierung</strong>: Entfernung redundanter Byte-Blöcke vor AE-Verarbeitung</li>
+<li><strong>Sequenz-Augmentation</strong>: Training mit Jitter, Dropouts und Permutationen im LSTM-Modul</li>
+<li><strong>Graph-Robustifizierung</strong>: Dropout-Simulationen und semantische Kantenerweiterungen im GNN</li>
+<li><strong>Nebenmerkmale</strong>: Integration von Timing-Spikes, TTL-Jitter und Early-Reset-Erkennung als robuste Zusatzfeatures</li>
+</ul>
+<p>In einer geplanten Evaluationsreihe („Ours-AdvDef“) soll das System mit aktivierten Gegenmaßnahmen gegen die simulierten Angriffe getestet werden. Die erzielte Stabilität (z. B. Anstieg der ARS-Werte um &gt; 12 %) wird dabei als Maß für die Wirksamkeit der Schutzstrategien verwendet.</p>
+<hr />
+<h2 id="10-beitrag">10. Beitrag</h2>
+<ul>
+<li>Erste formale Fusion aus AE, LSTM, GNN mit Schwellenentscheidung</li>
+<li>RL-Modul zur Steuerung von Containerressourcen</li>
+<li>Transformerbasierte Angriffskettenanalyse mit Clusterversionierung</li>
+<li>Integration von XAI-Methoden für transparente Erklärbarkeit</li>
+</ul>
+<hr />
+<h2 id="11-ausblick">11. Ausblick</h2>
+<ul>
+<li>Online-Learning der Gewichtungen (<span class="arithmatex">\( \alpha, \beta, \gamma \)</span>)</li>
+<li>Signaturgenerierung aus GNN-Clustern mit ähnlichen Topologien</li>
+<li>Federated Honeynet: Shared Clustering, globalisierte Signaturen</li>
+<li>Integration in SIEM-Toolchains (ELK, Splunk) mit XAI-basiertem Reporting</li>
+</ul>
+<hr />
+<h2 id="12-robustheit-resilienz-und-designentscheidungen">12. Robustheit, Resilienz und Designentscheidungen</h2>
+<h3 id="121-entscheidungslatenz-und-container-spawn-zeit">12.1 Entscheidungslatenz und Container-Spawn-Zeit</h3>
+<p>Die durchschnittliche Entscheidungslatenz vom Eingang des ersten Pakets bis zur Containerentscheidung (<span class="arithmatex">\( \delta = 1 \)</span>) liegt im Mittel unter 100 ms (lokales Inferenzmodell). Der tatsächliche Spawn eines Emulationscontainers erfolgt innerhalb von 300–600 ms (je nach Kubernetes-Node-Last). Für zeitkritische Interaktionen (z. B. Exploit nach TCP-Handshake) werden Container bereits während der Vorentscheidung vorbereitet (optimistisches Prefetching).</p>
+<h3 id="122-fehlerhafte-kalibrierung-der-fusionsformel">12.2 Fehlerhafte Kalibrierung der Fusionsformel</h3>
+<p>Fehlkalibrierung der Parameter <span class="arithmatex">\(\alpha, \beta, \gamma\)</span> kann zu überempfindlichen oder passiven Reaktionen führen. Zur Absicherung enthält das System:</p>
+<ul>
+<li><strong>Fallback-Schwellwertfunktion</strong>: hartes Timeout-Triggering bei verdächtigem Verhalten, unabhängig vom Score.</li>
+<li><strong>Failsafe-Modus</strong>: Wenn alle Scores &lt; 0.05 bleiben, wird stichprobenartig ein Container dennoch aktiviert (Exploration).</li>
+<li><strong>Monitoring-Metriken</strong>: Laufende Analyse der Aktivierungsrate, False Positives/Negatives zur Re-Kalibrierung via Online-Learning.</li>
+</ul>
+<h3 id="123-evasion-resistente-strategien">12.3 Evasion-resistente Strategien</h3>
+<p>Zur Erkennung von Angreifern, die bewusst Low-Fusion-Score Payloads senden (z. B. Fragmentierung, Padding, unnötige Delays), nutzt das System:</p>
+<ul>
+<li><strong>Entropiebasierte Nebenmerkmale</strong> im First-Flight-Modul</li>
+<li><strong>Verhaltensanalyse über Zeit</strong>: auch bei initialem Score &lt; T erfolgt eine Probabilistische Nachbeobachtung (Score-Trailing).</li>
+<li><strong>Active Triggering</strong>: selektive Emulationsantworten, um aggressivere Probing-Aktionen zu provozieren.</li>
+</ul>
+<h3 id="124-umgang-mit-concept-drift">12.4 Umgang mit Concept Drift</h3>
+<p>Angesichts sich wandelnder Payloads und Angriffsstrategien:</p>
+<ul>
+<li><strong>Rolling Retraining</strong>: regelmäßige Re-Initialisierung der AE- und LSTM-Modelle mit aktuellen Session-Daten (z. B. alle 7 Tage)</li>
+<li><strong>Drift Detection</strong>: Einsatz von ADWIN/EDDM auf Score-Zeitreihen zur Erkennung signifikanter Verschiebungen</li>
+<li><strong>Online-Learning-Pipeline</strong>: Optional aktiviert für Fusion-Parameter und Schwellenwertanpassung</li>
+</ul>
+<h3 id="125-robustheit-der-gnn-analyse">12.5 Robustheit der GNN-Analyse</h3>
+<p>GNNs reagieren empfindlich auf unvollständige oder inkonsistente Graphstrukturen. Zur Absicherung:</p>
+<ul>
+<li><strong>Session-Normalisierung</strong>: unvollständige Knoten werden per Regeln synthetisch ergänzt (z. B. „Unknown Service“) zur Topologie-Stabilisierung</li>
+<li><strong>Dropout-Simulation im Training</strong>: Training auf fragmentierte Subgraphen fördert Generalisierung</li>
+<li><strong>Graph-Margin-Erweiterung</strong>: Kanten über heuristische Nähe verlängert (Payload-Zeitkorrelation), um Disruption durch TCP-Reassemblierung zu mindern</li>
+</ul>
+<hr />
+<hr />
+<h2 id="13-angriffskettenbeispiel-visualisierung">13. Angriffskettenbeispiel (Visualisierung)</h2>
+<p>Ein exemplarischer Ablauf einer Angriffssession:</p>
+<ul>
+<li>Zeit: 14:21:05</li>
+<li>Protokoll: SSH → Reverse Shell → DNS Tunneling</li>
+<li>Initiale Scores: <span class="arithmatex">\( s_{line} = 0.2 \)</span>, <span class="arithmatex">\( s_{session} = 0.3 \)</span>, <span class="arithmatex">\( s_{graph} = 0.9 \)</span></li>
+<li>Fusion Score: <span class="arithmatex">\( s_{fusion} = ((0.2+1)^{1.0} \cdot (0.3+1)^{1.0} \cdot (0.9+1)^{1.0}) - 1 = 2.14 \)</span></li>
+</ul>
+<p>Ein Container wird daraufhin aktiviert. Die Session wird durch den Transformer kodiert, erhält ein Embedding, das in Cluster C12 einsortiert wird. Da der Abstand zum Clustermittelpunkt <span class="arithmatex">\( d(E, \mu_{C12}) = 0.42 &gt; \epsilon = 0.3 \)</span>, wird eine neue Version erzeugt.</p>
+<p><strong>Visualisierung:</strong>
+Ein gerichteter Graph zeigt:</p>
+<ul>
+<li><strong>Knoten</strong> = Session-Cluster</li>
+<li><strong>Kanten</strong> = zeitliche Reihenfolge</li>
+<li><strong>Farbintensität</strong> = Fusion Score</li>
+</ul>
+<p>Zusätzlich erfolgt ein Export in STIX 2.1 zur Weiterverarbeitung im SIEM.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

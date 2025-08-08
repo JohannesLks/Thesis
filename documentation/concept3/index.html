@@ -1,0 +1,877 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://johanneslks.github.io/Thesis/documentation/concept3/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Concept3 - Honeypot Anomaly Detection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#adaptives-bsi-honeypot-konzept-mit-nicht-linearer-score-fusion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-header__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Honeypot Anomaly Detection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Concept3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Honeypot Anomaly Detection" class="md-nav__button md-logo" aria-label="Honeypot Anomaly Detection" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Honeypot Anomaly Detection
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatedWork/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Related Work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Journals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thoughts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thoughts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concept1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept I
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-ausgangslage-und-ziel" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Ausgangslage und Ziel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mehrstufige-ml-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Mehrstufige ML-Architektur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Mehrstufige ML-Architektur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-line-level-autoencoder-ae" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Line-Level Autoencoder (AE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-session-level-transformer-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Session-Level Transformer-LSTM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-optional-cross-session-graph-gnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 (Optional) Cross-Session Graph + GNN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-neuartige-nicht-lineare-fusionsformel" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Neuartige nicht-lineare Fusionsformel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-adaptives-container-spawning" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Adaptives Container-Spawning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Adaptives Container-Spawning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-heuristisches-grundmodell" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Heuristisches Grundmodell
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-reinforcement-learning-spater" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Reinforcement Learning (später)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-versionierung-von-angriffsverhalten" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Versionierung von Angriffsverhalten
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Versionierung von Angriffsverhalten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-bot-apt-familien" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Bot &amp; APT-Familien
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-bulk-step-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Bulk-Step Summaries
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-datenlage-bsi-logs-t-pot" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Datenlage: BSI-Logs &amp; T-Pot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Datenlage: BSI-Logs &amp; T-Pot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-bsi-honeypot-unlabeled-all-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 BSI-Honeypot (unlabeled, All-Port)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-t-pot-daten-ebenfalls-unlabeled-aber-session-structured" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 T-Pot-Daten (ebenfalls unlabeled, aber session-structured)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-partial-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Partial Testing:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-evaluationskonzept" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Evaluationskonzept
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-stufenweise-realisierung" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Stufenweise Realisierung
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-schlussbemerkung" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Schlussbemerkung
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>Nachfolgend ein nochmals erweitertes Projektkonzept zum <strong>BSI-Honeypot</strong> (All-Port), das die <strong>unlabeled T-Pot-Daten</strong> als Ergänzung vorsieht und dabei eine <strong>neue, nicht-lineare Fusionsformel</strong> für den finalen Anomaliescore präsentiert. Diese Formel berücksichtigt synergetische Effekte aus verschiedenen Ebenen (Line-, Session-, Graph-Level) und verstärkt Fälle, in denen mehrere Indikatoren parallel hoch sind.</p>
+<hr />
+<h1 id="adaptives-bsi-honeypot-konzept-mit-nicht-linearer-score-fusion">Adaptives BSI-Honeypot-Konzept mit nicht-linearer Score-Fusion:</h1>
+<p><em>All-Port-Erfassung, T-Pot-Datenintegration und neuartige Synergie-Formel</em></p>
+<h2 id="1-ausgangslage-und-ziel">1. Ausgangslage und Ziel</h2>
+<ol>
+<li><strong>BSI-Honeypot</strong>:  </li>
+<li>Realisiert ein All-Port-Prinzip (ähnlich MADCAT), erfasst sämtliche eingehende Verbindungen (ggf. hunderte GB Logs, zumeist unlabelt).  </li>
+<li>
+<p>Schränkt sich meist auf statische Minimal-Interaktion ein, will aber zukünftig <strong>adaptive</strong> Container-Dienste bei erhöhtem Verdacht starten.</p>
+</li>
+<li>
+<p><strong>T-Pot als zusätzliche Datenbasis</strong>:  </p>
+</li>
+<li>T-Pot vereint diverse Honeypot-Dienste (Cowrie, Dionaea, etc.) und liefert Interaktions- bzw. Session-Logs.  </li>
+<li>
+<p>Ebenfalls überwiegend unlabelt, jedoch nützlich für Vortraining auf <strong>Session-Ebene</strong> und tiefe Befehlssequenzen.  </p>
+</li>
+<li>
+<p><strong>Ziel</strong>:  </p>
+</li>
+<li>Ein ressourcenschonendes, stufenweises ML-System (Autoencoder → Session-Transformer-LSTM → optional GNN).  </li>
+<li>Dynamische Container-Orchestrierung (heuristisch oder RL) zur Emulation auffälliger Verbindungen.  </li>
+<li><strong>Neu</strong>: Eine synergetische, nicht-lineare Fusionsformel, die Anomaliescores von line-, session- und graph-Level kombiniert.</li>
+</ol>
+<hr />
+<h2 id="2-mehrstufige-ml-architektur">2. Mehrstufige ML-Architektur</h2>
+<h3 id="21-line-level-autoencoder-ae">2.1 Line-Level Autoencoder (AE)</h3>
+<ul>
+<li><strong>Eingabe</strong>: Jede Log-Zeile <span class="arithmatex">\( l_i \)</span> wird in Feature-Vektor <span class="arithmatex">\( x_i \)</span> (Port, IP, Banner, Byte-Snippets etc.) umgewandelt.  </li>
+<li><strong>Ausgabe</strong>:  </li>
+<li><strong>Line Embedding</strong> <span class="arithmatex">\( e_{l_i} \)</span> (Bottleneck),  </li>
+<li><strong>Anomaliescore</strong> <span class="arithmatex">\( \mathrm{score}_{\mathrm{line}}(l_i) = \| x_i - \hat{x}_i \|_2 \)</span>.</li>
+</ul>
+<h3 id="22-session-level-transformer-lstm">2.2 Session-Level Transformer-LSTM</h3>
+<ul>
+<li><strong>Session-Bildung</strong>: Anomale Zeilen desselben IP/Protokolls, zeitlich nahe, bilden Session <span class="arithmatex">\( s_j \)</span>.  </li>
+<li><strong>Verarbeitung</strong>: Hybrid (LSTM + Self-Attention).  </li>
+<li><strong>Ergebnis</strong>: Session-Embedding <span class="arithmatex">\( e_{s_j} \)</span> + Session-Anomaliescore <span class="arithmatex">\( \mathrm{score}_{\mathrm{session}}(s_j) \)</span>.</li>
+</ul>
+<h3 id="23-optional-cross-session-graph-gnn">2.3 (Optional) Cross-Session Graph + GNN</h3>
+<ul>
+<li><strong>Graph</strong>: Knoten = Sessions, Kanten durch Ähnlichkeit in Embedding + Zeitfenster (z. B. IP-/Credential-Reuse).  </li>
+<li><strong>GNN</strong> (z. B. GraphSAGE) erkennt multi-session Attacken, z. B. verteilte Bot-Welle.  </li>
+<li><strong>Graphscore</strong> <span class="arithmatex">\( \mathrm{score}_{\mathrm{graph}}(s_j) \)</span> für jede Session im Subgraph.</li>
+</ul>
+<hr />
+<h2 id="3-neuartige-nicht-lineare-fusionsformel">3. Neuartige nicht-lineare Fusionsformel</h2>
+<p>Um die <strong>Synergie</strong> zwischen mehreren hochgradigen Indikatoren (Line, Session, Graph) abzubilden und nicht nur linear zu summieren, definieren wir:</p>
+<div class="arithmatex">\[
+\mathrm{score}_{\mathrm{fusion}}(s_j) 
+= \bigl[(\mathrm{score}_{\mathrm{line}}(s_j) + 1)^{\alpha} \cdot (\mathrm{score}_{\mathrm{session}}(s_j) + 1)^{\beta} \cdot (\mathrm{score}_{\mathrm{graph}}(s_j) + 1)^{\gamma}\bigr] - 1
+\]</div>
+<p><strong>Interpretation</strong>:<br />
+- Alle Teil-Scores werden um 1 erhöht, damit 0-Anomaly keine Nullmultiplikation verursacht.<br />
+- Die Exponenten <span class="arithmatex">\(\alpha, \beta, \gamma\)</span> gewichten die Wichtigkeit der jeweiligen Ebene.<br />
+- Ist <span class="arithmatex">\( \mathrm{score}_{\mathrm{line}} \approx 0\)</span>, aber <span class="arithmatex">\(\mathrm{score}_{\mathrm{session}}\)</span> und <span class="arithmatex">\(\mathrm{score}_{\mathrm{graph}}\)</span> hoch, so bleibt das Produkt dennoch groß.<br />
+- <strong>Synergetischer Effekt</strong>: Wenn zwei oder drei Teil-Scores gleichzeitig hoch sind, multiplizieren sich ihre Abweichungen, was den resultierenden Fusion-Score deutlich steigert (stärker als in einer linearen Summe).</p>
+<p><strong>Beispiel</strong>:
+- line=2, session=1, graph=0 =&gt; <span class="arithmatex">\((2+1)^\alpha (1+1)^\beta (0+1)^\gamma -1\)</span>.<br />
+- Sind alle &gt; 0 =&gt; starker Multiplikationseffekt.</p>
+<hr />
+<h2 id="4-adaptives-container-spawning">4. Adaptives Container-Spawning</h2>
+<h3 id="41-heuristisches-grundmodell">4.1 Heuristisches Grundmodell</h3>
+<ul>
+<li>Falls <span class="arithmatex">\(\mathrm{score}_{\mathrm{fusion}}(s_j) &gt; T\)</span> und Containerlimit nicht erreicht, wird ein passender Container hochgefahren (z. B. SSH, HTTP).  </li>
+<li><strong>Ressourcenlimit</strong>: max <span class="arithmatex">\(\mathrm{Pods} = M\)</span>.  </li>
+<li>Timeout: Nach <span class="arithmatex">\(\delta\)</span> min ohne neue Interaktion wird Container beendet.</li>
+</ul>
+<h3 id="42-reinforcement-learning-spater">4.2 Reinforcement Learning (später)</h3>
+<ul>
+<li>RL-Agent liest <span class="arithmatex">\(\mathrm{score}_{\mathrm{fusion}}\)</span> + Containerstatus.  </li>
+<li>Aktionen: spawn/stop service, adjust Banner, etc.  </li>
+<li>Reward<strong>( s_j )</strong> = <span class="arithmatex">\(\mathrm{Datengewinn} - \mathrm{Ressourcenaufwand}\)</span>.  </li>
+<li>Expert-Override = negative/positive Korrektur in der Replay-Memory.</li>
+</ul>
+<hr />
+<h2 id="5-versionierung-von-angriffsverhalten">5. Versionierung von Angriffsverhalten</h2>
+<h3 id="51-bot-apt-familien">5.1 Bot &amp; APT-Familien</h3>
+<ul>
+<li>Jede Familie hat eine Repräsentation <span class="arithmatex">\( f_{\mathrm{fam}} \in \mathbb{R}^d \)</span>.  </li>
+<li>Neue Session <span class="arithmatex">\( e_{s_j} \)</span> =&gt; Distanz <span class="arithmatex">\(\mathrm{dist}(f_{\mathrm{fam}}, e_{s_j})\)</span>.  </li>
+<li>Größer als <span class="arithmatex">\(\Delta\)</span> =&gt; neue Version. z. B. “Bot_X_v2“.</li>
+</ul>
+<h3 id="52-bulk-step-summaries">5.2 Bulk-Step Summaries</h3>
+<ul>
+<li>Große repetitive Steps (z. B. 500 bruteforce-Versuche) werden in der Kette als ein “Bulk-Knoten” aufgeführt. </li>
+<li>Zeitliche Aggregation<strong>( <span class="arithmatex">\(\Delta t\)</span> )</strong> =&gt; verschlankt die Visualisierung.</li>
+</ul>
+<hr />
+<h2 id="6-datenlage-bsi-logs-t-pot">6. Datenlage: BSI-Logs &amp; T-Pot</h2>
+<h3 id="61-bsi-honeypot-unlabeled-all-port">6.1 BSI-Honeypot (unlabeled, All-Port)</h3>
+<ul>
+<li>Hauptquelle: Erfassung im realen Betrieb, massive Logs.  </li>
+<li>Kein oder kaum Ground-Truth =&gt; unsupervised Ansätze.</li>
+</ul>
+<h3 id="62-t-pot-daten-ebenfalls-unlabeled-aber-session-structured">6.2 T-Pot-Daten (ebenfalls unlabeled, aber session-structured)</h3>
+<ul>
+<li>Bieten Interaktionslogs (Cowrie, Dionaea etc.) =&gt; Längere Kommandosequenzen.  </li>
+<li>Optionales Vortraining (z. B. Transformer-LSTM auf “SSH Kommandos”).</li>
+<li>Auch hier kein direktes Label, aber man kann heuristische Pseudo-Labels (z. B. “sicherer vs. unsicherer Befehlssatz”) definieren.</li>
+</ul>
+<h3 id="63-partial-testing">6.3 Partial Testing:</h3>
+<ul>
+<li>Subsets von KDD Cup 99 / NSL-KDD, oder manuell gelabelte Ausschnitte =&gt; Basic Precision/Recall.  </li>
+</ul>
+<hr />
+<h2 id="7-evaluationskonzept">7. Evaluationskonzept</h2>
+<ol>
+<li><strong>Anomalie-Bewertung</strong>:</li>
+<li>Unsupervised Metriken (z. B. Reconstruction error distribution).  </li>
+<li>
+<p>Clustering-Qualität (Silhouette Score) bei Session-Embeddings.  </p>
+</li>
+<li>
+<p><strong>Fusion-Formel</strong>: </p>
+</li>
+<li>Variation der Exponenten <span class="arithmatex">\(\alpha, \beta, \gamma\)</span>.  </li>
+<li>
+<p>Test, ob synergy-Ansatz signifikant besser hochgradige Ketten markiert als lineare Summe.</p>
+</li>
+<li>
+<p><strong>Ressourcen</strong>: </p>
+</li>
+<li>
+<p><span class="arithmatex">\(\#\text{Container}, \mathrm{CPU/Mem}\)</span> pro Tag, RL-Policy vs. heuristische Policy.</p>
+</li>
+<li>
+<p><strong>Versionierung</strong>:</p>
+</li>
+<li>Manuelle Stichproben =&gt; Ab wieviel <span class="arithmatex">\(\Delta\)</span> distanz entsteht eine neue Bot-Familie v2 vs. v3?  </li>
+<li>Metrik: Frequenz unnötiger Version Splits vs. verpasster wirklicher Changes.</li>
+</ol>
+<hr />
+<h2 id="8-stufenweise-realisierung">8. Stufenweise Realisierung</h2>
+<ol>
+<li><strong>Line-level AE</strong> + simpler Container-Spawn (Score&gt;Schwelle =&gt; Start).  </li>
+<li><strong>Session-Modul</strong> + synergy-Fusionsformel <span class="arithmatex">\((\dots)^\alpha (\dots)^\beta (\dots)^\gamma -1\)</span>.  </li>
+<li><strong>Optionale GNN</strong> im HPC- oder Batchmodus für top-verdächtige Sessions.  </li>
+<li><strong>RL-Integration</strong> → Ablösen heuristischer Container-Starts, Overriding durch Analysten.  </li>
+<li><strong>Versionierung</strong> und Bulk Steps → Kettenvisualisierung iterativ verfeinert.</li>
+</ol>
+<hr />
+<h2 id="9-schlussbemerkung">9. Schlussbemerkung</h2>
+<p>Dieses Konzept nutzt die <strong>BSI-Honeypot-Daten</strong> als primären Treiber und <strong>T-Pot-Logs</strong> als zusätzlichen Motor, um z. B. Kommandosequenzen für Session-Modelle zu trainieren oder Modelle zu validieren. Dabei behält man die Komplexität im Griff, indem:</p>
+<ul>
+<li>(a) nur bei hohen Scores tiefergehende Analysen (Session, GNN) erfolgen,  </li>
+<li>(b) Container-Spawning streng limitiert ist,  </li>
+<li>(c) die neue synergy-Fusionsformel exponentiell ansteigt, sobald mehrere Ebenen gleichzeitig auffällig sind,  </li>
+<li>(d) ein schrittweises Rollout (z. B. MVP → GNN → RL → Versionierung) erfolgt.</li>
+</ul>
+<p>Mit diesem Ansatz gelingt eine <strong>fortschrittliche, aber praktikable</strong> ML-basierte All-Port-Honeypot-Lösung, die durch die synergy-basierte Anomaliescore-Berechnung mehrdimensionale Abweichungen erkennt und zugleich ressourcenschonend in reale BSI-Prozesse integrierbar bleibt.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
